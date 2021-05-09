@@ -1,0 +1,12 @@
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\bin\Debug\net5.0\CinePlusEntities.deps.json
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\bin\Debug\net5.0\CinePlusEntities.dll
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\bin\Debug\net5.0\ref\CinePlusEntities.dll
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\bin\Debug\net5.0\CinePlusEntities.pdb
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.csprojAssemblyReference.cache
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.AssemblyInfoInputs.cache
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.AssemblyInfo.cs
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.csproj.CoreCompileInputs.cache
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.dll
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\ref\CinePlusEntities.dll
+D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.pdb

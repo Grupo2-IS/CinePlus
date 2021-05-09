@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Cynthia-PC\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Cynthia-PC\\.nuget\\packages"
+    ]
+  }
+}

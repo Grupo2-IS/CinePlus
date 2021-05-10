@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "uEFjJp0U1VDZCipsYz9I7POIvCdxEMizgaav/M3ZBHTQYwXwsglYxXLhm69OgdlIO+QZB3BVHW8zGY6Rv1i+oA==",
+  "success": true,
+  "projectFilePath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}

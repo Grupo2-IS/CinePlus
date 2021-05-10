@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    <ProjectReference Include="../CinePlusContext/CinePlusContext.csproj" />
+    <ProjectReference Include="..\CinePlusContext\CinePlusContext.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CinePlusServices.Controllers
+namespace CinePlus.Services.Controllers
 {
     [ApiController]
     [Route("[controller]")]

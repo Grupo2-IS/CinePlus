@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
 using CinePlus.Entities;
 using CinePlus.Context;
 using System;
@@ -18,10 +19,13 @@ namespace CinePlus.Services.Repositories
         {
             this.db = db;
 
-            if(filmCache == null)
+            if (filmCache == null)
             {
                 filmCache = new ConcurrentDictionary<int, Film>(
-                    db.Films.ToDictionary(f => f.FilmID)
+                    db.Films
+                    .Include(f => f.Directors)
+                    .Include(f => f.Performers)
+                    .ToDictionary(f => f.FilmID)
                 );
             }
         }
@@ -31,7 +35,7 @@ namespace CinePlus.Services.Repositories
             EntityEntry<Film> added = await db.Films.AddAsync(film);
             int affected = await db.SaveChangesAsync();
 
-            if(affected == 1)
+            if (affected == 1)
             {
                 return filmCache.AddOrUpdate(film.FilmID, film, UpdateCache);
             }
@@ -44,9 +48,9 @@ namespace CinePlus.Services.Repositories
         private Film UpdateCache(int id, Film film)
         {
             Film old;
-            if(filmCache.TryGetValue(id, out old))
+            if (filmCache.TryGetValue(id, out old))
             {
-                if(filmCache.TryUpdate(id, film, old))
+                if (filmCache.TryUpdate(id, film, old))
                 {
                     return film;
                 }
@@ -59,7 +63,7 @@ namespace CinePlus.Services.Repositories
             Film film = await this.db.Films.FindAsync(id);
             this.db.Films.Remove(film);
             int affected = await this.db.SaveChangesAsync();
-            if(affected == 1)
+            if (affected == 1)
             {
                 return filmCache.TryRemove(film.FilmID, out film);
             }
@@ -83,7 +87,7 @@ namespace CinePlus.Services.Repositories
                 filmCache.TryGetValue(id, out Film film);
                 return film;
             });
-            
+
         }
 
         public async Task<Film> UpdateAsync(int id, Film film)
@@ -91,7 +95,7 @@ namespace CinePlus.Services.Repositories
             this.db.Films.Update(film);
 
             int affected = await this.db.SaveChangesAsync();
-            if(affected == 1)
+            if (affected == 1)
             {
                 return UpdateCache(id, film);
             }

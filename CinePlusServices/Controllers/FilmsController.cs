@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using CinePlus.Entities;
-using CinePlus.Services.Repositories;
+using CinePlus.Context.Repositories;
 
 namespace CinePlusServices.Controllers
 {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CinePlus.Entities;
 
-namespace CinePlus.Services.Repositories
+namespace CinePlus.Context.Repositories
 {
     public interface IFilmRepository
     {

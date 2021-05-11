@@ -8,7 +8,7 @@ using CinePlus.Entities;
 using CinePlus.Context;
 using System;
 
-namespace CinePlus.Services.Repositories
+namespace CinePlus.Context.Repositories
 {
     public class FilmRepository : IFilmRepository
     {

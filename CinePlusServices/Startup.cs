@@ -15,7 +15,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using CinePlus.Context;
-using CinePlus.Services.Repositories;
+using CinePlus.Context.Repositories;
 
 
 namespace CinePlus.Services

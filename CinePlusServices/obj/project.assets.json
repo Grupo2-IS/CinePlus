@@ -5976,36 +5976,46 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "CinePlusContext >= 1.0.0",
+      "Microsoft.EntityFrameworkCore.Analyzers >= 5.0.5",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\": {}
+    "C:\\Users\\Adrianna Alvarez\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
+      "projectUniqueName": "C:\\SCHOOL\\THIRD YEAR 2021\\Primer Semestre\\Ingenieria de Software\\FINAL\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
       "projectName": "CinePlusServices",
-      "projectPath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
-      "packagesPath": "C:\\Users\\Cynthia-PC\\.nuget\\packages\\",
-      "outputPath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusServices\\obj\\",
+      "projectPath": "C:\\SCHOOL\\THIRD YEAR 2021\\Primer Semestre\\Ingenieria de Software\\FINAL\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
+      "packagesPath": "C:\\Users\\Adrianna Alvarez\\.nuget\\packages\\",
+      "outputPath": "C:\\SCHOOL\\THIRD YEAR 2021\\Primer Semestre\\Ingenieria de Software\\FINAL\\CinePlus\\CinePlusServices\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Cynthia-PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Adrianna Alvarez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusContext\\CinePlusContext.csproj": {
-              "projectPath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusContext\\CinePlusContext.csproj"
+            "C:\\SCHOOL\\THIRD YEAR 2021\\Primer Semestre\\Ingenieria de Software\\FINAL\\CinePlus\\CinePlusContext\\CinePlusContext.csproj": {
+              "projectPath": "C:\\SCHOOL\\THIRD YEAR 2021\\Primer Semestre\\Ingenieria de Software\\FINAL\\CinePlus\\CinePlusContext\\CinePlusContext.csproj"
             }
           }
         }
@@ -6020,6 +6030,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[5.0.5, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[5.6.3, )"
@@ -6043,7 +6057,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

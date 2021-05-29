@@ -16,3 +16,21 @@ D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusConte
 D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusContext\obj\Debug\net5.0\ref\CinePlusContext.dll
 D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.pdb
 D:\Vik\Univ\3er año\IngenieríaDeSoftware\Proyecto Final\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.genruntimeconfig.cache
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\bin\Debug\net5.0\CinePlusContext.deps.json
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\bin\Debug\net5.0\CinePlusContext.runtimeconfig.json
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\bin\Debug\net5.0\CinePlusContext.runtimeconfig.dev.json
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\bin\Debug\net5.0\CinePlusContext.dll
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\bin\Debug\net5.0\ref\CinePlusContext.dll
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\bin\Debug\net5.0\CinePlusContext.pdb
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\bin\Debug\net5.0\CinePlusEntities.dll
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\bin\Debug\net5.0\CinePlusEntities.pdb
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.csprojAssemblyReference.cache
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.GeneratedMSBuildEditorConfig.editorconfig
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.AssemblyInfoInputs.cache
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.AssemblyInfo.cs
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.csproj.CoreCompileInputs.cache
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.csproj.CopyComplete
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.dll
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\ref\CinePlusContext.dll
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.pdb
+C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.genruntimeconfig.cache

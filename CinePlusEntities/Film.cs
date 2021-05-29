@@ -24,6 +24,9 @@ namespace CinePlus.Entities
         [MaxLength(40)]
         public string Genre { get; set; }
 
+        [Required]
+        [MaxLength(500)]
+        public string Synopsis { get; set; }
         public virtual ICollection<Director> Directors { get; set; }
 
         public virtual ICollection<Performer> Performers { get; set; }

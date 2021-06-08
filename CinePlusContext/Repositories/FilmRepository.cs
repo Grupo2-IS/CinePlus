@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using CinePlus.Entities;
-using CinePlus.Context;
 using System;
 
 namespace CinePlus.Context.Repositories

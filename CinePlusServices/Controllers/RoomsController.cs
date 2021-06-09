@@ -10,6 +10,7 @@ namespace CinePlusServices.Controllers
     // base address: api/films
     [Route("api/[controller]")]
     [ApiController]
+     [Authorize(Roles = "Admin")]
     public class RoomsController : ControllerBase
     {
         private IRoomRepository repository;

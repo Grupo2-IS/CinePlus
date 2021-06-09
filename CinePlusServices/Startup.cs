@@ -34,6 +34,19 @@ namespace CinePlus.Services
         {
             services.AddDbContext<CinePlusDb>(options => options.UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=CinePlusDB;Integrated Security=true;"));
 
+           services.AddIdentity<Usuario, IdentityRole>(opts =>
+            {
+                
+                opts.User.RequireUniqueEmail = true;
+                //opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
+                opts.Password.RequiredLength = 8;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            })  .AddEntityFrameworkStores<AdminDAeropuertosContext>()
+                 .AddDefaultTokenProviders();        
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -41,10 +54,14 @@ namespace CinePlus.Services
             });
 
             services.AddScoped<IFilmRepository, FilmRepository>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<ISeatRepository, SeatRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -63,6 +80,9 @@ namespace CinePlus.Services
             {
                 endpoints.MapControllers();
             });
+
+            SeedData.AddRoles(serviceProvider, Configuration).Wait();
+                        SeedData.Initialize(serviceProvider);
         }
     }
 }

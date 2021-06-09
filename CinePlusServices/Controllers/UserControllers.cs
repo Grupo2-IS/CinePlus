@@ -42,9 +42,9 @@ namespace CinePlusServices.Controllers
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(User))]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Create([FromBody] User user)
+        public async Task<IActionResult> Create(CreatePartners partner)
         {
-            if (user == null)
+            if (partner == null)
             {
                 return BadRequest();  // 400 Bad Request
             }
@@ -54,7 +54,11 @@ namespace CinePlusServices.Controllers
                 return BadRequest(ModelState); // 400 Bad Request
             }
 
-            User added = await repository.CreateAsync(user);
+            User added = new User
+            {
+                
+            } await repository.CreateAsync(user);
+            await userManager.AddToRoleAsync(user,member.Role);
 
             return CreatedAtRoute( // 201 Created
                 routeName: nameof(this.GetUser),

@@ -86,12 +86,90 @@ namespace CinePlus.Services
       services.AddAutoMapper();
 
       services.AddMvc();
+
+// Configure JWT
+
+var jwtOptions = Configuration.GetSection(nameof(JwtOptions));     
+
+services.Configure<JwtOptions>(options =>
+
+{
+
+  options.Issuer = jwtOptions[nameof(JwtOptions.Issuer)];
+
+  options.Audience = jwtOptions[nameof(JwtOptions.Audience)];
+
+  options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+
+});
+
+var tokenValidationParameters = new TokenValidationParameters
+
+  {
+
+    ValidateIssuer = true,
+
+    ValidIssuer = jwtOptions[nameof(JwtOptions.Issuer)],
+
+
+
+    ValidateAudience = true,
+
+    ValidAudience = jwtOptions[nameof(JwtOptions.Audience)],
+
+
+
+    ValidateIssuerSigningKey = true,
+
+    IssuerSigningKey = _signingKey,
+
+
+
+    RequireExpirationTime = false,
+
+    ValidateLifetime = true,
+
+    ClockSkew = TimeSpan.Zero
+
+  };
+
+
+
+  services.AddAuthentication(options =>
+
+  {
+
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+  })
+
+  .AddJwtBearer(configureOptions =>
+
+  {
+
+    configureOptions.ClaimsIssuer = jwtOptions[nameof(JwtOptions.Issuer)];
+
+    configureOptions.TokenValidationParameters = tokenValidationParameters;
+
+    configureOptions.SaveToken = true;
+
+  });
+
+  services.AddAuthorization(options =>
+
+  {
+
+    options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.JwtClaimIdentifiers.Rol, Constants.JwtClaims.ApiAccess));
+
+  });
         }
 
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -111,8 +189,7 @@ namespace CinePlus.Services
                 endpoints.MapControllers();
             });
 
-            SeedData.AddRoles(serviceProvider, Configuration).Wait();
-                        SeedData.Initialize(serviceProvider);
+            
         }
     }
 }

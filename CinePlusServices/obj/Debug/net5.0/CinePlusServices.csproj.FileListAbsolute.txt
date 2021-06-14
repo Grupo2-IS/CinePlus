@@ -128,3 +128,6 @@ C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusServices\obj\Debug\net5.0\CinePlusServices.RazorTargetAssemblyInfo.cache
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusServices\obj\Debug\net5.0\CinePlusServices.csproj.CopyComplete
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusServices\obj\Debug\net5.0\CinePlusServices.genruntimeconfig.cache
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusServices\obj\Debug\net5.0\CinePlusServices.dll
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusServices\obj\Debug\net5.0\ref\CinePlusServices.dll
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusServices\obj\Debug\net5.0\CinePlusServices.pdb

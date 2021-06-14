@@ -22,3 +22,11 @@ C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.dll
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusEntities\obj\Debug\net5.0\ref\CinePlusEntities.dll
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.pdb
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.csprojAssemblyReference.cache
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.AssemblyInfoInputs.cache
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.AssemblyInfo.cs
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.csproj.CoreCompileInputs.cache
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.dll
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\ref\CinePlusEntities.dll
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusEntities\obj\Debug\net5.0\CinePlusEntities.pdb

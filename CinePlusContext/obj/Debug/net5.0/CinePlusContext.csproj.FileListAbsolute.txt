@@ -34,3 +34,6 @@ C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\ref\CinePlusContext.dll
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.pdb
 C:\SCHOOL\THIRD YEAR 2021\Primer Semestre\Ingenieria de Software\FINAL\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.genruntimeconfig.cache
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.dll
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusContext\obj\Debug\net5.0\ref\CinePlusContext.dll
+C:\Users\Peny\Desktop\IS\Proyecto Final\CinePlus\CinePlusContext\obj\Debug\net5.0\CinePlusContext.pdb

@@ -2,11 +2,12 @@
 using CinePlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft;
 
 namespace CinePlus.Context
 {
-    public class CinePlusDb: IdentityDbContext 
+    public class CinePlusDb : IdentityDbContext
     {
         public CinePlusDb(){}
         public CinePlusDb(DbContextOptions<CinePlusDb> options):base(options)
@@ -23,7 +24,7 @@ namespace CinePlus.Context
         public DbSet<Showing> Showings { get; set; }
         public DbSet<NormalPurchase> NormalPurchases { get; set; }
         public DbSet<MemberPurchase> MemberPurchases { get; set; }
-        public DbSet<User> Users { get; set; }
+        // public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,7 +35,8 @@ namespace CinePlus.Context
         {
             // Configuring Director Entity.
             builder.Entity<Director>().HasKey(
-                d => new {
+                d => new
+                {
                     d.ArtistID,
                     d.FilmID
                 }
@@ -61,7 +63,8 @@ namespace CinePlus.Context
 
             // Configuring Performer entity.
             builder.Entity<Performer>().HasKey(
-                p => new {
+                p => new
+                {
                     p.ArtistID,
                     p.FilmID
                 }
@@ -71,7 +74,7 @@ namespace CinePlus.Context
                 .HasOne(p => p.Artist)
                 .WithMany(a => a.Performers)
                 .HasForeignKey(p => p.ArtistID);
-            
+
             builder.Entity<Performer>()
                 .HasOne(p => p.Film)
                 .WithMany(f => f.Performers)
@@ -88,7 +91,7 @@ namespace CinePlus.Context
 
             // Configuring Seat Entity
             builder.Entity<Seat>().HasKey(
-                s => new {s.SeatID, s.RoomID}
+                s => new { s.SeatID, s.RoomID }
             );
 
             builder.Entity<Seat>()
@@ -98,7 +101,7 @@ namespace CinePlus.Context
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Seat>().HasData(
-                 new { SeatID = 1, RoomID = 1},
+                 new { SeatID = 1, RoomID = 1 },
                  new { SeatID = 2, RoomID = 1 },
                  new { SeatID = 3, RoomID = 1 },
                  new { SeatID = 4, RoomID = 2 },
@@ -108,14 +111,14 @@ namespace CinePlus.Context
 
             // Configuring ShowingSeat Entity.
             builder.Entity<Showing>().HasKey(
-                sh => new {sh.ShowingStart, sh.FilmID, sh.RoomID, sh.ShowingEnd}
+                sh => new { sh.ShowingStart, sh.FilmID, sh.RoomID, sh.ShowingEnd }
             );
 
             builder.Entity<Showing>()
                 .HasOne(sh => sh.Room)
                 .WithMany(r => r.Showings)
                 .HasForeignKey(sh => sh.RoomID);
-            
+
             builder.Entity<Showing>()
                 .HasOne(sh => sh.Film)
                 .WithMany(f => f.Showings)
@@ -132,18 +135,18 @@ namespace CinePlus.Context
 
             // Configuring NormalPurchase Entity
             builder.Entity<NormalPurchase>().HasKey(
-                ss => new {ss.UserId, ss.ShowingStart, ss.FilmID, ss.RoomID, ss.SeatID}
+                ss => new { ss.UserId, ss.ShowingStart, ss.FilmID, ss.RoomID, ss.SeatID }
             );
 
             builder.Entity<NormalPurchase>()
                 .HasOne(ss => ss.Seat)
                 .WithMany(s => s.NormalPurchases)
-                .HasForeignKey(ss => new {ss.SeatID, ss.RoomID});
+                .HasForeignKey(ss => new { ss.SeatID, ss.RoomID });
 
             builder.Entity<NormalPurchase>()
                 .HasOne(ss => ss.Showing)
                 .WithMany(sh => sh.NormalPurchases)
-                .HasForeignKey(ss => new {ss.ShowingStart, ss.FilmID, ss.RoomID});
+                .HasForeignKey(ss => new { ss.ShowingStart, ss.FilmID, ss.RoomID });
 
             builder.Entity<NormalPurchase>()
                 .HasOne(sh => sh.User)
@@ -161,18 +164,18 @@ namespace CinePlus.Context
 
             // Configuring MemberPurchase Entity
             builder.Entity<MemberPurchase>().HasKey(
-                ss => new {ss.MemberId, ss.ShowingStart, ss.FilmID, ss.RoomID, ss.SeatID}
+                ss => new { ss.MemberId, ss.ShowingStart, ss.FilmID, ss.RoomID, ss.SeatID }
             );
 
             builder.Entity<MemberPurchase>()
                 .HasOne(ss => ss.Seat)
                 .WithMany(s => s.MemberPurchases)
-                .HasForeignKey(ss => new {ss.SeatID, ss.RoomID});
+                .HasForeignKey(ss => new { ss.SeatID, ss.RoomID });
 
             builder.Entity<MemberPurchase>()
                 .HasOne(ss => ss.Showing)
                 .WithMany(sh => sh.MemberPurchases)
-                .HasForeignKey(ss => new {ss.ShowingStart, ss.FilmID, ss.RoomID});
+                .HasForeignKey(ss => new { ss.ShowingStart, ss.FilmID, ss.RoomID });
 
             builder.Entity<MemberPurchase>()
                 .HasOne(sh => sh.Member)
@@ -180,31 +183,36 @@ namespace CinePlus.Context
                 .HasForeignKey(sh => sh.MemberId);
 
             builder.Entity<MemberPurchase>().HasData(
-                new {MemberId = 1, 
-                    FimlID = 1, 
-                    RoomID = 1, 
-                    SeatID = 1, 
-                    PayWithPoints = true, 
-                    Points = 30, 
-                    PurchaseCode = "ABCDEFGA", 
-                    UsedPoints = 5, 
-                    ShowingStarts = new DateTime(2021, 05, 28, 12, 00, 00)},
+                new
+                {
+                    MemberId = 1,
+                    FimlID = 1,
+                    RoomID = 1,
+                    SeatID = 1,
+                    PayWithPoints = true,
+                    Points = 30,
+                    PurchaseCode = "ABCDEFGA",
+                    UsedPoints = 5,
+                    ShowingStarts = new DateTime(2021, 05, 28, 12, 00, 00)
+                },
 
-                new {MemberId = 3,
-                     FilmID = 3,
-                     RoomID = 3,
-                     SeatID = 5,
-                     PayWithPoints =  false,
-                     Points = 10,
-                     PurchaseCode = "DEDFGRHA",
-                     UsedPoints = 0,
-                     ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00)
+                new
+                {
+                    MemberId = 3,
+                    FilmID = 3,
+                    RoomID = 3,
+                    SeatID = 5,
+                    PayWithPoints = false,
+                    Points = 10,
+                    PurchaseCode = "DEDFGRHA",
+                    UsedPoints = 0,
+                    ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00)
                 }
                 );
 
             // Configuring Member Entity.
             builder.Entity<Member>().HasKey(
-                ss => new {ss.MemberID, ss.UserID, ss.Points}
+                ss => new { ss.MemberID, ss.UserID, ss.Points }
                 );
 
             builder.Entity<Member>()
@@ -224,14 +232,17 @@ namespace CinePlus.Context
                 );
 
             builder.Entity<Film>().HasData(
-                new {FilmID = 1,
-                    Name = "The Notebook", 
-                    Country = "Estados Unidos", 
-                    Directors = "Nick Cassavetes", 
-                    FilmLength = new TimeSpan(2,04,0), 
-                    Genre = "Romance/Drama", 
+                new
+                {
+                    FilmID = 1,
+                    Name = "The Notebook",
+                    Country = "Estados Unidos",
+                    Directors = "Nick Cassavetes",
+                    FilmLength = new TimeSpan(2, 04, 0),
+                    Genre = "Romance/Drama",
                     Synosis = "En un hogar de retiro un hombre le lee a una mujer, que sufre de Alzheimer, la historia de dos jóvenes de distintas clases sociales que se enamoraron " +
-                    "durante la convulsionada década del 40, y de cómo fueron separados por terceros, y por la guerra"},
+                    "durante la convulsionada década del 40, y de cómo fueron separados por terceros, y por la guerra"
+                },
                 new
                 {
                     FilmID = 2,
@@ -358,7 +369,7 @@ namespace CinePlus.Context
 
             //Configuring User Entity
             builder.Entity<User>().HasKey(
-                ss => new { ss.UserID, ss.Member, ss.Nick, ss.NormalPurchases}
+                ss => new { ss.UserID, ss.Member, ss.Nick, ss.NormalPurchases }
                 );
 
             builder.Entity<User>().HasData(
@@ -376,11 +387,11 @@ namespace CinePlus.Context
                 );
 
             builder.Entity<Room>().HasData(
-                new 
+                new
                 {
-                    RoomID = 1, 
-                    RoomName = "A1", 
-                    Seats = new List<Seat> { new Seat { SeatID = 1 }, new Seat { SeatID = 2 }, new Seat { SeatID = 3 } } 
+                    RoomID = 1,
+                    RoomName = "A1",
+                    Seats = new List<Seat> { new Seat { SeatID = 1 }, new Seat { SeatID = 2 }, new Seat { SeatID = 3 } }
                 },
                 new
                 {

@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CinePlus.Entities
 {
-    
-    public class User:IdentityUser
+
+    public class User : IdentityUser
     {
         [Key]
         [Required]
@@ -20,7 +20,7 @@ namespace CinePlus.Entities
 
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }
         public virtual Member Member { get; set; }
-        
+
         public User()
         {
             this.NormalPurchases = new HashSet<NormalPurchase>();

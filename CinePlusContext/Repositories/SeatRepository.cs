@@ -62,7 +62,7 @@ namespace CinePlus.Context.Repositories
         public async Task<bool?> DeleteAsync(int id)
         {
             Seat seat = await this.db.Seats.FindAsync(id);
-            this.db.Seats.Remove(Seat);
+            this.db.Seats.Remove(seat);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
@@ -91,6 +91,18 @@ namespace CinePlus.Context.Repositories
 
         }
 
-       
+        public async Task<Seat> UpdateAsync(int id, Seat seat)
+        {
+            this.db.Seats.Update(seat);
+
+            int affected = await this.db.SaveChangesAsync();
+            if (affected == 1)
+            {
+                return UpdateCache(id, seat);
+            }
+            return null;
+        }
+
+
     }
 }

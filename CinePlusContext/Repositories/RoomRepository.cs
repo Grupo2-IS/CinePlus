@@ -15,7 +15,7 @@ namespace CinePlus.Context.Repositories
         private static ConcurrentDictionary<int, Room> roomCache;
         private CinePlusDb db;
 
-        public FilmRepository(CinePlusDb db)
+        public RoomRepository(CinePlusDb db)
         {
             this.db = db;
             if (roomCache == null)
@@ -28,7 +28,7 @@ namespace CinePlus.Context.Repositories
                 );
             }
         }
-        public async Task<Film> CreateAsync(Room room)
+        public async Task<Room> CreateAsync(Room room)
         {
 
             EntityEntry<Room> added = await db.Rooms.AddAsync(room);
@@ -44,7 +44,7 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private Film UpdateCache(int id, Room room)
+        private Room UpdateCache(int id, Room room)
         {
             Room  old;
             if (roomCache.TryGetValue(id, out old))

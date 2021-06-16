@@ -29,7 +29,7 @@ namespace CinePlus.Context.Repositories
                 );
             }
         }
-        public async Task<Film> CreateAsync(Artist artist)
+        public async Task<Artist> CreateAsync(Artist artist)
         {
 
             EntityEntry<Artist> added = await db.Artists.AddAsync(artist);

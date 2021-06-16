@@ -2,10 +2,12 @@
 using CinePlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft;
 
 namespace CinePlus.Context
 {
-    public class CinePlusDb: DbContext
+    public class CinePlusDb: IdentityDbContext 
     {
         public CinePlusDb(){}
         public CinePlusDb(DbContextOptions options):base(options)

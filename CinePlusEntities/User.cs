@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace CinePlus.Entities
 {
     
-    public class User
+    public class User:IdentityUser
     {
         [Key]
         [Required]

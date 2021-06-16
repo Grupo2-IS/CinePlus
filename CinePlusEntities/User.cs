@@ -18,6 +18,15 @@ namespace CinePlus.Entities
         [MaxLength(20)]
         public int Nick { get; set; }
 
+        [Required]
+        [MaxLength(100)]
+        public string Name{ get; set;}
+
+        //esto muy probable se use para las autorizaciones.
+        //[Required]
+        [MaxLengt(100)]
+        public string Level{get;set;}
+
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }
         public virtual Member Member { get; set; }
         

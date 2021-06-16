@@ -24,7 +24,7 @@ namespace CinePlus.Entities
 
         //esto muy probable se use para las autorizaciones.
         //[Required]
-        [MaxLengt(100)]
+        [MaxLength(100)]
         public string Level{get;set;}
 
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }

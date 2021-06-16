@@ -12,7 +12,7 @@ namespace CinePlus.Context.Repositories
 {
     public class DirectorRepository : IDirectorRepository
     {
-
+        
         private static ConcurrentDictionary<int, Director> directorCache;
         private CinePlusDb db;
 
@@ -29,7 +29,7 @@ namespace CinePlus.Context.Repositories
 
             if (affected == 1)
             {
-                return directorCache.AddOrUpdate(director.IDirector, director, UpdateCache);
+                return directorCache.AddOrUpdate(director.IDDirector, director, UpdateCache);
             }
             else
             {

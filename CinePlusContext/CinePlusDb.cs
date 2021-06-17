@@ -9,8 +9,8 @@ namespace CinePlus.Context
 {
     public class CinePlusDb : IdentityDbContext
     {
-        public CinePlusDb() { }
-        public CinePlusDb(DbContextOptions options) : base(options)
+        public CinePlusDb(){}
+        public CinePlusDb(DbContextOptions<CinePlusDb> options):base(options)
         {
         }
 
@@ -373,12 +373,12 @@ namespace CinePlus.Context
                 );
 
             builder.Entity<User>().HasData(
-                new { UserID = 1, Nick = 232456 },
-                new { UserID = 2, Nick = 893484334353 },
-                new { UserID = 3, Nick = 6433334343 },
-                new { UserID = 4, Nick = 6576423433 },
-                new { UserID = 5, Nick = 945848452433 },
-                new { UserID = 6, Nick = 2656565653433 }
+                new  {UserID = 1, Nick = 232456 , Name="Pablo"},
+                new { UserID = 2, Nick = 893484334353 , Name="Juan"},
+                new { UserID = 3, Nick = 6433334343, Name="Peny" },
+                new { UserID = 4, Nick = 6576423433 , Name="Ana"},
+                new { UserID = 5, Nick = 945848452433 , Name="Luis"},
+                new { UserID = 6, Nick = 2656565653433 , Name="Jose"}
                 );
 
             //Configuring Room Entity

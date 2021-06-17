@@ -21,9 +21,9 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
-        public async Task<IActionResult> GetDirector(int FilmID,int ArtistID)
+        public async Task<IActionResult> GetDirector(int FilmID, int ArtistID)
         {
-            Director director = await this.repository.RetrieveAsync(FilmID,ArtistID);
+            Director director = await this.repository.RetrieveAsync(FilmID, ArtistID);
 
             if (director == null)
             {
@@ -56,7 +56,7 @@ namespace CinePlusServices.Controllers
 
             return CreatedAtRoute( // 201 Created
                 routeName: nameof(this.GetDirector),
-                routeValues: new { id = added.IDDirector },
+                routeValues: new { id = added.ArtistID },
                 value: added
             );
         }
@@ -67,9 +67,9 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Update(int FilmID,int ArtistID, [FromBody]  Director director)
+        public async Task<IActionResult> Update(int FilmID, int ArtistID, [FromBody] Director director)
         {
-            if (director == null || director.FilmID!=FilmID ||director.ArtistID != ArtistID)
+            if (director == null || director.FilmID != FilmID || director.ArtistID != ArtistID)
             {
                 return BadRequest(); // 400 Bad Request
             }
@@ -86,7 +86,7 @@ namespace CinePlusServices.Controllers
                 return NotFound();  // 404 Resource not found
             }
 
-            await this.repository.UpdateAsync(FilmID,ArtistID, director);
+            await this.repository.UpdateAsync(FilmID, ArtistID, director);
 
             return new NoContentResult();   // 204 No Content
         }
@@ -96,15 +96,15 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int FilmID,int ArtistID)
+        public async Task<IActionResult> Delete(int FilmID, int ArtistID)
         {
-             Director director = await this.repository.RetrieveAsync(FilmID,ArtistID);
+            Director director = await this.repository.RetrieveAsync(FilmID, ArtistID);
             if (director == null)
             {
                 return NotFound();  // 404 Resource No Found
             }
 
-            bool? deleted = await this.repository.DeleteAsync(FilmID,ArtistID);
+            bool? deleted = await this.repository.DeleteAsync(FilmID, ArtistID);
             if (deleted.HasValue && deleted.Value)
             {
                 return new NoContentResult();   // 204 No Content
@@ -112,7 +112,7 @@ namespace CinePlusServices.Controllers
             else
             {
                 return BadRequest(  // 400 Bad Request
-                    $"Director with id {id} was found but failed to delete."
+                    $"Director with id {ArtistID} was found but failed to delete."
                 );
             }
         }

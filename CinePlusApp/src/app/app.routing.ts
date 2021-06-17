@@ -34,8 +34,6 @@ import { LandingComponent } from './examples/landing/landing.component';
 import { ProfileComponent } from './examples/profile/profile.component';
 
 
-import{ Lo} from './examples/e'
-
 // import { ComponentsComponent } from './components/components.component'
 
 
@@ -60,15 +58,8 @@ const routes: Routes = [
             { path: 'cartelera/detalles/reservar', component: SetPurchaseComponent },
             { path: 'cartelera/detalles/reservar/pagar', component: UserPaymentComponent }
         ]
-    }
-    ,
-    {
-        path: 'examples', component: ExamplesComponent,
-        children: [
-            { path: 'login', component: LoginComponent },
-            
-        ]
-    }
+    },
+
     // {
     //     path: 'admin', loadChildren: () =>
     //         AdminModule

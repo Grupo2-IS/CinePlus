@@ -18,6 +18,13 @@ namespace CinePlus.Context.Repositories
         public MemberPurchaseRepository(CinePlusDb db)
         {
             this.db = db;
+            if (memberPurchaseCache == null)
+            {
+                memberPurchaseCache = new ConcurrentDictionary<(int,int,int,int,DateTime), MemberPurchase>(
+                    this.db.MemberPurchases
+                    .ToDictionary(d => (d.MemberId, d.SeatID, d.FilmID, d.RoomID, d.ShowingStart))
+                );
+            }
         }
         public async Task<MemberPurchase> CreateAsync(MemberPurchase memberPurchase)
         {

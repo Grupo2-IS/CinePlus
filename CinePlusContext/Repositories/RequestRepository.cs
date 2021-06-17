@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using System.Link;
 using System.Threading.Tasks;
 using CinePlus.Entities;
 using CinePlus.Context;
 using System;
+using System.Linq;
 
 namespace CinePlus.Context.Repositories
 {
-    public interface RequestRepository:IRequestRepository
+    public class RequestRepository:IRequestRepository
     {
              private CinePlusDb dbContext;
 
@@ -21,15 +21,18 @@ namespace CinePlus.Context.Repositories
              {
                  NormalPurchaseRepository reponormalpurchase=new NormalPurchaseRepository(this.dbContext);
                 var entradas =await reponormalpurchase.RetrieveAllAsync();
-                var query= entradas.Select(Count(s=>new NormalPurchase())).Where(e=>e.ShowingStart.Day==dia
-                &&e.ShowingStart.Month==mes&&e.ShowingStart.Year==año)
+                var query= entradas.Where(s=>s.ShowingStart.Day==dia
+                &&s.ShowingStart.Month==mes&&s.ShowingStart.Year==año);
 
                   MemberPurchaseRepository repomemberpurchase=new MemberPurchaseRepository(this.dbContext);
                 var entradasdesocios =await repomemberpurchase.RetrieveAllAsync();
-                var querysocios= entradasdesocios.Select(Count(r=>new MemberPurchase())).Where(y=>y.ShowingStart.Day==dia
-                &&y.ShowingStart.Month==mes&&y.ShowingStart.Year==año)
-
-                return query+querysocios;
+                var querysocios= entradasdesocios.Where(y=>y.ShowingStart.Day==dia
+                &&y.ShowingStart.Month==mes&&y.ShowingStart.Year==año);
+                 
+                 int Compras=query.Count();
+                 int ComprasSocios=querysocios.Count();
+                 int TotalDCompras=Compras+ComprasSocios; 
+                return TotalDCompras;
 
              }
               
@@ -37,15 +40,19 @@ namespace CinePlus.Context.Repositories
              {
                  NormalPurchaseRepository reponormalpurchase=new NormalPurchaseRepository(this.dbContext);
                 var entradas =await reponormalpurchase.RetrieveAllAsync();
-                var query= entradas.Select(Count(s=>new NormalPurchase())).Where(e=>e.ShowingStart.Month==mes
-                && e.ShowingStart.Year=año)
+                var query= entradas.Where(s=>s.ShowingStart.Month==mes
+                && s.ShowingStart.Year==año);
 
                   MemberPurchaseRepository repomemberpurchase=new MemberPurchaseRepository(this.dbContext);
                 var entradasdesocios =await repomemberpurchase.RetrieveAllAsync();
-                var querysocios= entradasdesocios.Select(Count(r=>new MemberPurchase())).Where(y=>y.ShowingStart.Month==mes
-                &&y.ShowingStart.Year==año)
+                var querysocios= entradasdesocios.Where(r=>r.ShowingStart.Month==mes
+                &&r.ShowingStart.Year==año);
 
-                return query+querysocios;
+                 
+                int Compras=query.Count();
+                 int ComprasSocios=querysocios.Count();
+                 int TotalDCompras=Compras+ComprasSocios; 
+                return TotalDCompras;
 
              }
              
@@ -54,41 +61,44 @@ namespace CinePlus.Context.Repositories
              {
                NormalPurchaseRepository reponormalpurchase=new NormalPurchaseRepository(this.dbContext);
                 var entradas =await reponormalpurchase.RetrieveAllAsync();
-                var query= entradas.Select(Count(s=>new NormalPurchase())).Where(e=>e.ShowingStart.Year==year)
+                var query= entradas.Where(s=>s.ShowingStart.Year==year);
 
                   MemberPurchaseRepository repomemberpurchase=new MemberPurchaseRepository(this.dbContext);
                 var entradasdesocios =await repomemberpurchase.RetrieveAllAsync();
-                var querysocios= entradasdesocios.Select(Count(r=>new MemberPurchase())).Where(y=>y.ShowingStart.Year==year)
+                var querysocios= entradasdesocios.Where(r=>r.ShowingStart.Year==year);
 
-                return query+querysocios;
+                 int Compras=query.Count();
+                 int ComprasSocios=querysocios.Count();
+                 int TotalDCompras=Compras+ComprasSocios; 
+                return TotalDCompras;
              }
 
             public async Task<int> GetEntradasPorPelicula(int idfilm)
              {
                NormalPurchaseRepository reponormalpurchase=new NormalPurchaseRepository(this.dbContext);
                 var entradas =await reponormalpurchase.RetrieveAllAsync();
-                var query= entradas.Select(Count(s=>new NormalPurchase())).Where(e=>e.FilmID==idfilm)
+                var query= entradas.Where(s=>s.FilmID==idfilm);
 
                   MemberPurchaseRepository repomemberpurchase=new MemberPurchaseRepository(this.dbContext);
                 var entradasdesocios =await repomemberpurchase.RetrieveAllAsync();
-                var querysocios= entradasdesocios.Select(Count(r=>new MemberPurchase())).Where(y=>y.FilmID==idfilm)
+                var querysocios= entradasdesocios.Where(r=>r.FilmID==idfilm);
 
-                return query+querysocios;
+                 int Compras=query.Count();
+                 int ComprasSocios=querysocios.Count();
+                 int TotalDCompras=Compras+ComprasSocios; 
+                return TotalDCompras;
              }
-             public async Task<int> GetEntradasPorGenero(string genero)
-             {
-               NormalPurchaseRepository reponormalpurchase=new NormalPurchaseRepository(this.dbContext);
-                var entradas =await reponormalpurchase.RetrieveAllAsync();
-                var query= entradas.Select(Count(s=>new NormalPurchase())).Where(e=>e.FilmID.genero==genero)
-
-                  MemberPurchaseRepository repomemberpurchase=new MemberPurchaseRepository(this.dbContext);
-                var entradasdesocios =await repomemberpurchase.RetrieveAllAsync();
-                var querysocios= entradasdesocios.Select(Count(r=>new MemberPurchase())).Where(y=>y.FilmID.genero==genero)
-
-                return query+querysocios;
-             }
+             
+             
             
+             public async Task<IEnumerable<Film>> GetFilmsRating()
+             {
+               FilmRepository repofilm=new FilmRepository(this.dbContext);
+                var peliculas =await repofilm.RetrieveAllAsync();
+                var query= peliculas.OrderBy(o=>o.Rating);      
 
+                return query;
+             }
 
       
 

@@ -1,19 +1,21 @@
 using System.Collections.Generic;
-using System.Link;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using CinePlus.Context.Repositories;
+using CinePlus.Entities;
 
 namespace CinePlusServices.Controllers
 {
       // direccion base : api /
-      [Ruta ("api / [controlador]")]
+      
     [ApiController]
 
     public class RequestController:ControllerBase
     {
-         private CinePlusDb.Repositories.IRequestRepository repo;
+         private IRequestRepository repo;
 
-         public RequestController(CinePlusDb.Repositories.IRequestRepository repo)
+         public RequestController(IRequestRepository repo)
          {
 
             this.repo=repo; 
@@ -35,9 +37,11 @@ namespace CinePlusServices.Controllers
          {
              return await this.repo.GetEntradasPorPelicula(idfilm);
         }
-        public Task<int> GetEntradasPorGenero(string genero)
+      
+
+         public Task<IEnumerable<Film>>GetPeliculasMasGustadas()
          {
-             return await this.repo.GetEntradasPorGenero(genero);
+             return await this.repo.GetFilmsRating();
         }
 
     }

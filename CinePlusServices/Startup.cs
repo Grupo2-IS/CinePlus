@@ -41,7 +41,49 @@ namespace CinePlus.Services
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CinePlusServices", Version = "v1" });
             });
 
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<CinePlusDb>();
+
+             services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ManageRolesAndClaimsPolicy",
+                    policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
+
+                options.AddPolicy("DeleteRolePolicy",
+                    policy => policy.RequireClaim("Delete Role", "true"));
+
+                options.AddPolicy("EditRolePolicy",
+                    policy => policy.RequireClaim("Edit Role", "true"));
+
+                options.AddPolicy("CreateRolePolicy",
+                    policy => policy.RequireClaim("Create Role", "true"));
+
+                options.AddPolicy("AdminRolePolicy",
+                    policy => policy.RequireRole("Admin"));
+            });
+
+            services.AddScoped<IAuthorizationHandler, CanManageClaimHandler>();
+            //services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
+            services.AddScoped<IAuthorizationHandler, CanEditOtherAdminRolesAndClaimsHandler>();
+           
+
+
+
             services.AddScoped<IRepository<Film>, FilmRepository>();
+            services.AddScoped<IRepository<Room>, RoomRepository>();
+            services.AddScoped<IRepository<Seat>, SeatRepository>();
+            services.AddScoped<IRepository<User>, UserRepository>();
+            services.AddScoped<IRepository<Artist>,ArtistRepository>();
+            services.AddScoped<IMemberPurchaseRepository, MemberPurchaseRepository>();
+            services.AddScoped<INormalPurchaseRepository, NormalPurchaseRepository>();
+            services.AddScoped<IShowingRepository, ShowingRepository>();
+            services.AddScoped<IRepository<Member>, MemberRepository>();
+            services.AddScoped<IPerformerRepository, PerformerRepository>();
+            services.AddScoped<IRequestRepository, RequestRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +100,7 @@ namespace CinePlus.Services
 
             app.UseRouting();
 
+            // app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

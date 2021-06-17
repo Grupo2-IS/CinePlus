@@ -11,7 +11,7 @@ namespace CinePlus.Context.Repositories
          Task<int>  GetEntradasPorMes(int mes,int año);
          Task<int> GetEntradasPoraño(int year );
          Task<int> GetEntradasPorPelicula(int idfilm);
-         Task<int> GetEntradasPorGenero(string genero);
+         Task<IEnumerable<Film>> GetFilmsRating();
 
     }
 }

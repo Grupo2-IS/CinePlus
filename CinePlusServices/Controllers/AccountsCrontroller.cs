@@ -42,7 +42,7 @@ namespace CinePlusServices.Controllers
         // Post: api/accountsController/[userId]/[token]
         // BODY: Film (JSON)
         [HttpGet("{userId:string}/{token:string}")]
-        [AllowAnonymous]
+        [AllowAnonymous] 
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)

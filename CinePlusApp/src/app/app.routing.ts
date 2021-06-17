@@ -25,6 +25,9 @@ import { PurchaseFormComponent } from './admin/forms/purchase-form/purchase-form
 import { ShowingFormComponent } from './admin/forms/showing-form/showing-form.component';
 import { AdminComponent } from './admin/admin.component';
 
+
+import{ Lo} from './examples/e'
+
 // import { ComponentsComponent } from './components/components.component'
 
 
@@ -43,6 +46,13 @@ const routes: Routes = [
         ]
     }
     ,
+    {
+        path: 'examples', component: ExamplesComponent,
+        children: [
+            { path: 'login', component: LoginComponent },
+            
+        ]
+    }
     // {
     //     path: 'admin', loadChildren: () =>
     //         AdminModule

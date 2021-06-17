@@ -32,6 +32,7 @@ import { UserComponent } from './user/user.component';
 import { ProjectionDetailsComponent } from './user/projection-details/projection-details.component';
 import { SetPurchaseComponent } from './user/set-purchase/set-purchase.component';
 import { UserPaymentComponent } from './user/user-payment/user-payment.component';
+import { LogInComponent } from './app/log-in/log-in.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { UserPaymentComponent } from './user/user-payment/user-payment.component
         ProjectionDetailsComponent,
         SetPurchaseComponent,
         UserComponent,
-        UserPaymentComponent
+        UserPaymentComponent,
+        LogInComponent
     ],
     imports: [
         BrowserAnimationsModule,

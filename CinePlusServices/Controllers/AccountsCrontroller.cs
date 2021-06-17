@@ -198,6 +198,8 @@ namespace CinePlusServices.Controllers
             //return new NoContentResult();   // 204 No Content
             return new JsonResult($"Password change correctly");
         }
+
+        
     }
 
 

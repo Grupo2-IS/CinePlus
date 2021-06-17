@@ -5,7 +5,12 @@ using CinePlus.Entities;
 using CinePlus.Context.Repositories;
 using CinePlus.Context.AuxiliarClass;
 using System.Security.Claims;
+//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using  Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+
 
 
 
@@ -13,16 +18,17 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace CinePlusServices.Controllers
 {
    // [AllowAnonymous]
-  [Authorize(Roles = "Admin")]
+
+   // base address: api/administrationController
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize(Roles = "Admin")]
+
     public class AdministrationController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<User> userManager;
         private readonly IUserRepository repository;
-
-        // base address: api/administrationController
-	    [Route("api/[controller]")]
-        [ApiController]
 
         public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IUserRepository repository)
         {

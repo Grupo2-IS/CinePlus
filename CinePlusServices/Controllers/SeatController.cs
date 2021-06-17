@@ -12,10 +12,10 @@ namespace CinePlusServices.Controllers
     [ApiController]
     public class SeatsController : ControllerBase
     {
-        private ISeatRepository repository;
+        private IRepository<Seat> repository;
 
         // constructor injects repository registered in startup
-        public SeatsController(ISeatRepository repository)
+        public SeatsController(IRepository<Seat> repository)
         {
             this.repository = repository;
         }

@@ -16,7 +16,7 @@ namespace CinePlus.Entities
 
         [Required]
         [MaxLength(20)]
-        public int Nick { get; set; }
+        public string Nick { get; set; }
 
         [Required]
         [MaxLength(100)]

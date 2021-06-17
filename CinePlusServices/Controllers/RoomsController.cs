@@ -12,10 +12,10 @@ namespace CinePlusServices.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        private IRoomRepository repository;
+        private IRepository<Room> repository;
 
         // constructor injects repository registered in startup
-        public RoomsController(IRoomRepository repository)
+        public RoomsController(IRepository<Room> repository)
         {
             this.repository = repository;
         }

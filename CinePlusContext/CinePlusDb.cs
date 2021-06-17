@@ -24,7 +24,7 @@ namespace CinePlus.Context
         public DbSet<Showing> Showings { get; set; }
         public DbSet<NormalPurchase> NormalPurchases { get; set; }
         public DbSet<MemberPurchase> MemberPurchases { get; set; }
-        // public DbSet<User> Users { get; set; }
+        public DbSet<User> _Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

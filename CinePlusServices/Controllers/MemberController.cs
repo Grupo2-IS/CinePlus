@@ -7,10 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using CinePlus.Entities;
 using CinePlus.Context;
 using System;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace CinePlus.Context.Repositories
 {
-    public class MemberRepository : IMemberRepository
+    public class MemberRepository : IRepository<Member>
     {
         private static ConcurrentDictionary<int, Member> memberCache;
         private CinePlusDb db;

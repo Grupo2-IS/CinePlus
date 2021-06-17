@@ -5,6 +5,7 @@ using System.Linq;
 using CinePlus.Entities;
 using CinePlus.Context.Repositories;
 
+
 namespace CinePlusServices.Controllers
 {
     // base address: api/films
@@ -12,10 +13,10 @@ namespace CinePlusServices.Controllers
     [ApiController]
     public class FilmsController : ControllerBase
     {
-        private IFilmRepository repository;
+        private IRepository<Film> repository;
 
         // constructor injects repository registered in startup
-        public FilmsController(IFilmRepository repository)
+        public FilmsController(IRepository<Film>  repository)
         {
             this.repository = repository;
         }

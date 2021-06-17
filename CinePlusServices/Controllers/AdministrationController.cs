@@ -6,9 +6,10 @@ using CinePlus.Context.Repositories;
 using CinePlus.Context.AuxiliarClass;
 using System.Security.Claims;
 //using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using  Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
 
 
 
@@ -17,9 +18,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CinePlusServices.Controllers
 {
-   // [AllowAnonymous]
+    // [AllowAnonymous]
 
-   // base address: api/administrationController
+    // base address: api/administrationController
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
@@ -28,9 +29,9 @@ namespace CinePlusServices.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<User> userManager;
-        private readonly IUserRepository repository;
+        private readonly IRepository<User> repository;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IUserRepository repository)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IRepository<User> repository)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
@@ -43,33 +44,33 @@ namespace CinePlusServices.Controllers
         [HttpGet]
         [ProducesResponseType(404)]
         [Authorize(Policy = "ManageRolesAndClaimsPolicy")]
-        public async Task<IActionResult> ManageUserRoles( [FromBody] UserRole userRole, string Id)
+        public async Task<IActionResult> ManageUserRoles([FromBody] UserRole userRole, string Id)
         {
             userRole.UserRoleID = Id;
 
             var user = await userManager.FindByIdAsync(Id);
 
-            if(user == null)
+            if (user == null)
             {
-              return NotFound();  // 404 Resource not found
+                return NotFound();  // 404 Resource not found
             }
 
             var model = new List<Roles>();
-            foreach(var role in roleManager.Roles)
+            foreach (var role in roleManager.Roles)
             {
                 var roles = new Roles
                 {
-                    RoleId = role.Id,
+                    RoleID = role.Id,
                     RoleName = role.Name
-                }; 
+                };
 
                 if (await userManager.IsInRoleAsync(user, role.Name))
-                    Roles.IsSelected = true;
+                    roles.IsSelected = true;
                 else
-                    Roles.IsSelected = false;
+                    roles.IsSelected = false;
                 model.Add(roles);
             }
-            return ok(model);
+            return Ok(model);
         }
         //el mismo Manage pero pasandole la lista d roles
 
@@ -80,32 +81,32 @@ namespace CinePlusServices.Controllers
         [HttpGet]
         [ProducesResponseType(404)]
         [Authorize(Policy = "ManageRolesAndClaimsPolicy")]
-        public async Task<IActionResult> ManageUserClaims([FromBody] UserRole userRole,string Id)
+        public async Task<IActionResult> ManageUserClaims([FromBody] UserRole userRole, string Id)
         {
-            userRole.UserRoleID= Id;
+            userRole.UserRoleID = Id;
 
             var user = await userManager.FindByIdAsync(Id);
 
             if (user == null)
             {
-               return NotFound();  // 404 Resource not found
+                return NotFound();  // 404 Resource not found
             }
 
             var existingUserClaims = await userManager.GetClaimsAsync(user);
             var model = new List<UserClaims>();
 
-            foreach(Claim claim in ClaimsStore.AllClaims)
+            foreach (Claim claim in ClaimsStore.AllClaims)
             {
                 UserClaimsViewModel userClaim = new UserClaimsViewModel
                 {
                     ClaimType = claim.Type
                 };
-                if (existingUserClaims.Any(x => x.Type == claim.Type && x.Value == "true"))               
-                    userClaim.IsSelected = true; 
+                if (existingUserClaims.Any(x => x.Type == claim.Type && x.Value == "true"))
+                    userClaim.IsSelected = true;
 
                 model.Add(userClaim);
             }
-            return ok(model);
+            return Ok(model);
         }
 
 
@@ -117,16 +118,16 @@ namespace CinePlusServices.Controllers
         [Authorize(Policy = "CreateRolePolicy")]
         public async Task<IActionResult> CreateRole([FromBody] CreateRole model)
         {
-           if (! ModelState.IsValid)
-			{
-				return BadRequest(ModelState);  // 400 Bad Request
-			}
-           
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);  // 400 Bad Request
+            }
+
             var r = await roleManager.FindByNameAsync(model.RoleName);
 
             if (r is null)
             {
-               return NotFound();  // 404 Resource not found
+                return NotFound();  // 404 Resource not found
             }
 
             IdentityRole role = new IdentityRole
@@ -138,8 +139,9 @@ namespace CinePlusServices.Controllers
 
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return BadRequest(result);
             }
+            return StatusCode(201);
 
             //Hacer algo aki
 
@@ -149,7 +151,7 @@ namespace CinePlusServices.Controllers
             //     routeValues: new { id = added.ArtistID },
             //     value: added
             // );
-            
+
         }
 
         [HttpPost]
@@ -157,24 +159,26 @@ namespace CinePlusServices.Controllers
         [Authorize(Policy = "ManageRolePolicy")]
         public async Task<IActionResult> EditRole([FromBody] EditRole model)
         {
-            var role = await roleManager.FindByIdAsync(model.Id);
+            var role = await roleManager.FindByIdAsync(model.RoleID);
             if (role is null)
             {
                 return NotFound();  // 404 Resource not found
             }
-                
+
             role.Name = model.RoleName;
             var result = await roleManager.UpdateAsync(role);
 
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return BadRequest(result);
 
-            }               
-           // return RedirectToAction("AllRoles", "Administration");
-           //ALLROlles retorna una lista d roles roleManager.Roles
+            }
+
+            return StatusCode(201);
+            // return RedirectToAction("AllRoles", "Administration");
+            //ALLROlles retorna una lista d roles roleManager.Roles
         }
-    
+
 
         [HttpGet]
         [ProducesResponseType(404)]
@@ -182,7 +186,7 @@ namespace CinePlusServices.Controllers
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
-           if (role is null)
+            if (role is null)
             {
                 return NotFound();  // 404 Resource not found
             }
@@ -199,28 +203,28 @@ namespace CinePlusServices.Controllers
                     model.Users.Add(user.UserName);
                 }
             }
-            return ok(model);
+            return Ok(model);
         }
 
-        [HttpPost] 
+        [HttpPost]
         [ProducesResponseType(404)]
         [Authorize(Policy = "DeleteRolePolicy")]
         public async Task<IActionResult> DeleteRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
             if (role is null)
-              {
+            {
                 return NotFound();  // 404 Resource not found
-              } 
+            }
 
             var result = await roleManager.DeleteAsync(role);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return BadRequest(result);
             }
-                
+
             return RedirectToAction("AllRoles");
-                
+
         }
 
         [HttpPost]
@@ -230,7 +234,7 @@ namespace CinePlusServices.Controllers
         {
             var role = await roleManager.FindByIdAsync(id);
 
-           if (role is null)
+            if (role is null)
             {
                 return NotFound();  // 404 Resource not found
             }
@@ -253,7 +257,7 @@ namespace CinePlusServices.Controllers
 
                 if (result.Succeeded && i == model.Count - 1)
                 {
-                    return EditRole( id);
+                    return EditRole(id);
                 }
             }
             return EditRole(id);
@@ -300,7 +304,7 @@ namespace CinePlusServices.Controllers
             if (user is null)
             {
                 return NotFound();  // 404 Resource not found
-            } 
+            }
 
             user.Email = model.Email;
             user.UserName = model.UserName;
@@ -311,7 +315,7 @@ namespace CinePlusServices.Controllers
             {
                 return GetErrorResult(result);
             }
-            
+
             return RedirectToAction("Users");//List<User>metodo q hay q resolver
         }
 
@@ -340,6 +344,6 @@ namespace CinePlusServices.Controllers
             }
 
         }
-    
+
     }
 }

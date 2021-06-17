@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using CinePlus.Context;
 using CinePlus.Context.Repositories;
+using CinePlus.Entities;
 
 
 namespace CinePlus.Services
@@ -40,7 +41,7 @@ namespace CinePlus.Services
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CinePlusServices", Version = "v1" });
             });
 
-            services.AddScoped<IFilmRepository, FilmRepository>();
+            services.AddScoped<IRepository<Film>, FilmRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

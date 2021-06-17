@@ -12,8 +12,8 @@ namespace CinePlus.Context.Repositories
 {
     public class DirectorRepository : IDirectorRepository
     {
-        
-        private static ConcurrentDictionary<(int,int), Director> directorCache;
+
+        private static ConcurrentDictionary<(int, int), Director> directorCache;
         private CinePlusDb db;
 
         public DirectorRepository(CinePlusDb db)
@@ -21,7 +21,7 @@ namespace CinePlus.Context.Repositories
             this.db = db;
             if (directorCache == null)
             {
-                directorCache = new ConcurrentDictionary<(int,int), Director>(
+                directorCache = new ConcurrentDictionary<(int, int), Director>(
                     this.db.Directors
                     .Include(d => d.Film)
                     .ToDictionary(d => d.ArtistaID)
@@ -37,7 +37,7 @@ namespace CinePlus.Context.Repositories
 
             if (affected == 1)
             {
-                return directorCache.AddOrUpdate((director.FilmID,director.ArtistID), director, UpdateCache);
+                return directorCache.AddOrUpdate((director.FilmID, director.ArtistID), director, UpdateCache);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private Director UpdateCache((int,int) clave, Director director)
+        private Director UpdateCache((int, int) clave, Director director)
         {
             Director old;
             if (directorCache.TryGetValue(clave, out old))
@@ -58,10 +58,10 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-        public async Task<bool?> DeleteAsync(int FilmID,int ArtistID)
+        public async Task<bool?> DeleteAsync(int FilmID, int ArtistID)
         {
-            var clave =(FilmID,ArtistID);
-            Director director = await this.db.Directors.FindAsync(FilmID,ArtistID);
+            var clave = (FilmID, ArtistID);
+            Director director = await this.db.Directors.FindAsync(FilmID, ArtistID);
             this.db.Directors.Remove(director);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
@@ -81,9 +81,9 @@ namespace CinePlus.Context.Repositories
             );
         }
 
-        public Task<Director> RetrieveAsync(int FilmID,int ArtistID)
+        public Task<Director> RetrieveAsync(int FilmID, int ArtistID)
         {
-            var clave=(FilmID,ArtistID);
+            var clave = (FilmID, ArtistID);
             return Task.Run(() =>
             {
                 directorCache.TryGetValue(clave, out Director director);
@@ -92,9 +92,9 @@ namespace CinePlus.Context.Repositories
 
         }
 
-        public async Task<Director> UpdateAsync(int FilmID,int ArtistID, Director director)
+        public async Task<Director> UpdateAsync(int FilmID, int ArtistID, Director director)
         {
-            var key=(FilmID,ArtistID);
+            var key = (FilmID, ArtistID);
             this.db.Directors.Update(director);
 
             int affected = await this.db.SaveChangesAsync();

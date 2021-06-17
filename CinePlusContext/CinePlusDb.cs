@@ -241,7 +241,8 @@ namespace CinePlus.Context
                     FilmLength = new TimeSpan(2, 04, 0),
                     Genre = "Romance/Drama",
                     Synosis = "En un hogar de retiro un hombre le lee a una mujer, que sufre de Alzheimer, la historia de dos jóvenes de distintas clases sociales que se enamoraron " +
-                    "durante la convulsionada década del 40, y de cómo fueron separados por terceros, y por la guerra"
+                    "durante la convulsionada década del 40, y de cómo fueron separados por terceros, y por la guerra",
+                    Rating = 6
                 },
                 new
                 {
@@ -251,7 +252,8 @@ namespace CinePlus.Context
                     Directors = "Barry Levinson",
                     FilmLength = new TimeSpan(2, 14, 0),
                     Genre = "Drama/Melodrama",
-                    Synosis = "Un joven codicioso entabla una rara relación con el hermano autista que nunca conoció, y quien heredó la fortuna de su padre."
+                    Synosis = "Un joven codicioso entabla una rara relación con el hermano autista que nunca conoció, y quien heredó la fortuna de su padre.",
+                    Rating = 4
                 },
                 new
                 {
@@ -261,7 +263,9 @@ namespace CinePlus.Context
                     Directors = "Martin Brest",
                     FilmLength = new TimeSpan(2, 37, 0),
                     Genre = "Drama",
-                    Synosis = "Un excoronel invidente lleva a su joven guía a pasar una aventura maravillosa en Nueva York y enseñarle los placeres de la vida."
+                    Synosis = "Un excoronel invidente lleva a su joven guía a pasar una aventura maravillosa en Nueva York y enseñarle los placeres de la vida.",
+                    Rating = 7
+
                 },
                 new
                 {
@@ -271,7 +275,8 @@ namespace CinePlus.Context
                     Directors = " Frank Darabont",
                     FilmLength = new TimeSpan(2, 22, 0),
                     Genre = "Drama/Crimen",
-                    Synosis = "Un hombre inocente es enviado a una corrupta penitenciaria de Maine en 1947 y sentenciado a dos cadenas perpetuas por un doble asesinato."
+                    Synosis = "Un hombre inocente es enviado a una corrupta penitenciaria de Maine en 1947 y sentenciado a dos cadenas perpetuas por un doble asesinato.",
+                    Rating = 8
                 },
                 new
                 {
@@ -281,7 +286,8 @@ namespace CinePlus.Context
                     Directors = "Richard Linklater",
                     FilmLength = new TimeSpan(1, 45, 0),
                     Genre = "Romance/Independiente",
-                    Synosis = "Dos viajeros, un joven estadounidense y una mujer francesa, se conocen en un tren y pasan un día romántico en Viena, Austria."
+                    Synosis = "Dos viajeros, un joven estadounidense y una mujer francesa, se conocen en un tren y pasan un día romántico en Viena, Austria.",
+                    Rating = 4
                 },
                 new
                 {
@@ -292,7 +298,8 @@ namespace CinePlus.Context
                     FilmLength = new TimeSpan(2, 07, 0),
                     Genre = "Romance/Drama",
                     Synosis = "Un joven, tras descubrir su talento con las matemáticas, " +
-                    "deberá decidir si seguir con su vida de siempre o aprovechar sus grandes cualidades intelectuales en alguna universidad."
+                    "deberá decidir si seguir con su vida de siempre o aprovechar sus grandes cualidades intelectuales en alguna universidad.",
+                    Rating = 6
                 },
                 new
                 {
@@ -302,7 +309,8 @@ namespace CinePlus.Context
                     Directors = "Robert Zemeckis",
                     FilmLength = new TimeSpan(2, 22, 0),
                     Genre = "Romance/Drama",
-                    Synosis = "Forrest Gump, un joven sureño, tenaz e inocente, es protagonista de acontecimientos cruciales en la historia de los Estados Unidos."
+                    Synosis = "Forrest Gump, un joven sureño, tenaz e inocente, es protagonista de acontecimientos cruciales en la historia de los Estados Unidos.",
+                    Rating = 8
                 },
                 new
                 {
@@ -315,7 +323,8 @@ namespace CinePlus.Context
                     Synosis = "Jack Torrance se convierte en cuidador de invierno en el Hotel Overlook, en Colorado, con la esperanza de vencer su bloqueo con la escritura. " +
                     "Se instala allí junto con su esposa, Wendy, y su hijo, Danny, que está plagado de premoniciones psíquicas. Mientras la escritura de Jack no fluye " +
                     "y las visiones de Danny se vuelven más preocupantes, " +
-                    "Jack descubre oscuros secretos del hotel y comienza a convertirse en un maníaco homicida, empeñado en aterrorizar a su familia."
+                    "Jack descubre oscuros secretos del hotel y comienza a convertirse en un maníaco homicida, empeñado en aterrorizar a su familia.",
+                    Rating = 9
                 },
                 new
                 {
@@ -327,7 +336,8 @@ namespace CinePlus.Context
                     Genre = "Ciencia ficción/Aventura",
                     Synosis = "Gracias a un descubrimiento, un grupo de científicos y exploradores, encabezados por Cooper, " +
                     "se embarcan en un viaje espacial para encontrar un lugar con las condiciones necesarias para reemplazar a la Tierra" +
-                    " y comenzar una nueva vida allí."
+                    " y comenzar una nueva vida allí.",
+                    Rating = 8
                 },
                 new
                 {
@@ -338,7 +348,8 @@ namespace CinePlus.Context
                     FilmLength = new TimeSpan(1, 48, 0),
                     Genre = "Romance/Ciencia ficción",
                     Synosis = "Parecían la pareja ideal, su primer encuentro fue mágico, pero con el paso del tiempo ella deseó nunca haberlo conocido." +
-                    " Su anhelo se hace realidad gracias a un polémico y radical invento. Sin embargo descubrirán que el destino no se puede controlar."
+                    " Su anhelo se hace realidad gracias a un polémico y radical invento. Sin embargo descubrirán que el destino no se puede controlar.",
+                    Rating = 5
                 }
                 );
 

@@ -12,7 +12,7 @@ namespace CinePlus.Context.Repositories
 {
     public class ShowingRepository : IShowingRepository
     {
-        private static ConcurrentDictionary<int, Showing> showingCache;
+        private static ConcurrentDictionary<(int,int,DateTime,DateTime), Showing> showingCache;
         private CinePlusDb db;
 
         public ShowingRepository(CinePlusDb db)
@@ -28,7 +28,7 @@ namespace CinePlus.Context.Repositories
 
             if (affected == 1)
             {
-                return showingCache.AddOrUpdate(showing.ShowingID, showing, UpdateCache);
+                return showingCache.AddOrUpdate((showing.FilmID,showing.RoomID,showing.ShowingStart,showing.ShowingEnd), showing, UpdateCache);
             }
             else
             {
@@ -36,12 +36,12 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private Showing UpdateCache(int id, Showing showing)
+        private Showing UpdateCache((int,int,DateTime,DateTime) clave, Showing showing)
         {
             Showing old;
-            if (showingCache.TryGetValue(id, out old))
+            if (showingCache.TryGetValue(clave, out old))
             {
-                if (showingCache.TryUpdate(id, showing, old))
+                if (showingCache.TryUpdate(clave, showing, old))
                 {
                     return showing;
                 }
@@ -49,14 +49,15 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-        public async Task<bool?> DeleteAsync(int id)
+        public async Task<bool?> DeleteAsync(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd)
         {
-            Showing showing = await this.db.Showings.FindAsync(id);
+            var clave=(FilmId,RoomID,ShowingStart,ShowingEnd);
+            Showing showing = await this.db.Showings.FindAsync(FilmId, RoomID, ShowingStart, ShowingEnd);
             this.db.Showings.Remove(showing);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return showingCache.TryRemove(showing.ShowingID, out showing);
+                return showingCache.TryRemove(clave, out showing);
             }
             else
             {
@@ -71,24 +72,26 @@ namespace CinePlus.Context.Repositories
             );
         }
 
-        public Task<Showing> RetrieveAsync(int id)
+        public Task<Showing> RetrieveAsync(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd)
         {
+            var clave=(FilmId,RoomID,ShowingStart,ShowingEnd);
             return Task.Run(() =>
             {
-                showingCache.TryGetValue(id, out Showing showing);
+                showingCache.TryGetValue(clave, out Showing showing);
                 return showing;
             });
 
         }
 
-        public async Task<Showing> UpdateAsync(int id, Showing showing)
+        public async Task<Showing> UpdateAsync(int FilmID,int RoomID,DateTime ShowingStart,DateTime ShowingEnd, Showing showing)
         {
+            var clave=(FilmID, RoomID,ShowingStart,ShowingEnd);
             this.db.Showings.Update(showing);
 
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return UpdateCache(id, showing);
+                return UpdateCache(clave, showing);
             }
             return null;
         }

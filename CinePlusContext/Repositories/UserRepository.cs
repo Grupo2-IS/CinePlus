@@ -10,7 +10,7 @@ using System;
 
 namespace CinePlus.Context.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<User>
     {
         private static ConcurrentDictionary<int, User> userCache;
         private CinePlusDb db;
@@ -23,7 +23,7 @@ namespace CinePlus.Context.Repositories
             {
                 userCache = new ConcurrentDictionary<int, User>(
                     db.Users
-                    .Include(f => f.NormalPurchases)
+                    .Include(f => f.NormalPurchases)   //el error es aki
                     .ToDictionary(f => f.UserID)
                 );
             }
@@ -31,7 +31,7 @@ namespace CinePlus.Context.Repositories
         public async Task<User> CreateAsync(User user)
         {
 
-            EntityEntry<User> added = await db.Users.AddAsync(user);
+            await this.db.Users.AddAsync(user);
             int affected = await db.SaveChangesAsync();
 
             if (affected == 1)
@@ -58,10 +58,10 @@ namespace CinePlus.Context.Repositories
         }
 
         public async Task<bool?> DeleteAsync(int id)
-        {
-            User user = await this.db.Users.FindAsync(id);
-            this.db.Users.Remove(user);
-            int affected = await this.db.SaveChangesAsync();
+        {   //User
+            var user = await this.db.Users.FindAsync(id);
+            db.Users.Remove(user);
+            int affected = await db.SaveChangesAsync();
             if (affected == 1)
             {
                 return userCache.TryRemove(user.UserID, out user);

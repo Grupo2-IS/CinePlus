@@ -7,7 +7,7 @@ using CinePlus.Context.Repositories;
 
 namespace CinePlusServices.Controllers
 {
-    // base address: api/films
+    // base address: api/artists
     [Route("api/[controller]")]
     [ApiController]
     public class ArtistsController : ControllerBase
@@ -20,7 +20,7 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
-        // GET: api/films/[id]
+        // GET: api/artists/[id]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Artist))]
         [ProducesResponseType(404)]
@@ -38,8 +38,8 @@ namespace CinePlusServices.Controllers
             }
         }
 
-        // POST: api/films
-        // BODY: Film (JSON)
+        // POST: api/artists
+        // BODY: Artist (JSON)
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Artist))]
         [ProducesResponseType(400)]
@@ -64,8 +64,8 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/films/[id]
-        // BODY: Film (JSON)
+        // PUT: api/artists/[id]
+        // BODY: Artist (JSON)
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -94,7 +94,7 @@ namespace CinePlusServices.Controllers
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/films/[id]
+        // DELETE: api/artists/[id]
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -115,7 +115,7 @@ namespace CinePlusServices.Controllers
             else
             {
                 return BadRequest(  // 400 Bad Request
-                    $"Film with id {id} was found but failed to delete."
+                    $"Artist with id {id} was found but failed to delete."
                 );
             }
         }

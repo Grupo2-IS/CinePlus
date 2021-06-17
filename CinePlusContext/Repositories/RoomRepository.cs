@@ -10,7 +10,7 @@ using System;
 
 namespace CinePlus.Context.Repositories
 {
-    public class RoomRepository : IRoomRepository
+    public class RoomRepository : IRepository<Room>
     {
         private static ConcurrentDictionary<int, Room> roomCache;
         private CinePlusDb db;

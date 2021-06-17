@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CinePlus.Entities;
+using System;
 
 namespace CinePlus.Context.Repositories
 {
     public interface INormalPurchaseRepository
     {
-        Task<Film> CreateAsync(NormalPurchase normalPurchase);
+        Task<NormalPurchase> CreateAsync(NormalPurchase normalPurchase);
         Task<IEnumerable<NormalPurchase>> RetrieveAllAsync();
-        Task<NormalPurchase> RetrieveAsync(int id);
-        Task<NormalPurchase> UpdateAsync(int id, NormalPurchase normalPurchase);
-        Task<bool?> DeleteAsync(int id);
+        Task<NormalPurchase> RetrieveAsync(int UserId,int SeatID,int FilmID,int RoomID,DateTime ShowingStart);
+        Task<NormalPurchase> UpdateAsync(int UserId,int SeatID,int FilmID,int RoomID,DateTime ShowingStart, NormalPurchase normalPurchase);
+        Task<bool?> DeleteAsync(int UserId,int SeatID,int FilmID,int RoomID,DateTime ShowingStart);
 
     }
 }

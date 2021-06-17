@@ -10,7 +10,7 @@ using System;
 
 namespace CinePlus.Context.Repositories
 {
-    public class SeatRepository : ISeatRepository
+    public class SeatRepository : IRepository<Seat>
     {
         private static ConcurrentDictionary<int, Seat> seatCache;
         private CinePlusDb db;
@@ -62,7 +62,7 @@ namespace CinePlus.Context.Repositories
         public async Task<bool?> DeleteAsync(int id)
         {
             Seat seat = await this.db.Seats.FindAsync(id);
-            this.db.Seats.Remove(Seat);
+            this.db.Seats.Remove(seat);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {

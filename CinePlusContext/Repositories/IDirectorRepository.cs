@@ -8,9 +8,9 @@ namespace CinePlus.Context.Repositories
     {
         Task<Director> CreateAsync(Director director);
         Task<IEnumerable<Director>> RetrieveAllAsync();
-        Task<Director> RetrieveAsync(int id);
-        Task<Director> UpdateAsync(int id, Director director);
-        Task<bool?> DeleteAsync(int id);
+        Task<Director> RetrieveAsync(int FilmID,int ArtistID);
+        Task<Director> UpdateAsync(int FilmID,int ArtistID, Director director);
+        Task<bool?> DeleteAsync(int FilmID,int ArtistID);
 
     }
 }

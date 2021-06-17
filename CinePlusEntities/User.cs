@@ -27,6 +27,12 @@ namespace CinePlus.Entities
         [MaxLength(100)]
         public string Level{get;set;}
 
+        [MaxLength(120)]
+        [RegularExpression(@"[a-zA-Z0-9\.-_]+@[a-zA-Z0-9\.-_]+")]
+        //[Required]
+        public string Email { get; set; }
+
+
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }
         public virtual Member Member { get; set; }
 

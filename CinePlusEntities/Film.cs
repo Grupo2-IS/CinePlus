@@ -23,6 +23,9 @@ namespace CinePlus.Entities
 
         [MaxLength(40)]
         public string Genre { get; set; }
+        
+        [Required]
+        public int Rating { get; set;}
 
         [Required]
         [MaxLength(500)]

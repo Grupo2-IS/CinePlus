@@ -9,7 +9,7 @@ using System;
 
 namespace CinePlus.Context.Repositories
 {
-    public class FilmRepository : IFilmRepository
+    public class FilmRepository : IRepository<Film>
     {
         private static ConcurrentDictionary<int, Film> filmCache;
         private CinePlusDb db;

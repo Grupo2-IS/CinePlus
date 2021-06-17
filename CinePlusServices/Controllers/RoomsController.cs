@@ -7,7 +7,7 @@ using CinePlus.Context.Repositories;
 
 namespace CinePlusServices.Controllers
 {
-    // base address: api/films
+    // base address: api/rooms
     [Route("api/[controller]")]
     [ApiController]
     public class RoomsController : ControllerBase
@@ -20,12 +20,9 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
-        // GET: api/films
-        // GET: api/films/?genre=[genre]
+        // GET: api/rooms
         // This will return a list offilms that may be empty.
-       
-
-        // GET: api/films/[id]
+        // GET: api/rooms/[id]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Room))]
         [ProducesResponseType(404)]
@@ -43,8 +40,8 @@ namespace CinePlusServices.Controllers
             }
         }
 
-        // POST: api/films
-        // BODY: Film (JSON)
+        // POST: api/rooms
+        // BODY: Room (JSON)
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Room))]
         [ProducesResponseType(400)]
@@ -69,8 +66,8 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/films/[id]
-        // BODY: Film (JSON)
+        // PUT: api/rooms/[id]
+        // BODY: Room (JSON)
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -99,7 +96,7 @@ namespace CinePlusServices.Controllers
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/films/[id]
+        // DELETE: api/rooms/[id]
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

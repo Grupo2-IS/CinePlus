@@ -18,6 +18,13 @@ namespace CinePlus.Context.Repositories
         public ShowingRepository(CinePlusDb db)
         {
             this.db = db;
+            if (showingCache == null)
+            {
+                showingCache = new ConcurrentDictionary<(int,int,DateTime,DateTime), Showing>(
+                    this.db.Showings
+                    .ToDictionary(d => (d.FilmID,d.RoomID,d.ShowingStart,d.ShowingEnd))
+                );
+            }
         }
 
         public async Task<Showing> CreateAsync(Showing showing)

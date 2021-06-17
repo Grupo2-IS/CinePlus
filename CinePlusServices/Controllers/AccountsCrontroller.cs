@@ -4,14 +4,10 @@ using System.Linq;
 using CinePlus.Entities;
 using CinePlus.Context.Repositories;
 using CinePlus.Context.AuxiliarClass;
-using Microsoft.Extensions.Logging;        //esto es con logger q no se usa se puede borrar
-//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-
-
-
 
 
 namespace CinePlusServices.Controllers
@@ -21,19 +17,17 @@ namespace CinePlusServices.Controllers
     [ApiController]
     public class AccountsCrontroller : ControllerBase
     {
+    
+		private Usermanager<User> userManager;
+		private SingInmanager<User> singInmanager;
 
-        private UserManager<User> userManager;
-        private SignInManager<User> signInManager;
-        public ILogger<AccountsCrontroller> logger { get; }
+		public AccountsCrontroller( Usermanager<User> usermanager, SingInmanager<User> singInmanager)
+		{
+			this.userManager = usermanager;
+			this.singInmanager = singInmanager;
+		}
 
-        public AccountsCrontroller(UserManager<User> usermanager, SignInManager<User> signInManager, ILogger<AccountsCrontroller> logger)
-        {
-            this.userManager = usermanager;
-            this.signInManager = signInManager;
-            this.logger = logger;
-        }
-
-
+		
         // Get: api/accountsController/accesDenied
         // BODY: Film (JSON)
         [HttpGet()]
@@ -48,7 +42,7 @@ namespace CinePlusServices.Controllers
         // Post: api/accountsController/[userId]/[token]
         // BODY: Film (JSON)
         [HttpGet("{userId:string}/{token:string}")]
-        [AllowAnonymous]
+        [AllowAnonymous] 
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
@@ -204,6 +198,8 @@ namespace CinePlusServices.Controllers
             //return new NoContentResult();   // 204 No Content
             return new JsonResult($"Password change correctly");
         }
+
+        
     }
 
 

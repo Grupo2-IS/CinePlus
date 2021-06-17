@@ -18,5 +18,6 @@ namespace CinePlus.Context.AuxiliarClass
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+
     }
 }

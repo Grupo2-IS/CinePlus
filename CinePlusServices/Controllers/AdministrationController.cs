@@ -265,23 +265,24 @@ namespace CinePlusServices.Controllers
 
 
         [HttpGet]
+        [ProducesResponseType(404)]
+        [Authorize(Policy = "EditUserPolicy")]
+
         public async Task<IActionResult> EditUsersInRole(string id)
         {
-            ViewBag.RoleId = id;
-            //List<UserRole> list =
-
             var role = await roleManager.FindByIdAsync(id);
 
-            if (role is null)
-                //Poner pagina o mesnsaje para mostrar los errores
-                return RedirectToAction("AllRoles", "Administration");
+             if (role is null)
+            {
+                return NotFound();  // 404 Resource not found
+            }
 
-            var model = new List<UserRoleViewModel>();
+            var model = new List<UserRole>();
 
             foreach (var user in userManager.Users)
             {
                 if (!user.Active) continue;
-                var userrole = new UserRoleViewModel
+                var userrole = new UserRole
                 {
                     UserId = user.Id,
                     UserName = user.UserName
@@ -293,7 +294,7 @@ namespace CinePlusServices.Controllers
                     userrole.IsSelected = false;
                 model.Add(userrole);
             }
-            return View(model);
+            return Ok(model);
         }
 
         [HttpPost]

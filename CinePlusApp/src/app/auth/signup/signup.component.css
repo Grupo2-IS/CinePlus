@@ -1,0 +1,9 @@
+.container{
+    max-width: 40%;
+}
+.input-group-text{
+    background-color: bisque !important;
+}
+.input-group.form-group-no-border .input-group-prepend .input-group-text {
+    width: 45px;
+}

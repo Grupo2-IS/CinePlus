@@ -24,14 +24,30 @@ import { MemberFormComponent } from './admin/forms/member-form/member-form.compo
 import { PurchaseFormComponent } from './admin/forms/purchase-form/purchase-form.component';
 import { ShowingFormComponent } from './admin/forms/showing-form/showing-form.component';
 import { AdminComponent } from './admin/admin.component';
+import { ComponentsComponent } from './components/components.component';
+import { LoginComponent } from './examples/login/login.component';
+import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.component';
+import { LandingComponent } from './examples/landing/landing.component';
+import { ProfileComponent } from './examples/profile/profile.component';
 
 // import { ComponentsComponent } from './components/components.component'
 
 
 const routes: Routes = [
     { path: '', redirectTo: 'index', pathMatch: 'full' },
-    { path: 'index', component: MainComponent },
-    // { path: 'index', component: ComponentsComponent },
+    // { path: 'index', component: MainComponent },
+    { path: 'index', component: ComponentsComponent },
+    { path: 'examples/login', component: LoginComponent },
+    { path: 'examples/landing', component: LandingComponent },
+    { path: 'examples/profile', component: ProfileComponent },
+    { path: 'nucleoicons', component: NucleoiconsComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: 'signin', component: SigninComponent },
+    { path: 'refund', component: RemovePurchaseComponent },
+
     // User paths.
     {
         path: 'user', component: UserComponent,

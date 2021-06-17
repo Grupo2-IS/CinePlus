@@ -1,0 +1,23 @@
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(assets/img/book-banner.jpg)"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div class="card card-login card-plain">
+                <div class="header header-primary text-center">
+                    <h1>Devolución</h1>
+                </div>
+                <div class="content">
+                    <form class="form" #f="ngForm" (ngSubmit)="onRefund(f)">
+                        <div class="form-group">
+                            <label for="code">Código de ticket</label>
+                            <input type="text" name="code" id="code" placeholder="Código" class="form-control"
+                                ngModel />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Reembolzar</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -32,6 +32,12 @@ import { UserComponent } from './user/user.component';
 import { ProjectionDetailsComponent } from './user/projection-details/projection-details.component';
 import { SetPurchaseComponent } from './user/set-purchase/set-purchase.component';
 import { UserPaymentComponent } from './user/user-payment/user-payment.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { ComponentsComponent } from './components/components.component';
+import { LoginComponent } from './examples/login/login.component';
+import { ComponentsModule } from './components/components.module';
+import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.component';
 
 
 @NgModule({
@@ -57,7 +63,12 @@ import { UserPaymentComponent } from './user/user-payment/user-payment.component
         ProjectionDetailsComponent,
         SetPurchaseComponent,
         UserComponent,
-        UserPaymentComponent
+        UserPaymentComponent,
+        SigninComponent,
+        SignupComponent,
+        RemovePurchaseComponent
+        // ComponentsComponent,
+        // LoginComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -65,7 +76,7 @@ import { UserPaymentComponent } from './user/user-payment/user-payment.component
         FormsModule,
         RouterModule,
         AppRoutingModule,
-        //ComponentsModule,
+        ComponentsModule,
         ExamplesModule
     ],
     providers: [],

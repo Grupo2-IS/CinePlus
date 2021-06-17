@@ -12,10 +12,10 @@ namespace CinePlusServices.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IUserRepository repository;
+        private IRepository<User>  repository;
 
         // constructor injects repository registered in startup
-        public UsersController(IUserRepository repository)
+        public UsersController(IRepository<User>  repository)
         {
             this.repository = repository;
         }

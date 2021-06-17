@@ -26,7 +26,7 @@ namespace CinePlus.Context.Security
                 {
                     Email = "admin@mail.com",
                     NormalizedEmail = "ADMIN@MAIL.COM",
-                    UserID = "4",
+                    UserID = 4,
                     Name = "Admin",
                     UserName = "Admin",
                     NormalizedUserName = "ADMIN",

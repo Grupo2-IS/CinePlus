@@ -4,8 +4,12 @@ using System.Linq;
 using CinePlus.Entities;
 using CinePlus.Context.Repositories;
 using CinePlus.Context.AuxiliarClass;
-using Microsoft.Extensions.Logging;   //esto es con logger q no se usa se puede borrar
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;        //esto es con logger q no se usa se puede borrar
+//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+
 
 
 

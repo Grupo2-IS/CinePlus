@@ -23,8 +23,7 @@ namespace CinePlus.Context.Repositories
             {
                 directorCache = new ConcurrentDictionary<(int, int), Director>(
                     this.db.Directors
-                    .Include(d => d.Film)
-                    .ToDictionary(d => d.ArtistaID)
+                    .ToDictionary(d => (d.ArtistID, d.FilmID))
                 );
             }
 

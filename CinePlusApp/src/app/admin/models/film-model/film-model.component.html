@@ -1,19 +1,22 @@
-<div class="container page-header">
-    <button class="btn btn-primary btn-round btn-add" type="button">
+<app-book-header></app-book-header>
+
+
+<div class="container">
+    <button class="btn btn-primary btn-round btn-add" type="button" (click)="createFilm()">
         <i class="now-ui-icons ui-1_simple-add"></i>
-        NUEVO ARTISTA
+        NUEVA PELICULA
     </button>
 
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Duracion</th>
-                <th scope="col">Pais</th>
-                <th scope="col">Genero</th>
-                <th scope="col">Sinopsis</th>
-                <th scope="col">Acciones</th>
+                <th scope="col" style="width: 5%;">Id</th>
+                <th scope="col" style="width: 10%;">Nombre</th>
+                <th scope="col" style="width: 10%;">Duracion</th>
+                <th scope="col" style="width: 10%;">Pais</th>
+                <th scope="col" style="width: 10%;">Genero</th>
+                <th scope="col" style="width: 40%;">Sinopsis</th>
+                <th scope="col" style="width: 20%;">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +40,7 @@
                     </button>
                 </td>
             </tr>
+
             <tr>
                 <th scope="row">2</th>
                 <td>Jacob</td>
@@ -46,7 +50,6 @@
                 <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore harum impedit consequuntur modi est
                     minima quasi alias consequatur, reprehenderit magnam officia pariatur velit eos dolorum illum unde
                     culpa quidem recusandae?</td>
-                <td>
                 <td>
                     <button class="btn btn-warning btn-round" type="button">
                         <i class="now-ui-icons arrows-1_refresh-69"></i>
@@ -67,7 +70,6 @@
                 <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore harum impedit consequuntur modi est
                     minima quasi alias consequatur, reprehenderit magnam officia pariatur velit eos dolorum illum unde
                     culpa quidem recusandae?</td>
-                <td>
                 <td>
                     <button class="btn btn-warning btn-round" type="button">
                         <i class="now-ui-icons arrows-1_refresh-69"></i>

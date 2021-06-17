@@ -1,3 +1,5 @@
+<app-book-header></app-book-header>
+
 <div class="row">
     <div class="col-75">
         <div class="container">
@@ -11,7 +13,7 @@
                         <label for="country"><i class="fa fa-envelope"></i>PAIS</label>
                         <input type="text" id="email" name="country" placeholder="john@example.com">
                         <label for="adr"><i class="fa fa-address-card-o"></i>GENERO</label>
-                        <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                        <input type="number" max="400" min="10" id="adr" name="address" placeholder="542 W. 15th Street">
                         <label for="city"><i class="fa fa-institution"></i> DURACION</label>
                         <input type="text" id="city" name="city" placeholder="New York">
                     </div>
@@ -20,9 +22,23 @@
                         <h3>DETALLES</h3>
                         <label for="fname">Accepted Cards</label>
                         <label for="cname">SINOPSIS</label>
-                        <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                        <textarea [(ngModel)]="sinopsis" id="cname" name="cardname" placeholder="Sinopsis"
+                            style="width: 100%;"></textarea>
                         <label for="ccnum">ACTORES</label>
-                        <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                        <div id="artist">
+                            <select [(ngModel)]="selectedArtist" name="artistSelector">
+                                <option *ngFor="let a of artists" [ngValue]="a">{{a.name}}</option>
+                            </select>
+                            <button class="btn btn-success" (click)="addArtist()">
+                                <i class="now-ui-icons ui-1_simple-add"></i>
+                            </button>
+                        </div>
+                        <div id="artist-list">
+                            <span *ngFor="let a of selectedArtists" class="badge badge-primary">
+                                {{ a.name }} <i class="now-ui-icons ui-1_simple-remove" style="margin-left: 3px;"
+                                    (click)="removeArtist(a)"></i></span>
+                        </div>
+
                         <label for="expmonth">DIRECTORES</label>
                         <input type="text" id="expmonth" name="expmonth" placeholder="September">
 

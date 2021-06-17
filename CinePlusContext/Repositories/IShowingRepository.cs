@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CinePlus.Entities;
@@ -9,9 +10,9 @@ namespace CinePlus.Context.Repositories
     {
         Task<Showing> CreateAsync(Showing showing);
         Task<IEnumerable<Showing>> RetrieveAllAsync();
-        Task<Showing> RetrieveAsync(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd);
-        Task<Showing> UpdateAsync(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd, Showing showing);
-        Task<bool?> DeleteAsync(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd);
+        Task<Showing> RetrieveAsync(int FilmId, int RoomID, DateTime ShowingStart, DateTime ShowingEnd);
+        Task<Showing> UpdateAsync(int FilmId, int RoomID, DateTime ShowingStart, DateTime ShowingEnd, Showing showing);
+        Task<bool?> DeleteAsync(int FilmId, int RoomID, DateTime ShowingStart, DateTime ShowingEnd);
 
     }
 }

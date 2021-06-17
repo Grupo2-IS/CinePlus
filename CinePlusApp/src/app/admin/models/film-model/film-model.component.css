@@ -1,8 +1,15 @@
 .container{
-    margin-top: 180px;
+    margin-top: 20;
 }
 
 .btn-add{
     font-size: large;
     margin-bottom: 50px;
+    width: fit-content;
+
+}
+
+.table{
+    table-layout: auto;
+    width: 100%;
 }

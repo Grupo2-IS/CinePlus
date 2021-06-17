@@ -12,7 +12,7 @@ namespace CinePlus.Context.Repositories
 {
     public class MemberPurchaseRepository : IMemberPurchaseRepository
     {
-        private static ConcurrentDictionary<(int,int,int,int,DateTime), MemberPurchase> memberPurchaseCache;
+        private static ConcurrentDictionary<(int, int, int, int, DateTime), MemberPurchase> memberPurchaseCache;
         private CinePlusDb db;
 
         public MemberPurchaseRepository(CinePlusDb db)
@@ -27,7 +27,7 @@ namespace CinePlus.Context.Repositories
 
             if (affected == 1)
             {
-                return memberPurchaseCache.AddOrUpdate((memberPurchase.MemberId , memberPurchase.SeatID, memberPurchase.FilmID,memberPurchase.RoomID,memberPurchase.ShowingStart), memberPurchase, UpdateCache);
+                return memberPurchaseCache.AddOrUpdate((memberPurchase.MemberId, memberPurchase.SeatID, memberPurchase.FilmID, memberPurchase.RoomID, memberPurchase.ShowingStart), memberPurchase, UpdateCache);
             }
             else
             {
@@ -35,10 +35,10 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private MemberPurchase UpdateCache((int,int,int,int,DateTime) clave, MemberPurchase memberPurchase)
+        private MemberPurchase UpdateCache((int, int, int, int, DateTime) clave, MemberPurchase memberPurchase)
         {
             MemberPurchase old;
-            if (memberPurchaseCache.TryGetValue(clave , out old))
+            if (memberPurchaseCache.TryGetValue(clave, out old))
             {
                 if (memberPurchaseCache.TryUpdate(clave, memberPurchase, old))
                 {
@@ -48,10 +48,10 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-        public async Task<bool?> DeleteAsync(int MemberID , int SeatID,int FilmID,int RoomID,DateTime ShowingStart)
+        public async Task<bool?> DeleteAsync(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            var key=(MemberID,SeatID,FilmID,RoomID,ShowingStart);
-            MemberPurchase memberPurchase = await this.db.MemberPurchases.FindAsync(MemberID , SeatID, FilmID, RoomID,ShowingStart);
+            var key = (MemberID, SeatID, FilmID, RoomID, ShowingStart);
+            MemberPurchase memberPurchase = await this.db.MemberPurchases.FindAsync(MemberID, SeatID, FilmID, RoomID, ShowingStart);
             this.db.MemberPurchases.Remove(memberPurchase);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
@@ -71,9 +71,9 @@ namespace CinePlus.Context.Repositories
             );
         }
 
-        public Task<MemberPurchase> RetrieveAsync(int MemberID , int SeatID,int FilmID,int RoomID,DateTime ShowingStart)
+        public Task<MemberPurchase> RetrieveAsync(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            var clave=(MemberID,SeatID,FilmID,RoomID,ShowingStart);
+            var clave = (MemberID, SeatID, FilmID, RoomID, ShowingStart);
             return Task.Run(() =>
             {
                 memberPurchaseCache.TryGetValue(clave, out MemberPurchase memberPurchase);
@@ -82,9 +82,9 @@ namespace CinePlus.Context.Repositories
 
         }
 
-        public async Task<MemberPurchase> UpdateAsync(int MemberID , int SeatID,int FilmID,int RoomID,DateTime ShowingStart, MemberPurchase memberPurchase)
+        public async Task<MemberPurchase> UpdateAsync(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart, MemberPurchase memberPurchase)
         {
-            var key =(MemberID,SeatID,FilmID,RoomID,ShowingStart);
+            var key = (MemberID, SeatID, FilmID, RoomID, ShowingStart);
             this.db.MemberPurchases.Update(memberPurchase);
 
             int affected = await this.db.SaveChangesAsync();

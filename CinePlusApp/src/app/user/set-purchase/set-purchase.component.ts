@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-set-purchase',
@@ -24,13 +25,12 @@ export class SetPurchaseComponent implements OnInit {
     [false, false, true, true, true, false, true, false],
     [false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false]];
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   selectSeat(row: number, col: number) {
-    debugger;
     if (this.seats[row][col] === 0) {
       return;
     }
@@ -46,6 +46,11 @@ export class SetPurchaseComponent implements OnInit {
 
     this.costo = this.reservadas * this.precio;
 
+  }
+
+  onPay() {
+    console.log("en el m'etodo");
+    this.router.navigate(['pagar'], { relativeTo: this.route });
   }
 
 }

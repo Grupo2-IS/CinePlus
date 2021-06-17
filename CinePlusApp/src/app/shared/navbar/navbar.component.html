@@ -9,7 +9,7 @@
         </a>
         <div ngbDropdownMenu>
           <a class="dropdown-header">Dropdown header</a>
-          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" [routerLink]="['/admin']">Admin</a>
           <a class="dropdown-item" href="#">Another action</a>
           <a class="dropdown-item" href="#">Something else here</a>
           <div class="dropdown-divider"></div>
@@ -34,7 +34,7 @@
     <div class="collapse navbar-collapse" data-nav-image="assets/img/blurred-image-1.jpg" data-color="orange">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/cartelera">
+          <a class="nav-link" routerLink="/user/cartelera">
             <i class="now-ui-icons media-1_album"></i>
             <p>Cartelera</p>
           </a>

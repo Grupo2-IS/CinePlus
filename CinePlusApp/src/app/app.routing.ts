@@ -8,6 +8,9 @@ import { MainComponent } from './main/main.component';
 import { CarteleraComponent } from './user/cartelera/cartelera.component';
 import { ProjectionDetailsComponent } from './user/projection-details/projection-details.component';
 import { SetPurchaseComponent } from './user/set-purchase/set-purchase.component';
+import { UserComponent } from './user/user.component';
+import { UserPaymentComponent } from './user/user-payment/user-payment.component';
+
 
 import { AdminMainComponent } from './admin/admin-main/admin-main.component';
 import { ArtistModelComponent } from './admin/models/artist-model/artist-model.component';
@@ -20,26 +23,48 @@ import { ArtistFormComponent } from './admin/forms/artist-form/artist-form.compo
 import { MemberFormComponent } from './admin/forms/member-form/member-form.component';
 import { PurchaseFormComponent } from './admin/forms/purchase-form/purchase-form.component';
 import { ShowingFormComponent } from './admin/forms/showing-form/showing-form.component';
+import { AdminComponent } from './admin/admin.component';
+
+// import { ComponentsComponent } from './components/components.component'
+
 
 const routes: Routes = [
     { path: '', redirectTo: 'index', pathMatch: 'full' },
     { path: 'index', component: MainComponent },
+    // { path: 'index', component: ComponentsComponent },
     // User paths.
-    { path: 'cartelera', component: CarteleraComponent },
-    { path: 'cartelera/detalles', component: ProjectionDetailsComponent },
-    { path: 'reservar', component: SetPurchaseComponent },
+    {
+        path: 'user', component: UserComponent,
+        children: [
+            { path: 'cartelera', component: CarteleraComponent },
+            { path: 'cartelera/detalles', component: ProjectionDetailsComponent },
+            { path: 'cartelera/detalles/reservar', component: SetPurchaseComponent },
+            { path: 'cartelera/detalles/reservar/pagar', component: UserPaymentComponent }
+        ]
+    }
+    ,
+    // {
+    //     path: 'admin', loadChildren: () =>
+    //         AdminModule
+    // },
     // Admin paths.
-    { path: 'admin', component: AdminMainComponent },
-    { path: 'admin/artists', component: ArtistModelComponent },
-    { path: 'admin/artists/create', component: ArtistFormComponent },
-    { path: 'admin/films', component: FilmModelComponent },
-    { path: 'admin/films/create', component: FilmFormComponent },
-    { path: 'admin/members', component: MemberModelComponent },
-    { path: 'admin/members/create', component: MemberFormComponent },
-    { path: 'admin/purhcases', component: PurchaseModelComponent },
-    { path: 'admin/purhcases/create', component: PurchaseFormComponent },
-    { path: 'admin/showings', component: ShowingModelComponent },
-    { path: 'admin/showings/create', component: ShowingFormComponent },
+    {
+        path: 'admin', component: AdminComponent,
+        children: [
+            { path: '', redirectTo: 'main', pathMatch: 'full' },
+            { path: 'main', component: AdminMainComponent },
+            { path: 'artists', component: ArtistModelComponent },
+            { path: 'artists/create', component: ArtistFormComponent },
+            { path: 'films', component: FilmModelComponent },
+            { path: 'films/create', component: FilmFormComponent },
+            { path: 'members', component: MemberModelComponent },
+            { path: 'members/create', component: MemberFormComponent },
+            { path: 'purchases', component: PurchaseModelComponent },
+            { path: 'purchases/create', component: PurchaseFormComponent },
+            { path: 'showings', component: ShowingModelComponent },
+            { path: 'showings/create', component: ShowingFormComponent },
+        ]
+    },
     { path: 'test', component: SetPurchaseComponent }
 ];
 

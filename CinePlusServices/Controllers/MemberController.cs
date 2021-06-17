@@ -1,106 +1,125 @@
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
-using CinePlus.Entities;
-using CinePlus.Context;
-using System;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using CinePlus.Entities;
+using CinePlus.Context.Repositories;
 
-
-namespace CinePlus.Context.Repositories
+namespace CinePlusServices.Controllers
 {
-    public class MemberRepository : IRepository<Member>
+    // base address: api/members
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MemberController : ControllerBase
     {
-        private static ConcurrentDictionary<int, Member> memberCache;
-        private CinePlusDb db;
+        private IMemberRepository repository;
 
-        public MemberRepository(CinePlusDb db)
+        // constructor injects repository registered in startup
+        public MemberController(IMemberRepository repository)
         {
-            this.db = db;
-
-            if (memberCache == null)
-            {
-                memberCache = new ConcurrentDictionary<int, Member>(
-                    db.Members
-                    .Include(f => f.MemberPurchases)
-                    .ToDictionary(f => f.MemberID)
-                );
-            }
+            this.repository = repository;
         }
-        public async Task<Member> CreateAsync(Member member)
+
+        // GET: api/members/[id]
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(Member))]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> GetMember(int id)
         {
+            Member member = await this.repository.RetrieveAsync(id);
 
-            EntityEntry<Member> added = await db.Members.AddAsync(member);
-            int affected = await db.SaveChangesAsync();
-
-            if (affected == 1)
+            if (member== null)
             {
-                return memberCache.AddOrUpdate(member.MemberID, member, UpdateCache);
+                return NotFound(); // 404 resource not found
             }
             else
             {
-                return null;
+                return Ok(member);
             }
         }
 
-        private Member UpdateCache(int id, Member member)
+        // POST: api/members
+        // BODY: Member (JSON)
+        [HttpPost]
+        [ProducesResponseType(201, Type = typeof(Member))]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Create([FromBody]Member member)
         {
-            Member old;
-            if (memberCache.TryGetValue(id, out old))
+            if (member == null)
             {
-                if (memberCache.TryUpdate(id, member, old))
-                {
-                    return member;
-                }
+                return BadRequest();  // 400 Bad Request
             }
-            return null;
-        }
 
-        public async Task<bool?> DeleteAsync(int id)
-        {
-            Member member = await this.db.Members.FindAsync(id);
-            this.db.Members.Remove(member);
-            int affected = await this.db.SaveChangesAsync();
-            if (affected == 1)
+            if (!ModelState.IsValid)
             {
-                return memberCache.TryRemove(member.MemberID, out member);
+                return BadRequest(ModelState); // 400 Bad Request
             }
-            else
-            {
-                return null;
-            }
-        }
 
-        public Task<IEnumerable<Member>> RetrieveAllAsync()
-        {
-            return Task.Run<IEnumerable<Member>>(
-                () => memberCache.Values
+            Member added = await repository.CreateAsync(member);
+
+            return CreatedAtRoute( // 201 Created
+                routeName: nameof(this.GetMember),
+                routeValues: new { id = added.MemberID },
+                value: added
             );
         }
 
-        public Task<Member> RetrieveAsync(int id)
+        // PUT: api/members/[id]
+        // BODY: Member (JSON)
+        [HttpPut("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Update(int id, [FromBody] Member member)
         {
-            return Task.Run(() =>
+            if (member == null || member.MemberID != id)
             {
-                memberCache.TryGetValue(id, out Member member);
-                return member;
-            });
-
-        }
-
-        public async Task<Member> UpdateAsync(int id, Member member)
-        {
-            this.db.Members.Update(member);
-
-            int affected = await this.db.SaveChangesAsync();
-            if (affected == 1)
-            {
-                return UpdateCache(id, member);
+                return BadRequest(); // 400 Bad Request
             }
-            return null;
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // 400 Bad request
+            }
+
+            var existing = await this.repository.RetrieveAsync(id);
+
+            if (existing == null)
+            {
+                return NotFound();  // 404 Resource not found
+            }
+
+            await this.repository.UpdateAsync(id, member);
+
+            return new NoContentResult();   // 204 No Content
         }
+
+        // DELETE: api/members/[id]
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Member member = await this.repository.RetrieveAsync(id);
+            if (member == null)
+            {
+                return NotFound();  // 404 Resource No Found
+            }
+
+            bool? deleted = await this.repository.DeleteAsync(id);
+            if (deleted.HasValue && deleted.Value)
+            {
+                return new NoContentResult();   // 204 No Content
+            }
+            else
+            {
+                return BadRequest(  // 400 Bad Request
+                    $"Member with id {id} was found but failed to delete."
+                );
+            }
+        }
+
+
     }
 }

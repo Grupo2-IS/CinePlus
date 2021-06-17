@@ -4,14 +4,10 @@ using System.Linq;
 using CinePlus.Entities;
 using CinePlus.Context.Repositories;
 using CinePlus.Context.AuxiliarClass;
-using Microsoft.Extensions.Logging;        //esto es con logger q no se usa se puede borrar
-//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-
-
-
 
 
 namespace CinePlusServices.Controllers
@@ -24,13 +20,11 @@ namespace CinePlusServices.Controllers
     
 		private Usermanager<User> userManager;
 		private SingInmanager<User> singInmanager;
-		public Ilogger<AccountsCrontroller> logger{get;}
 
-		public AccountsCrontroller( Usermanager<User> usermanager, SingInmanager<User> singInmanager, Ilogger<AccountsCrontroller> logger)
+		public AccountsCrontroller( Usermanager<User> usermanager, SingInmanager<User> singInmanager)
 		{
 			this.userManager = usermanager;
 			this.singInmanager = singInmanager;
-			this.logger = logger;
 		}
 
 		

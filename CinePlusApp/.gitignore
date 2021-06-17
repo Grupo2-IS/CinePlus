@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 /src/app/components
-/src/app/examples
+#/src/app/examples

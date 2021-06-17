@@ -12,7 +12,7 @@ namespace CinePlus.Context.Repositories
 {
     public class NormalPurchaseRepository : INormalPurchaseRepository
     {
-        private static ConcurrentDictionary<int, NormalPurchase> normalPurchaseCache;
+        private static ConcurrentDictionary<(int, int, int, int, DateTime), NormalPurchase> normalPurchaseCache;
         private CinePlusDb db;
 
         public NormalPurchaseRepository(CinePlusDb db)
@@ -27,7 +27,7 @@ namespace CinePlus.Context.Repositories
 
             if (affected == 1)
             {
-                return normalPurchaseCache.AddOrUpdate(normalPurchase.NormalPurchaseID, normalPurchase, UpdateCache);
+                return normalPurchaseCache.AddOrUpdate((normalPurchase.UserId, normalPurchase.ShowingStart, normalPurchase.FilmID, normalPurchase.RoomID, normalPurchase.SeatID), normalPurchase, UpdateCache);
             }
             else
             {
@@ -35,12 +35,13 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private NormalPurchase UpdateCache(int id, NormalPurchase normalPurchase)
+        private NormalPurchase UpdateCache((int, int, int, int, DateTime) clave, NormalPurchase normalPurchase)
         {
+
             NormalPurchase old;
-            if (normalPurchaseCache.TryGetValue(id, out old))
+            if (normalPurchaseCache.TryGetValue(clave, out old))
             {
-                if (normalPurchaseCache.TryUpdate(id, normalPurchase, old))
+                if (normalPurchaseCache.TryUpdate(clave, normalPurchase, old))
                 {
                     return normalPurchase;
                 }
@@ -48,14 +49,15 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-        public async Task<bool?> DeleteAsync(int id)
+        public async Task<bool?> DeleteAsync(int UserId, DateTime ShowingStart, int FilmID, int RoomID, int SeatID)
         {
-            NormalPurchase normalPurchase = await this.db.NormalPurchases.FindAsync(id);
+            var clave = (UserId, ShowingStart, FilmID, RoomID, SeatID);
+            NormalPurchase normalPurchase = await this.db.NormalPurchases.FindAsync(UserId, ShowingStart, FilmID, RoomID, SeatID);
             this.db.NormalPurchases.Remove(normalPurchase);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return normalPurchaseCache.TryRemove(normalPurchase.NormalPurchaseID, out normalPurchase);
+                return normalPurchaseCache.TryRemove(clave, out normalPurchase);
             }
             else
             {
@@ -70,24 +72,26 @@ namespace CinePlus.Context.Repositories
             );
         }
 
-        public Task<NormalPurchase> RetrieveAsync(int id)
+        public Task<NormalPurchase> RetrieveAsync(int UserId, DateTime ShowingStart, int FilmID, int RoomID, int SeatID)
         {
+            var clave = (UserId, ShowingStart, FilmID, RoomID, SeatID);
             return Task.Run(() =>
             {
-                normalPurchaseCache.TryGetValue(id, out NormalPurchase normalPurchase);
+                normalPurchaseCache.TryGetValue(clave, out NormalPurchase normalPurchase);
                 return normalPurchase;
             });
 
         }
 
-        public async Task<NormalPurchase> UpdateAsync(int id, NormalPurchase normalPurchase)
+        public async Task<NormalPurchase> UpdateAsync(int UserId, DateTime ShowingStart, int FilmID, int RoomID, int SeatID, NormalPurchase normalPurchase)
         {
+            var clave = (UserId, ShowingStart, FilmID, RoomID, SeatID);
             this.db.NormalPurchases.Update(normalPurchase);
 
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return UpdateCache(id, normalPurchase);
+                return UpdateCache(clave, normalPurchase);
             }
             return null;
         }

@@ -1,24 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-
-@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"); */
-
-/* body {
-	font-family: "Montserrat", sans-serif;
-	min-height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-  background-color: #242333;
-  color: #fff;
-  margin: 0;
-} */
-/* 
-* {
-	font-family: "Montserrat", sans-serif !important;
-  box-sizing: border-box;
-} */
-
 .movie-container {
   margin: 20px 0px;
   display: flex;

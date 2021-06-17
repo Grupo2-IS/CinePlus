@@ -1,0 +1,9 @@
+.container{
+    margin-top: 20;
+}
+
+
+.table{
+    table-layout: auto;
+    width: 100%;
+}

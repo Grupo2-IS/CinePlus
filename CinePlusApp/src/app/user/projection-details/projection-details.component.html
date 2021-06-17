@@ -1,30 +1,38 @@
+<app-book-header></app-book-header>
+
 <div class="container">
     <div id="film">
-        <div id="nombre">
-
-        </div>
-        <div id="sinopsis">
-
-        </div>
-        <div id="genero-duracion">
-
-        </div>
-        <div id="participantes">
-            <div id="actores">
-
-            </div>
-            <div id="directores">
-
-            </div>
-        </div>
+        <h1>Pelicula</h1>
+        <h2>Genero</h2>
+        <h3>Duracion</h3>
+        <h4>Sinopsis</h4>
+        <h4>Actores:</h4>
+        <ul>
+            <li>Actor1</li>
+            <li>Actor2</li>
+        </ul>
+        <h4>Directores</h4>
+        <ul>
+            <li>Director</li>
+        </ul>
     </div>
     <div class="proyeccion">
-        <div id="room">
-            <h2>SALA: #</h2>
-        </div>
-        <div id="date">
-            <h2>FECHA: DD:MM:YY:HH:MM</h2>
-        </div>
-        <button class="btn btn-warning">Reservar</button>
+        <table class="table table-hove" style="table-layout: auto;">
+            <thead>
+                <tr>
+                    <th>SALA</th>
+                    <th>FECHA Y HORA</th>
+                    <th>RESERVAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#</td>
+                    <td>DD:MM:YY:HH:MM</td>
+                    <td><button class="btn btn-warning" (click)="onReserve()">Reservar</button></td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </div>

@@ -7,7 +7,7 @@ using CinePlus.Context.Repositories;
 
 namespace CinePlusServices.Controllers
 {
-    // base address: api/films
+    // base address: api/performers
     [Route("api/[controller]")]
     [ApiController]
     public class PerformersController : ControllerBase
@@ -20,13 +20,13 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
-        // GET: api/films/[id]
+        // GET: api/performers/[id]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Performer))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetPerformer(int id)
+        public async Task<IActionResult> GetPerformer(int Film,int Artist)
         {
-            Performer performer = await this.repository.RetrieveAsync(id);
+            Performer performer = await this.repository.RetrieveAsync(Film,Artist);
 
             if (performer == null)
             {
@@ -38,8 +38,8 @@ namespace CinePlusServices.Controllers
             }
         }
 
-        // POST: api/films
-        // BODY: Film (JSON)
+        // POST: api/performers
+        // BODY: Performer (JSON)
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Performer))]
         [ProducesResponseType(400)]
@@ -64,15 +64,15 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/films/[id]
-        // BODY: Film (JSON)
+        // PUT: api/performers/[id]
+        // BODY: Performer (JSON)
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Update(int id, [FromBody] Performer performer)
+        public async Task<IActionResult> Update(int Film,int Artist, [FromBody] Performer performer)
         {
-            if (performer == null || performer.PerformerID != id)
+            if (performer == null || performer.(Film,Artist) != { Film, Artist})
             {
                 return BadRequest(); // 400 Bad Request
             }
@@ -82,32 +82,32 @@ namespace CinePlusServices.Controllers
                 return BadRequest(ModelState); // 400 Bad request
             }
 
-            var existing = await this.repository.RetrieveAsync(id);
+            var existing = await this.repository.RetrieveAsync( Film,Artist);
 
             if (existing == null)
             {
                 return NotFound();  // 404 Resource not found
             }
 
-            await this.repository.UpdateAsync(id, performer);
+            await this.repository.UpdateAsync(Film, Artist, performer);
 
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/films/[id]
+        // DELETE: api/performers/[id]
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int Film,int Artist)
         {
-            Performer performer = await this.repository.RetrieveAsync(id);
+            Performer performer = await this.repository.RetrieveAsync(Film,Artist);
             if (performer == null)
             {
                 return NotFound();  // 404 Resource No Found
             }
 
-            bool? deleted = await this.repository.DeleteAsync(id);
+            bool? deleted = await this.repository.DeleteAsync(Film, Artist);
             if (deleted.HasValue && deleted.Value)
             {
                 return new NoContentResult();   // 204 No Content

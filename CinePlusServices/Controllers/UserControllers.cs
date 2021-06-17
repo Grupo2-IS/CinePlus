@@ -7,7 +7,7 @@ using CinePlus.Context.Repositories;
 
 namespace CinePlusServices.Controllers
 {
-    // base address: api/films
+    // base address: api/users
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -19,7 +19,7 @@ namespace CinePlusServices.Controllers
         {
             this.repository = repository;
         }
-        // GET: api/films/[id]
+        // GET: api/users/[id]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(404)]
@@ -37,8 +37,8 @@ namespace CinePlusServices.Controllers
             }
         }
 
-        // POST: api/films
-        // BODY: Film (JSON)
+        // POST: api/users
+        // BODY: User (JSON)
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(User))]
         [ProducesResponseType(400)]
@@ -63,8 +63,8 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/films/[id]
-        // BODY: Film (JSON)
+        // PUT: api/users/[id]
+        // BODY: User (JSON)
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -93,7 +93,7 @@ namespace CinePlusServices.Controllers
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/films/[id]
+        // DELETE: api/users/[id]
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

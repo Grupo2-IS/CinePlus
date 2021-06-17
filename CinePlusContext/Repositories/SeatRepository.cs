@@ -10,7 +10,7 @@ using System;
 
 namespace CinePlus.Context.Repositories
 {
-    public class SeatRepository : ISeatRepository
+    public class SeatRepository : IRepository<Seat>
     {
         private static ConcurrentDictionary<int, Seat> seatCache;
         private CinePlusDb db;
@@ -91,7 +91,7 @@ namespace CinePlus.Context.Repositories
 
         }
 
-        public async Task<Seat> UpdateAsync(int id, Seat seat)
+ public async Task<Seat> UpdateAsync(int id, Seat seat)
         {
             this.db.Seats.Update(seat);
 
@@ -103,6 +103,6 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-
+       
     }
 }

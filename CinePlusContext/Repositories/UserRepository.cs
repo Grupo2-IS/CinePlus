@@ -10,7 +10,7 @@ using System;
 
 namespace CinePlus.Context.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<User>
     {
         private static ConcurrentDictionary<int, User> userCache;
         private CinePlusDb db;

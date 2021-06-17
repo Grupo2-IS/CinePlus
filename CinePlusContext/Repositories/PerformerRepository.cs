@@ -11,7 +11,7 @@ namespace CinePlus.Context.Repositories
 {
     public class PerformerRepository : IPerformerRepository
     {
-        private static ConcurrentDictionary<int, Performer> performerCache;
+        private static ConcurrentDictionary<(int,int), Performer> performerCache;
         private CinePlusDb db;
 
         public PerformerRepository(CinePlusDb db)
@@ -28,7 +28,7 @@ namespace CinePlus.Context.Repositories
 
             if (affected == 1)
             {
-                return performerCache.AddOrUpdate(performer.PerformerID, performer, UpdateCache);
+                return performerCache.AddOrUpdate((performer.FilmID, performer.ArtistID), performer, UpdateCache);
             }
             else
             {
@@ -36,12 +36,13 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private Performer UpdateCache(int id, Performer performer)
+        private Performer UpdateCache((int,int) clave , Performer performer)
         {
+
             Performer old;
-            if (performerCache.TryGetValue(id, out old))
+            if (performerCache.TryGetValue(clave, out old))
             {
-                if (performerCache.TryUpdate(id, performer, old))
+                if (performerCache.TryUpdate(clave, performer, old))
                 {
                     return performer;
                 }
@@ -49,14 +50,15 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-        public async Task<bool?> DeleteAsync(int id)
+        public async Task<bool?> DeleteAsync(int FilmID,int ArtistID)
         {
-            Performer performer = await this.db.Performers.FindAsync(id);
+            var clave=(FilmID,ArtistID);
+            Performer performer = await this.db.Performers.FindAsync(FilmID,ArtistID);
             this.db.Performers.Remove(performer);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return performerCache.TryRemove(performer.PerformerID, out performer);
+                return performerCache.TryRemove(clave, out performer);
             }
             else
             {
@@ -71,24 +73,26 @@ namespace CinePlus.Context.Repositories
             );
         }
 
-        public Task<Performer> RetrieveAsync(int id)
+        public Task<Performer> RetrieveAsync(int FilmID,int ArtistID)
         {
+            var clave=(FilmID,ArtistID);
             return Task.Run(() =>
             {
-                performerCache.TryGetValue(id, out Performer performer);
+                performerCache.TryGetValue(clave, out Performer performer);
                 return performer;
             });
 
         }
 
-        public async Task<Performer> UpdateAsync(int id, Performer performer)
+        public async Task<Performer> UpdateAsync(int FilmID,int ArtistID, Performer performer)
         {
+            var clave=(FilmID,ArtistID);
             this.db.Performers.Update(performer);
 
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return UpdateCache(id, performer);
+                return UpdateCache(clave, performer);
             }
             return null;
         }

@@ -1,27 +1,37 @@
-<ul class="list-group main-admin-list">
-    <li>
-        <a class="list-group-item list-group-item-action" href="#">
-            <h3>Películas</h3>
-        </a>
-    </li>
-    <li>
-        <a class="list-group-item list-group-item-action" href="#">
-            <h3>Artistas</h3>
-        </a>
-    </li>
-    <li>
-        <a class="list-group-item list-group-item-action" href="#">
-            <h3>Comrpas</h3>
-        </a>
-    </li>
-    <li>
-        <a class="list-group-item list-group-item-action" href="#">
-            <h3>Proyecciones</h3>
-        </a>
-    </li>
-    <li>
-        <a class="list-group-item list-group-item-action" href="#">
-            <h3>Miembros</h3>
-        </a>
-    </li>
-</ul>
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image: url('assets/img/book-banner.jpg');"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+
+            <ul class="list-group main-admin-list">
+                <li>
+                    <a class="list-group-item list-group-item-action" [routerLink]="['/admin/films']">
+                        <h3>Películas</h3>
+                    </a>
+                </li>
+                <li>
+                    <a class="list-group-item list-group-item-action" [routerLink]="['/admin/artists']">
+                        <h3>Artistas</h3>
+                    </a>
+                </li>
+                <li>
+                    <a class="list-group-item list-group-item-action" [routerLink]="['/admin/purchases']">
+                        <h3>Comrpas</h3>
+                    </a>
+                </li>
+                <li>
+                    <a class="list-group-item list-group-item-action" [routerLink]="['/admin/showings']">
+                        <h3>Proyecciones</h3>
+                    </a>
+                </li>
+                <li>
+                    <a class="list-group-item list-group-item-action" [routerLink]="['/admin/members']">
+                        <h3>Miembros</h3>
+                    </a>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+</div>

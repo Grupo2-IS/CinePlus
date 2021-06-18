@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
 
 
 namespace CinePlus.Entities
 {
 
-    public class User : IdentityUser
+    public class User
     {
         [Key]
         [Required]
@@ -27,10 +25,18 @@ namespace CinePlus.Entities
         [MaxLength(100)]
         public string Level { get; set; }
 
+        public string Role { get; set; }
+
         // [MaxLength(120)]
         // [RegularExpression(@"[a-zA-Z0-9\.-_]+@[a-zA-Z0-9\.-_]+")]
         //[Required]
         //public string Email { get; set; }
+
+        [JsonIgnore]
+        public string PasswordHash { get; set; }
+
+        [JsonIgnore]
+        public List<RefreshToken> RefreshTokens { get; set; }
 
 
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }

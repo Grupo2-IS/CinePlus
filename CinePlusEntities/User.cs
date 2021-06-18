@@ -20,17 +20,17 @@ namespace CinePlus.Entities
 
         [Required]
         [MaxLength(100)]
-        public string Name{ get; set;}
+        public string Name { get; set; }
 
         //esto muy probable se use para las autorizaciones.
         //[Required]
         [MaxLength(100)]
-        public string Level{get;set;}
+        public string Level { get; set; }
 
-        [MaxLength(120)]
-        [RegularExpression(@"[a-zA-Z0-9\.-_]+@[a-zA-Z0-9\.-_]+")]
+        // [MaxLength(120)]
+        // [RegularExpression(@"[a-zA-Z0-9\.-_]+@[a-zA-Z0-9\.-_]+")]
         //[Required]
-        public string Email { get; set; }
+        //public string Email { get; set; }
 
 
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }

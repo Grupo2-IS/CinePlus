@@ -6,41 +6,46 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft;
 using CinePlus.Context.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Security.Claims;
+using System.Linq;
+
 
 
 namespace CinePlus.Context
-{  
-  public class TokenGenerator
+{
+    public class TokenGenerator
 
     {
-      public static async Task<string> GenerateJwt(
+        public static async Task<string> GenerateJwt(
 
-        ClaimsIdentity identity,
+          ClaimsIdentity identity,
 
-        IJwtFactory jwtFactory,
+          IJwtFactory jwtFactory,
 
-        string userName,
+          string userName,
 
-        JwtOptions jwtOptions,
+          JwtOptions jwtOptions,
 
-        JsonSerializerSettings serializerSettings)
-      {
-
-        var response = new
-
+          JsonSerializerSettings serializerSettings)
         {
 
-          id = identity.Claims.Single(c => c.Type == "id").Value,
+            var response = new
 
-          auth_token = await jwtFactory.GenerateEncodedToken(userName, identity),
+            {
 
-          expires_in = (int)jwtOptions.ValidFor.TotalSeconds
+                id = identity.Claims.Single(c => c.Type == "id").Value,
 
-        };
+                auth_token = await jwtFactory.GenerateEncodedToken(userName, identity),
 
-        return JsonConvert.SerializeObject(response, serializerSettings);
+                expires_in = (int)jwtOptions.ValidFor.TotalSeconds
 
-      }
+            };
+
+            return JsonConvert.SerializeObject(response, serializerSettings);
+
+        }
 
     }
 }

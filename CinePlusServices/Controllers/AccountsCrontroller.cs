@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CinePlus.Entities;
 using CinePlus.Context.Repositories;
+using CinePlus.Context;
 using CinePlus.Context.AuxiliarClass;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
@@ -17,17 +18,17 @@ namespace CinePlusServices.Controllers
     [ApiController]
     public class AccountsCrontroller : ControllerBase
     {
-    
-		private Usermanager<User> userManager;
-		private SingInmanager<User> singInmanager;
 
-		public AccountsCrontroller( Usermanager<User> usermanager, SingInmanager<User> singInmanager)
-		{
-			this.userManager = usermanager;
-			this.singInmanager = singInmanager;
-		}
+        private Usermanager<User> userManager;
+        private SingInmanager<User> singInmanager;
 
-		
+        public AccountsCrontroller(Usermanager<User> usermanager, SingInmanager<User> singInmanager)
+        {
+            this.userManager = usermanager;
+            this.singInmanager = singInmanager;
+        }
+
+
         // Get: api/accountsController/accesDenied
         // BODY: Film (JSON)
         [HttpGet()]
@@ -42,7 +43,7 @@ namespace CinePlusServices.Controllers
         // Post: api/accountsController/[userId]/[token]
         // BODY: Film (JSON)
         [HttpGet("{userId:string}/{token:string}")]
-        [AllowAnonymous] 
+        [AllowAnonymous]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
@@ -199,7 +200,7 @@ namespace CinePlusServices.Controllers
             return new JsonResult($"Password change correctly");
         }
 
-        
+
     }
 
 

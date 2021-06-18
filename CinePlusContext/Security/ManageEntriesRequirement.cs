@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Museo.Models.Security
+namespace CinePlus.Context.Security
 {
     public class ManageEntriesRequirement : IAuthorizationRequirement
     {

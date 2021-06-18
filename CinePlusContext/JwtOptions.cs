@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.IdentityModel.Tokens;
 using System.Linq;
 using CinePlus.Context.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Newtonsoft.Json.Serialization;
 
 namespace CinePlus.Context
 {
@@ -24,5 +25,6 @@ namespace CinePlus.Context
         public TimeSpan ValidFor { get; set; } = TimeSpan.FromMinutes(120);
         public Func<Task<string>> JtiGenerator => () => Task.FromResult(Guid.NewGuid().ToString());
         public SigningCredentials SigningCredentials { get; set; }
+
     }
 }

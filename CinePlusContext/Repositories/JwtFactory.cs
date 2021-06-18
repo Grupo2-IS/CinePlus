@@ -7,6 +7,11 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using CinePlus.Entities;
 using System;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
@@ -15,51 +20,51 @@ namespace CinePlus.Context.Repositories
     public class JwtFactory : IJwtFactory
 
     {
-      private readonly JwtOptions _jwtOptions;
+        private readonly JwtOptions _jwtOptions;
 
-      public JwtFactory(IOptions<JwtOptions> jwtOptions)
-
-      {
-
-        _jwtOptions = jwtOptions.Value;
-
-        if (_jwtOptions == null) throw new ArgumentNullException(nameof(jwtOptions));
-
-        if (_jwtOptions.ValidFor <= TimeSpan.Zero)
+        public JwtFactory(IOptions<JwtOptions> jwtOptions)
 
         {
 
-          throw new ArgumentException("Must be a non-zero TimeSpan.", nameof(JwtOptions.ValidFor));
+            _jwtOptions = jwtOptions.Value;
+
+            if (_jwtOptions == null) throw new ArgumentNullException(nameof(jwtOptions));
+
+            if (_jwtOptions.ValidFor <= TimeSpan.Zero)
+
+            {
+
+                throw new ArgumentException("Must be a non-zero TimeSpan.", nameof(JwtOptions.ValidFor));
+
+            }
+
+            if (_jwtOptions.SigningCredentials == null)
+
+            {
+
+                throw new ArgumentNullException(nameof(JwtOptions.SigningCredentials));
+
+            }
+
+            if (_jwtOptions.JtiGenerator == null)
+
+            {
+
+                throw new ArgumentNullException(nameof(JwtOptions.JtiGenerator));
+
+            }
 
         }
 
-        if (_jwtOptions.SigningCredentials == null)
+
+
+        public async Task<string> GenerateEncodedToken(string userName, ClaimsIdentity identity)
 
         {
 
-          throw new ArgumentNullException(nameof(JwtOptions.SigningCredentials));
+            var claims = new[]
 
-        }
-
-        if (_jwtOptions.JtiGenerator == null)
-
-        {
-
-          throw new ArgumentNullException(nameof(JwtOptions.JtiGenerator));
-
-        }
-
-      }
-
-
-
-      public async Task<string> GenerateEncodedToken(string userName, ClaimsIdentity identity)
-
-      {
-
-        var claims = new[]
-
-        {
+            {
 
           new Claim(JwtRegisteredClaimNames.Sub, userName),
 
@@ -75,41 +80,41 @@ namespace CinePlus.Context.Repositories
 
 
 
-        // Create the JWT security token and encode it.
+            // Create the JWT security token and encode it.
 
-        var jwt = new JwtSecurityToken(
+            var jwt = new JwtSecurityToken(
 
-          issuer: _jwtOptions.Issuer,
+              issuer: _jwtOptions.Issuer,
 
-          audience: _jwtOptions.Audience,
+              audience: _jwtOptions.Audience,
 
-          claims: claims,
+              claims: claims,
 
-          notBefore: _jwtOptions.NotBefore,
+              notBefore: _jwtOptions.NotBefore,
 
-          expires: _jwtOptions.Expiration,
+              expires: _jwtOptions.Expiration,
 
-          signingCredentials: _jwtOptions.SigningCredentials);
-
-
-
-        var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+              signingCredentials: _jwtOptions.SigningCredentials);
 
 
 
-        return encodedJwt;
-
-      }
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
 
 
-      public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
+            return encodedJwt;
 
-      {
+        }
 
-        return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
+
+
+        public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
 
         {
+
+            return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
+
+            {
 
           new Claim(Constants.JwtClaimIdentifiers.Id, id),
 
@@ -117,17 +122,17 @@ namespace CinePlus.Context.Repositories
 
         });
 
-      }
+        }
 
 
 
-      private static long ToUnixEpochDate(DateTime date)
+        private static long ToUnixEpochDate(DateTime date)
 
-        => (long)Math.Round((date.ToUniversalTime() -
+          => (long)Math.Round((date.ToUniversalTime() -
 
-          new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero))
+            new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero))
 
-          .TotalSeconds);
+            .TotalSeconds);
 
     }
 }

@@ -16,8 +16,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using CinePlus.Context;
 using CinePlus.Context.Repositories;
+using CinePlus.Context.Security;
 using CinePlus.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 
 
 
@@ -50,34 +52,34 @@ namespace CinePlus.Services
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<CinePlusDb>();
 
-             services.AddAuthorization(options =>
-            {
-                options.AddPolicy("ManageRolesAndClaimsPolicy",
-                    policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
+            services.AddAuthorization(options =>
+           {
+               options.AddPolicy("ManageRolesAndClaimsPolicy",
+                   policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
 
-                options.AddPolicy("DeleteRolePolicy",
-                    policy => policy.RequireClaim("Delete Role", "true"));
+               options.AddPolicy("DeleteRolePolicy",
+                   policy => policy.RequireClaim("Delete Role", "true"));
 
-                options.AddPolicy("EditRolePolicy",
-                    policy => policy.RequireClaim("Edit Role", "true"));
+               options.AddPolicy("EditRolePolicy",
+                   policy => policy.RequireClaim("Edit Role", "true"));
 
-                options.AddPolicy("CreateRolePolicy",
-                    policy => policy.RequireClaim("Create Role", "true"));
+               options.AddPolicy("CreateRolePolicy",
+                   policy => policy.RequireClaim("Create Role", "true"));
 
-                options.AddPolicy("AdminRolePolicy",
-                    policy => policy.RequireRole("Admin"));
-            });
+               options.AddPolicy("AdminRolePolicy",
+                   policy => policy.RequireRole("Admin"));
+           });
 
             services.AddScoped<IAuthorizationHandler, CanManageClaimHandler>();
             //services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
             services.AddScoped<IAuthorizationHandler, CanEditOtherAdminRolesAndClaimsHandler>();
-           
+
 
             services.AddScoped<IRepository<Film>, FilmRepository>();
             services.AddScoped<IRepository<Room>, RoomRepository>();
             services.AddScoped<IRepository<Seat>, SeatRepository>();
             services.AddScoped<IRepository<User>, UserRepository>();
-            services.AddScoped<IRepository<Artist>,ArtistRepository>();
+            services.AddScoped<IRepository<Artist>, ArtistRepository>();
             services.AddScoped<IMemberPurchaseRepository, MemberPurchaseRepository>();
             services.AddScoped<INormalPurchaseRepository, NormalPurchaseRepository>();
             services.AddScoped<IShowingRepository, ShowingRepository>();
@@ -85,12 +87,12 @@ namespace CinePlus.Services
             services.AddScoped<IPerformerRepository, PerformerRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
 
-            var jwtOptions = Configuration.GetSection(nameof(JwtOptions));     
+            var jwtOptions = Configuration.GetSection(nameof(JwtOptions));
             services.Configure<JwtOptions>(options =>
             {
-            options.Issuer = jwtOptions[nameof(JwtOptions.Issuer)];
-            options.Audience = jwtOptions[nameof(JwtOptions.Audience)];
-            options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+                options.Issuer = jwtOptions[nameof(JwtOptions.Issuer)];
+                options.Audience = jwtOptions[nameof(JwtOptions.Audience)];
+                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
             });
             var tokenValidationParameters = new TokenValidationParameters
             {

@@ -742,29 +742,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Peny\\.nuget\\packages\\": {}
+    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Peny\\Desktop\\IS\\Proyecto Final\\CinePlus\\CinePlusEntities\\CinePlusEntities.csproj",
+      "projectUniqueName": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusEntities\\CinePlusEntities.csproj",
       "projectName": "CinePlusEntities",
-      "projectPath": "C:\\Users\\Peny\\Desktop\\IS\\Proyecto Final\\CinePlus\\CinePlusEntities\\CinePlusEntities.csproj",
-      "packagesPath": "C:\\Users\\Peny\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Peny\\Desktop\\IS\\Proyecto Final\\CinePlus\\CinePlusEntities\\obj\\",
+      "projectPath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusEntities\\CinePlusEntities.csproj",
+      "packagesPath": "C:\\Users\\Cynthia-PC\\.nuget\\packages\\",
+      "outputPath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusEntities\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Peny\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Cynthia-PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Paquetes VS\\.dotnet": {},
-        "C:\\Paquetes VS\\NuGetPackages": {},
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\5.0.102": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

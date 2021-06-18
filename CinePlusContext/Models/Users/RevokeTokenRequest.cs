@@ -1,4 +1,4 @@
-namespace WebApi.Models.Users
+namespace CinePlus.Models.Users
 {
     public class RevokeTokenRequest
     {

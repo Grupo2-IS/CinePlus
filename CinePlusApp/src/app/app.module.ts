@@ -5,7 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 //import { ComponentsModule } from './components/components.module';
-import { ExamplesModule } from './examples/examples.module';
+// import { ExamplesModule } from './examples/examples.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -34,9 +34,9 @@ import { SetPurchaseComponent } from './user/set-purchase/set-purchase.component
 import { UserPaymentComponent } from './user/user-payment/user-payment.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { ComponentsComponent } from './components/components.component';
-import { LoginComponent } from './examples/login/login.component';
-import { ComponentsModule } from './components/components.module';
+// import { ComponentsComponent } from './components/components.component';
+// import { LoginComponent } from './examples/login/login.component';
+// import { ComponentsModule } from './components/components.module';
 import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.component';
 
 
@@ -76,8 +76,8 @@ import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.compo
         FormsModule,
         RouterModule,
         AppRoutingModule,
-        ComponentsModule,
-        ExamplesModule
+        // ComponentsModule
+        // ExamplesModule
     ],
     providers: [],
     bootstrap: [AppComponent]

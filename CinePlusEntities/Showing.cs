@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CinePlus.Entities
 {
@@ -18,7 +17,7 @@ namespace CinePlus.Entities
 
         [Required]
         public DateTime ShowingEnd { get; set; }
-        
+
         public virtual Film Film { get; set; }
         public virtual Room Room { get; set; }
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }
@@ -29,6 +28,6 @@ namespace CinePlus.Entities
             this.NormalPurchases = new HashSet<NormalPurchase>();
             this.MemberPurchases = new HashSet<MemberPurchase>();
         }
-        
+
     }
 }

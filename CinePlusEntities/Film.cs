@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace CinePlus.Entities
@@ -23,9 +22,9 @@ namespace CinePlus.Entities
 
         [MaxLength(40)]
         public string Genre { get; set; }
-        
+
         [Required]
-        public int Rating { get; set;}
+        public int Rating { get; set; }
 
         [Required]
         [MaxLength(500)]
@@ -43,6 +42,6 @@ namespace CinePlus.Entities
             this.Showings = new HashSet<Showing>();
         }
 
-        
+
     }
 }

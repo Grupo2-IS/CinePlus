@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,7 +15,7 @@ namespace CinePlus.Entities
         public int Row { get; set; }
 
         public virtual Room Room { get; set; }
-        
+
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }
         public virtual ICollection<MemberPurchase> MemberPurchases { get; set; }
 
@@ -26,6 +25,6 @@ namespace CinePlus.Entities
             this.MemberPurchases = new HashSet<MemberPurchase>();
         }
 
-        
+
     }
 }

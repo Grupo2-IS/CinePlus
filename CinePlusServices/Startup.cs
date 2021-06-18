@@ -1,25 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using CinePlus.Context;
 using CinePlus.Context.Repositories;
-using CinePlus.Context.Security;
 using CinePlus.Entities;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using CinePlus.Helpers;
+using CinePlus.Authorization;
 using Microsoft.AspNetCore.Identity;
+using BCryptNet = BCrypt.Net.BCrypt;
+
 
 
 
@@ -38,8 +31,11 @@ namespace CinePlus.Services
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CinePlusDb>(options => options.UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=CinePlusDB;Integrated Security=true;"));
+            services.AddCors(options =>
+                options.AddDefaultPolicy(p => p.AllowAnyOrigin()));
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+                options.JsonSerializerOptions.IgnoreNullValues = true);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CinePlusServices", Version = "v1" });
@@ -52,28 +48,11 @@ namespace CinePlus.Services
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<CinePlusDb>();
 
-            services.AddAuthorization(options =>
-           {
-               options.AddPolicy("ManageRolesAndClaimsPolicy",
-                   policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
+            // configure strongly typed settings object
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-               options.AddPolicy("DeleteRolePolicy",
-                   policy => policy.RequireClaim("Delete Role", "true"));
-
-               options.AddPolicy("EditRolePolicy",
-                   policy => policy.RequireClaim("Edit Role", "true"));
-
-               options.AddPolicy("CreateRolePolicy",
-                   policy => policy.RequireClaim("Create Role", "true"));
-
-               options.AddPolicy("AdminRolePolicy",
-                   policy => policy.RequireRole("Admin"));
-           });
-
-            services.AddScoped<IAuthorizationHandler, CanManageClaimHandler>();
-            //services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
-            services.AddScoped<IAuthorizationHandler, CanEditOtherAdminRolesAndClaimsHandler>();
-
+            services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IRepository<Film>, FilmRepository>();
             services.AddScoped<IRepository<Room>, RoomRepository>();
@@ -87,48 +66,16 @@ namespace CinePlus.Services
             services.AddScoped<IPerformerRepository, PerformerRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
 
-            var jwtOptions = Configuration.GetSection(nameof(JwtOptions));
-            services.Configure<JwtOptions>(options =>
-            {
-                options.Issuer = jwtOptions[nameof(JwtOptions.Issuer)];
-                options.Audience = jwtOptions[nameof(JwtOptions.Audience)];
-                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
-            });
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidIssuer = jwtOptions[nameof(JwtOptions.Issuer)],
 
-                ValidateAudience = true,
-                ValidAudience = jwtOptions[nameof(JwtOptions.Audience)],
+            services.AddAuthentication();
 
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = _signingKey,
 
-                RequireExpirationTime = false,
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.Zero
-            };
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(configureOptions =>
-            {
-                configureOptions.ClaimsIssuer = jwtOptions[nameof(JwtOptions.Issuer)];
-                configureOptions.TokenValidationParameters = tokenValidationParameters;
-                configureOptions.SaveToken = true;
-            });
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.JwtClaimIdentifiers.Rol, Constants.JwtClaims.ApiAccess));
-            });
+            services.AddAuthorization();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CinePlusDb context)
         {
             if (env.IsDevelopment())
             {
@@ -136,18 +83,41 @@ namespace CinePlus.Services
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CinePlusServices v1"));
             }
+            createTestUser(context);
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseCors(policy => policy
+                .SetIsOriginAllowed(origin => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            app.UseMiddleware<JwtMiddleware>();
             // app.UseAuthentication();
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void createTestUser(CinePlusDb context)
+        {
+            // add hardcoded test user to db on startup
+            var testUser = new User
+            {
+                Name = "Test",
+                Nick = "test",
+                PasswordHash = BCryptNet.HashPassword("test")
+            };
+            context.Users.Add(testUser);
+            context.SaveChanges();
         }
     }
 }

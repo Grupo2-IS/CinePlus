@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,7 +21,7 @@ namespace CinePlus.Entities
             this.Seats = new HashSet<Seat>();
             this.Showings = new HashSet<Showing>();
         }
-        
-        
+
+
     }
 }

@@ -29,16 +29,11 @@ namespace CinePlus.Entities
         [Required]
         [MaxLength(500)]
         public string Synopsis { get; set; }
-        public virtual ICollection<Director> Directors { get; set; }
-
-        public virtual ICollection<Performer> Performers { get; set; }
 
         public virtual ICollection<Showing> Showings { get; set; }
 
         public Film()
         {
-            this.Directors = new HashSet<Director>();
-            this.Performers = new HashSet<Performer>();
             this.Showings = new HashSet<Showing>();
         }
 

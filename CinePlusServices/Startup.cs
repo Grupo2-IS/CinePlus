@@ -30,7 +30,8 @@ namespace CinePlus.Services
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CinePlusDb>(options => options.UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=CinePlusDB;Integrated Security=true;"));
+            //services.AddDbContext<CinePlusDb>(options => options.UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=CinePlusDB;Integrated Security=true;"));
+            services.AddDbContext<CinePlusDb>();
             services.AddCors(options =>
                 options.AddDefaultPolicy(p => p.AllowAnyOrigin()));
 
@@ -41,12 +42,6 @@ namespace CinePlus.Services
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CinePlusServices", Version = "v1" });
             });
 
-            services.AddIdentity<User, IdentityRole>(options =>
-            {
-                options.Password.RequiredUniqueChars = 3;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireDigit = false;
-            }).AddEntityFrameworkStores<CinePlusDb>();
 
             // configure strongly typed settings object
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
@@ -58,12 +53,10 @@ namespace CinePlus.Services
             services.AddScoped<IRepository<Room>, RoomRepository>();
             services.AddScoped<IRepository<Seat>, SeatRepository>();
             services.AddScoped<IRepository<User>, UserRepository>();
-            services.AddScoped<IRepository<Artist>, ArtistRepository>();
             services.AddScoped<IMemberPurchaseRepository, MemberPurchaseRepository>();
             services.AddScoped<INormalPurchaseRepository, NormalPurchaseRepository>();
             services.AddScoped<IShowingRepository, ShowingRepository>();
             services.AddScoped<IRepository<Member>, MemberRepository>();
-            services.AddScoped<IPerformerRepository, PerformerRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
 
 
@@ -83,7 +76,7 @@ namespace CinePlus.Services
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CinePlusServices v1"));
             }
-            createTestUser(context);
+            // createTestUser(context);
 
             app.UseHttpsRedirection();
 
@@ -101,10 +94,7 @@ namespace CinePlus.Services
             // app.UseAuthentication();
             // app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 
         private void createTestUser(CinePlusDb context)

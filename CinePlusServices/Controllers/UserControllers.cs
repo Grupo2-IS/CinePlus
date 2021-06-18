@@ -12,25 +12,25 @@ namespace CinePlusServices.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IRepository<User>  repository;
+        private IRepository<User> repository;
 
         // constructor injects repository registered in startup
-        public UsersController(IRepository<User>  repository)
+        public UsersController(IRepository<User> repository)
         {
             this.repository = repository;
         }
 
 
-         // GET: api/users
+        // GET: api/users
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
-        public async  Task<IEnumerable<User>>  GetAll()
+        public async Task<IEnumerable<User>> GetAll()
         {
             return await this.repository.RetrieveAllAsync();
         }
 
         // GET: api/users/[id]
-        [HttpGet("{id:int")]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetUser(int id)

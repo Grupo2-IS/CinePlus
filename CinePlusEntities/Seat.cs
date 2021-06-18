@@ -14,6 +14,9 @@ namespace CinePlus.Entities
         [Required]
         public int Row { get; set; }
 
+        [Required]
+        public int Column { get; set; }
+
         public virtual Room Room { get; set; }
 
         public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }

@@ -28,13 +28,7 @@ namespace CinePlusServices.Controllers
         {
             return await this.repository.RetrieveAllAsync();
         }
-         // GET: api/memberpurchases
-        [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<MemberPurchase>))]
-        public async Task<IEnumerable<MemberPurchase>> GetAll()
-        {
-            return await this.repository.RetrieveAllAsync();
-        }
+
 
         // GET: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
         [HttpGet("{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
@@ -114,7 +108,7 @@ namespace CinePlusServices.Controllers
         public async Task<IActionResult> Delete(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
             MemberPurchase memberPurchase = await this.repository.RetrieveAsync(MemberID, SeatID, FilmID, RoomID, ShowingStart);
-            if (film == null)
+            if (memberPurchase == null)
             {
                 return NotFound();  // 404 Resource No Found
             }
@@ -127,7 +121,7 @@ namespace CinePlusServices.Controllers
             else
             {
                 return BadRequest(  // 400 Bad Request
-                    $"MemberPurchase with id {id} was found but failed to delete."
+                    $"MemberPurchase was found but failed to delete."
                 );
             }
         }

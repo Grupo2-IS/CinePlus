@@ -33,12 +33,12 @@ namespace CinePlusServices.Controllers
         // This will return a list offilms that may be empty.
 
         // GET: api/normalpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
-        [HttpGet( "{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}") ]
+        [HttpGet("{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(200, Type = typeof(NormalPurchase))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetNormalPurchase(int UserId,int SeatID,int FilmID,int RoomID,DateTime ShowingStart)
+        public async Task<IActionResult> GetNormalPurchase(int UserId, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            NormalPurchase normalPurchase = await this.repository.RetrieveAsync(UserId, ShowingStart,FilmID, RoomID,SeatID);
+            NormalPurchase normalPurchase = await this.repository.RetrieveAsync(UserId, SeatID, FilmID, RoomID, ShowingStart);
 
             if (normalPurchase == null)
             {
@@ -69,11 +69,7 @@ namespace CinePlusServices.Controllers
 
             NormalPurchase added = await repository.CreateAsync(normalPurchase);
 
-            return CreatedAtRoute( // 201 Created
-                routeName: nameof(this.GetNormalPurchase),
-                routeValues: new { id = added.NormalPurchaseID },
-                value: added
-            );
+            return StatusCode(201);
         }
 
         // PUT: api/normalpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
@@ -82,9 +78,9 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Update(int UserId,int SeatID,int FilmID,int RoomID,DateTime ShowingStart, [FromBody] NormalPurchase normalPurchase)
+        public async Task<IActionResult> Update(int UserId, int SeatID, int FilmID, int RoomID, DateTime ShowingStart, [FromBody] NormalPurchase normalPurchase)
         {
-             if (normalPurchase == null || normalPurchase.UserId != UserId || normalPurchase.SeatID !=SeatID|| normalPurchase.FilmID!=FilmID|| normalPurchase.RoomID!=RoomID||normalPurchase.ShowingStart!=ShowingStart)
+            if (normalPurchase == null || normalPurchase.UserId != UserId || normalPurchase.SeatID != SeatID || normalPurchase.FilmID != FilmID || normalPurchase.RoomID != RoomID || normalPurchase.ShowingStart != ShowingStart)
             {
                 return BadRequest(); // 400 Bad Request
             }
@@ -94,14 +90,14 @@ namespace CinePlusServices.Controllers
                 return BadRequest(ModelState); // 400 Bad request
             }
 
-            var existing = await this.repository.RetrieveAsync(UserId,SeatID,FilmID,RoomID,ShowingStart);
+            var existing = await this.repository.RetrieveAsync(UserId, SeatID, FilmID, RoomID, ShowingStart);
 
             if (existing == null)
             {
                 return NotFound();  // 404 Resource not found
             }
 
-            await this.repository.UpdateAsync(UserId,SeatID,FilmID,RoomID,ShowingStart, normalPurchase);
+            await this.repository.UpdateAsync(UserId, SeatID, FilmID, RoomID, ShowingStart, normalPurchase);
 
             return new NoContentResult();   // 204 No Content
         }
@@ -111,15 +107,15 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int UserId,int SeatID,int FilmID,int RoomID,DateTime ShowingStart)
+        public async Task<IActionResult> Delete(int UserId, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            NormalPurchase normalPurchase = await this.repository.RetrieveAsync(UserId, ShowingStart, FilmID, RoomID, SeatID);
+            NormalPurchase normalPurchase = await this.repository.RetrieveAsync(UserId, SeatID, FilmID, RoomID, ShowingStart);
             if (normalPurchase == null)
             {
                 return NotFound();  // 404 Resource No Found
             }
 
-            bool? deleted = await this.repository.DeleteAsync( UserId, ShowingStart, FilmID, RoomID, SeatID);
+            bool? deleted = await this.repository.DeleteAsync(UserId, SeatID, FilmID, RoomID, ShowingStart);
             if (deleted.HasValue && deleted.Value)
             {
                 return new NoContentResult();   // 204 No Content
@@ -127,7 +123,7 @@ namespace CinePlusServices.Controllers
             else
             {
                 return BadRequest(  // 400 Bad Request
-                    $"NormalPurchase with id {id} was found but failed to delete."
+                    $"NormalPurchase was found but failed to delete."
                 );
             }
         }

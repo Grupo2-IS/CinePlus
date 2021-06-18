@@ -23,13 +23,13 @@ namespace CinePlusServices.Controllers
         // GET: api/rooms
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Room>))]
-        public async  Task<IEnumerable<Room>>  GetAll()
+        public async Task<IEnumerable<Room>> GetAll()
         {
             return await this.repository.RetrieveAllAsync();
         }
 
         // GET: api/rooms/[id]
-        [HttpGet("{id:int")]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(Room))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetRoom(int id)
@@ -43,88 +43,6 @@ namespace CinePlusServices.Controllers
             else
             {
                 return Ok(room);
-            }
-        }
-
-        // POST: api/rooms
-        // BODY: Room (JSON)
-        [HttpPost]
-        [ProducesResponseType(201, Type = typeof(Room))]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> Create([FromBody] Room room)
-        {
-            if (room == null)
-            {
-                return BadRequest();  // 400 Bad Request
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState); // 400 Bad Request
-            }
-
-            Room added = await repository.CreateAsync(room);
-
-            return CreatedAtRoute( // 201 Created
-                routeName: nameof(this.GetRoom),
-                routeValues: new { id = added.RoomID },
-                value: added
-            );
-        }
-
-        // PUT: api/rooms/[id]
-        // BODY: Room (JSON)
-        [HttpPut("{id}")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
-        public async Task<IActionResult> Update(int id, [FromBody] Room room)
-        {
-            if ( room == null ||room.RoomID != id)
-            {
-                return BadRequest(); // 400 Bad Request
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState); // 400 Bad request
-            }
-
-            var existing = await this.repository.RetrieveAsync(id);
-
-            if (existing == null)
-            {
-                return NotFound();  // 404 Resource not found
-            }
-
-            await this.repository.UpdateAsync(id, room);
-
-            return new NoContentResult();   // 204 No Content
-        }
-
-        // DELETE: api/rooms/[id]
-        [HttpDelete("{id}")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int id)
-        {
-            Room room = await this.repository.RetrieveAsync(id);
-            if (room == null)
-            {
-                return NotFound();  // 404 Resource No Found
-            }
-
-            bool? deleted = await this.repository.DeleteAsync(id);
-            if (deleted.HasValue && deleted.Value)
-            {
-                return new NoContentResult();   // 204 No Content
-            }
-            else
-            {
-                return BadRequest(  // 400 Bad Request
-                    $"Film with id {id} was found but failed to delete."
-                );
             }
         }
 

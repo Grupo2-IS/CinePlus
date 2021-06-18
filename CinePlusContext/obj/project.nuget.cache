@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pTKttumyIXnif1HovfA7prSpEqeeqPrstuZGzugKwPJCHxoDIUYskkkJQmwKVz+KzDJRbI+s+0X5kKNGJkRqYQ==",
+  "dgSpecHash": "xTqgSqaLW5wuxQyPWbZKzx9fCEtPT747tqQOTpKJ+bK3KBGKv57u9BWRPbpdlqb9VUrHQsNN2G6Y9LXV6rzAaQ==",
   "success": true,
   "projectFilePath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusContext\\CinePlusContext.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.7\\microsoft.entityframeworkcore.abstractions.5.0.7.nupkg.sha512",
     "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.7\\microsoft.entityframeworkcore.analyzers.5.0.7.nupkg.sha512",
     "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.7\\microsoft.entityframeworkcore.design.5.0.7.nupkg.sha512",
+    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\5.0.7\\microsoft.entityframeworkcore.inmemory.5.0.7.nupkg.sha512",
     "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.7\\microsoft.entityframeworkcore.relational.5.0.7.nupkg.sha512",
     "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.7\\microsoft.entityframeworkcore.sqlserver.5.0.7.nupkg.sha512",
     "C:\\Users\\Cynthia-PC\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",

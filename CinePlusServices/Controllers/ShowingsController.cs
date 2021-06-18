@@ -33,7 +33,7 @@ namespace CinePlusServices.Controllers
         [HttpGet("{FilmId:int}/{RoomID:int}/{ShowingStart:DateTime}/{ShowingEnd:DateTime}")]
         [ProducesResponseType(200, Type = typeof(Showing))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetShowing(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd)
+        public async Task<IActionResult> GetShowing(int FilmId, int RoomID, DateTime ShowingStart, DateTime ShowingEnd)
         {
             Showing showing = await this.repository.RetrieveAsync(FilmId, RoomID, ShowingStart, ShowingEnd);
 
@@ -66,11 +66,7 @@ namespace CinePlusServices.Controllers
 
             Showing added = await repository.CreateAsync(showing);
 
-            return CreatedAtRoute( // 201 Created
-                routeName: nameof(this.GetShowing),
-                routeValues: new { id = added.ShowingID },
-                value: added
-            );
+            return StatusCode(201);
         }
 
         // PUT: api/Showings/[FilmID]/[RoomID]/[ShowingStar]/[ShowingEnd]
@@ -79,9 +75,9 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Update(int FilmID,int RoomID,DateTime ShowingStart,DateTime ShowingEnd, [FromBody] Showing showing)
+        public async Task<IActionResult> Update(int FilmID, int RoomID, DateTime ShowingStart, DateTime ShowingEnd, [FromBody] Showing showing)
         {
-            if (showing == null || showing.FilmID!=FilmID|| showing.RoomID!=RoomID|| showing.ShowingStart!=ShowingStart|| showing.ShowingEnd!=ShowingEnd)
+            if (showing == null || showing.FilmID != FilmID || showing.RoomID != RoomID || showing.ShowingStart != ShowingStart || showing.ShowingEnd != ShowingEnd)
             {
                 return BadRequest(); // 400 Bad Request
             }
@@ -91,14 +87,14 @@ namespace CinePlusServices.Controllers
                 return BadRequest(ModelState); // 400 Bad request
             }
 
-            var existing = await this.repository.RetrieveAsync( FilmID, RoomID, ShowingStart,ShowingEnd);
+            var existing = await this.repository.RetrieveAsync(FilmID, RoomID, ShowingStart, ShowingEnd);
 
             if (existing == null)
             {
                 return NotFound();  // 404 Resource not found
             }
 
-            await this.repository.UpdateAsync(FilmID, RoomID, ShowingStart,ShowingEnd, showing);
+            await this.repository.UpdateAsync(FilmID, RoomID, ShowingStart, ShowingEnd, showing);
 
             return new NoContentResult();   // 204 No Content
         }
@@ -108,15 +104,15 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int FilmID,int RoomID,DateTime ShowingStart,DateTime ShowingEnd)
+        public async Task<IActionResult> Delete(int FilmID, int RoomID, DateTime ShowingStart, DateTime ShowingEnd)
         {
-            Showing showing = await this.repository.RetrieveAsync(FilmID,RoomID,ShowingStart,ShowingEnd);
+            Showing showing = await this.repository.RetrieveAsync(FilmID, RoomID, ShowingStart, ShowingEnd);
             if (showing == null)
             {
                 return NotFound();  // 404 Resource No Found
             }
 
-            bool? deleted = await this.repository.DeleteAsync(FilmID, RoomID,ShowingStart, ShowingEnd);
+            bool? deleted = await this.repository.DeleteAsync(FilmID, RoomID, ShowingStart, ShowingEnd);
             if (deleted.HasValue && deleted.Value)
             {
                 return new NoContentResult();   // 204 No Content
@@ -124,7 +120,7 @@ namespace CinePlusServices.Controllers
             else
             {
                 return BadRequest(  // 400 Bad Request
-                    $"Showing with id {id} was found but failed to delete."
+                    $"Showing was found but failed to delete."
                 );
             }
         }

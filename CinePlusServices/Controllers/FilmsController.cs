@@ -16,7 +16,7 @@ namespace CinePlusServices.Controllers
         private IRepository<Film> repository;
 
         // constructor injects repository registered in startup
-        public FilmsController(IRepository<Film>  repository)
+        public FilmsController(IRepository<Film> repository)
         {
             this.repository = repository;
         }
@@ -24,7 +24,7 @@ namespace CinePlusServices.Controllers
         // GET: api/films
         // GET: api/films/?genre=[genre]
         // This will return a list offilms that may be empty.
-        [HttpGet]
+        [HttpGet("{genre:string}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Film>))]
         public async Task<IEnumerable<Film>> GetFilms(string genre)
         {
@@ -39,7 +39,7 @@ namespace CinePlusServices.Controllers
             }
         }
 
-         // GET: api/film
+        // GET: api/film
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Film>))]
         public async Task<IEnumerable<Film>> GetAll()
@@ -48,7 +48,7 @@ namespace CinePlusServices.Controllers
         }
 
         // GET: api/films/[id]
-        [HttpGet]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(Film))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetFilm(int id)

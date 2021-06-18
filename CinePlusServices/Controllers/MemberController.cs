@@ -19,7 +19,7 @@ namespace CinePlusServices.Controllers
         {
             this.repository = repository;
         }
-         // GET: api/members
+        // GET: api/members
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Member>))]
         public async Task<IEnumerable<Member>> GetAll()
@@ -28,14 +28,14 @@ namespace CinePlusServices.Controllers
         }
 
         // GET: api/members/[id]
-        [HttpGet]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(Member))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetMember(int id)
         {
             Member member = await this.repository.RetrieveAsync(id);
 
-            if (member== null)
+            if (member == null)
             {
                 return NotFound(); // 404 resource not found
             }
@@ -50,7 +50,7 @@ namespace CinePlusServices.Controllers
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Member))]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Create([FromBody]Member member)
+        public async Task<IActionResult> Create([FromBody] Member member)
         {
             if (member == null)
             {

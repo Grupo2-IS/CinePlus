@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Threading.Tasks;
 using CinePlus.Helpers;
-using CinePlus.Entities;
+using CinePlus.Services;
 
 namespace CinePlus.Authorization
 {

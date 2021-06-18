@@ -25,9 +25,9 @@ namespace CinePlusServices.Controllers
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(MemberPurchase))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetMemberPurchase(int MemberID , int SeatID,int FilmID,int RoomID,DateTime ShowingStart)
+        public async Task<IActionResult> GetMemberPurchase(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            MemberPurchase memberPurchase = await this.repository.RetrieveAsync(MemberID , SeatID, FilmID, RoomID,ShowingStart);
+            MemberPurchase memberPurchase = await this.repository.RetrieveAsync(MemberID, SeatID, FilmID, RoomID, ShowingStart);
 
             if (memberPurchase == null)
             {
@@ -58,11 +58,7 @@ namespace CinePlusServices.Controllers
 
             MemberPurchase added = await repository.CreateAsync(memberPurchase);
 
-            return CreatedAtRoute( // 201 Created
-                routeName: nameof(this.GetMemberPurchase),
-                routeValues: new { id = added.MemberPurchaseID },
-                value: added
-            );
+            return StatusCode(201);
         }
 
         // PUT: api/memberpurchases/[id]
@@ -71,9 +67,9 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Update(int MemberID , int SeatID,int FilmID,int RoomID,DateTime ShowingStart, [FromBody] MemberPurchase memberPurchase)
+        public async Task<IActionResult> Update(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart, [FromBody] MemberPurchase memberPurchase)
         {
-            if (memberPurchase == null || memberPurchase.MemberId != MemberID || memberPurchase.SeatID !=SeatID|| memberPurchase.FilmID!=FilmID|| memberPurchase.RoomID!=RoomID||memberPurchase.ShowingStart!=ShowingStart)
+            if (memberPurchase == null || memberPurchase.MemberId != MemberID || memberPurchase.SeatID != SeatID || memberPurchase.FilmID != FilmID || memberPurchase.RoomID != RoomID || memberPurchase.ShowingStart != ShowingStart)
             {
                 return BadRequest(); // 400 Bad Request
             }
@@ -83,14 +79,14 @@ namespace CinePlusServices.Controllers
                 return BadRequest(ModelState); // 400 Bad request
             }
 
-            var existing = await this.repository.RetrieveAsync( MemberID ,  SeatID, FilmID, RoomID,ShowingStart);
+            var existing = await this.repository.RetrieveAsync(MemberID, SeatID, FilmID, RoomID, ShowingStart);
 
             if (existing == null)
             {
                 return NotFound();  // 404 Resource not found
             }
 
-            await this.repository.UpdateAsync( MemberID ,SeatID, FilmID, RoomID,ShowingStart, memberPurchase);
+            await this.repository.UpdateAsync(MemberID, SeatID, FilmID, RoomID, ShowingStart, memberPurchase);
 
             return new NoContentResult();   // 204 No Content
         }
@@ -100,15 +96,15 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int MemberID , int SeatID,int FilmID,int RoomID,DateTime ShowingStart)
+        public async Task<IActionResult> Delete(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            MemberPurchase memberPurchase = await this.repository.RetrieveAsync( MemberID ,SeatID,FilmID,RoomID,ShowingStart);
+            MemberPurchase memberPurchase = await this.repository.RetrieveAsync(MemberID, SeatID, FilmID, RoomID, ShowingStart);
             if (film == null)
             {
                 return NotFound();  // 404 Resource No Found
             }
 
-            bool? deleted = await this.repository.DeleteAsync( MemberID ,  SeatID, FilmID, RoomID,ShowingStart);
+            bool? deleted = await this.repository.DeleteAsync(MemberID, SeatID, FilmID, RoomID, ShowingStart);
             if (deleted.HasValue && deleted.Value)
             {
                 return new NoContentResult();   // 204 No Content

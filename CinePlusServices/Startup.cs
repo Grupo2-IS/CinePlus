@@ -16,7 +16,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using CinePlus.Context;
 using CinePlus.Context.Repositories;
-using CinePlus.Context.Security;
 using CinePlus.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -54,9 +53,6 @@ namespace CinePlus.Services
 
             services.AddAuthorization(options =>
            {
-               options.AddPolicy("ManageRolesAndClaimsPolicy",
-                   policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
-
                options.AddPolicy("DeleteRolePolicy",
                    policy => policy.RequireClaim("Delete Role", "true"));
 
@@ -70,9 +66,7 @@ namespace CinePlus.Services
                    policy => policy.RequireRole("Admin"));
            });
 
-            services.AddScoped<IAuthorizationHandler, CanManageClaimHandler>();
-            //services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
-            services.AddScoped<IAuthorizationHandler, CanEditOtherAdminRolesAndClaimsHandler>();
+
 
 
             services.AddScoped<IRepository<Film>, FilmRepository>();
@@ -87,43 +81,11 @@ namespace CinePlus.Services
             services.AddScoped<IPerformerRepository, PerformerRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
 
-            var jwtOptions = Configuration.GetSection(nameof(JwtOptions));
-            services.Configure<JwtOptions>(options =>
-            {
-                options.Issuer = jwtOptions[nameof(JwtOptions.Issuer)];
-                options.Audience = jwtOptions[nameof(JwtOptions.Audience)];
-                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
-            });
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidIssuer = jwtOptions[nameof(JwtOptions.Issuer)],
 
-                ValidateAudience = true,
-                ValidAudience = jwtOptions[nameof(JwtOptions.Audience)],
+            services.AddAuthentication();
 
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = _signingKey,
 
-                RequireExpirationTime = false,
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.Zero
-            };
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(configureOptions =>
-            {
-                configureOptions.ClaimsIssuer = jwtOptions[nameof(JwtOptions.Issuer)];
-                configureOptions.TokenValidationParameters = tokenValidationParameters;
-                configureOptions.SaveToken = true;
-            });
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.JwtClaimIdentifiers.Rol, Constants.JwtClaims.ApiAccess));
-            });
+            services.AddAuthorization();
 
         }
 

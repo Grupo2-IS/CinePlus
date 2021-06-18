@@ -20,8 +20,17 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
-        // GET: api/performers/[id]
+
+        // GET: api/performers
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Performer>))]
+        public async Task<IEnumerable<Performer>> GetAll()
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+
+        // GET: api/performers/[FilmID]/[ArtistID]
+        [HttpGet("{FilmID:int}/{ArtistID:int}")]
         [ProducesResponseType(200, Type = typeof(Performer))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetPerformer(int FilmID,int ArtistID)
@@ -64,9 +73,9 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/performers/[id]
+        // PUT: api/performers/[FilmID]/[ArtistID]
         // BODY: Performer (JSON)
-        [HttpPut("{id}")]
+        [HttpPut("{FilmID:int}/{ArtistID:int}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -94,8 +103,8 @@ namespace CinePlusServices.Controllers
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/performers/[id]
-        [HttpDelete("{id}")]
+        // DELETE: api/performers/[FilmID]/[ArtistID]
+        [HttpDelete("{FilmID:int}/{ArtistID:int}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

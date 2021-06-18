@@ -22,10 +22,18 @@ namespace CinePlusServices.Controllers
         }
 
         // GET: api/normalpurchases
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<NormalPurchase>))]
+        public async Task<IEnumerable<NormalPurchase>> GetAll()
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+
+        // GET: api/normalpurchases
         // This will return a list offilms that may be empty.
 
-        // GET: api/normalpurchases/[id]
-        [HttpGet]
+        // GET: api/normalpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
+        [HttpGet( "{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}") ]
         [ProducesResponseType(200, Type = typeof(NormalPurchase))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetNormalPurchase(int UserId,int SeatID,int FilmID,int RoomID,DateTime ShowingStart)
@@ -68,9 +76,9 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/normalpurchases/[id]
+        // PUT: api/normalpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
         // BODY: Normalpurchases (JSON)
-        [HttpPut("{ UserId, ShowingStart, FilmID, RoomID, SeatID}")]
+        [HttpPut("{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -98,8 +106,8 @@ namespace CinePlusServices.Controllers
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/normalpurchases/[id]
-        [HttpDelete("{ UserId,SeatID , FilmID, RoomID, ShowingStart}")]
+        // DELETE: api/normalpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
+        [HttpDelete("{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

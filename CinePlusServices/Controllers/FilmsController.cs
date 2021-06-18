@@ -39,6 +39,14 @@ namespace CinePlusServices.Controllers
             }
         }
 
+         // GET: api/film
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Film>))]
+        public async Task<IEnumerable<Film>> GetAll()
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+
         // GET: api/films/[id]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Film))]

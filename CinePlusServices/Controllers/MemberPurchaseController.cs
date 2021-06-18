@@ -21,8 +21,23 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
-        // GET: api/memberpurchases/[id]
+        // GET: api/memberpurchases
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<MemberPurchase>))]
+        public async Task<IEnumerable<MemberPurchase>> GetAll()
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+         // GET: api/memberpurchases
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<MemberPurchase>))]
+        public async Task<IEnumerable<MemberPurchase>> GetAll()
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+
+        // GET: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
+        [HttpGet("{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(200, Type = typeof(MemberPurchase))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetMemberPurchase(int MemberID , int SeatID,int FilmID,int RoomID,DateTime ShowingStart)
@@ -65,9 +80,9 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/memberpurchases/[id]
+        // PUT: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
         // BODY: MemberPurchase (JSON)
-        [HttpPut("{id}")]
+        [HttpPut("{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -95,8 +110,8 @@ namespace CinePlusServices.Controllers
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/memberpurchases/[id]
-        [HttpDelete("{id}")]
+        // DELETE: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
+        [HttpDelete("{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

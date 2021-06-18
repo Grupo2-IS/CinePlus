@@ -20,8 +20,8 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
+       
         // GET: api/seats
-        // This will return a list offilms that may be empty.
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Seat>))]
         public async Task<IEnumerable<Seat>> GetSeats(string row)

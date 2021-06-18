@@ -15,12 +15,12 @@
                 <th scope="col" style="width: 10%;">Duracion</th>
                 <th scope="col" style="width: 10%;">Pais</th>
                 <th scope="col" style="width: 10%;">Genero</th>
-                <th scope="col" style="width: 40%;">Sinopsis</th>
+                <th scope="col" style="width: 40%;">Rating</th>
                 <th scope="col" style="width: 20%;">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <!-- <tr>
                 <th scope="row">1</th>
                 <td>Mark</td>
                 <td>Lorem, ipsum.</td>
@@ -61,7 +61,7 @@
                     </button>
                 </td>
             </tr>
-            <tr>
+            <tr> *ngFor="let d of data"
                 <th scope="row">3</th>
                 <td>Larry the Bird</td>
                 <td>Lorem, ipsum.</td>
@@ -80,7 +80,27 @@
                         ELIMINAR
                     </button>
                 </td>
-            </tr>
+            </tr> -->
+
+          
+        <tr  *ngFor="let d of data"  > 
+            <th scope="row">{{d.id }} </th>
+            <td>{{d.nombre}}</td>
+            <td>{{d.duracion}}</td>
+            <td>{{d.pais}}</td>
+            <td>{{d.genero}}</td>
+            <td>{{d.rating}}</td>
+            <td>
+                <button class="btn btn-warning btn-round" type="button">
+                    <i class="now-ui-icons arrows-1_refresh-69"></i>
+                    EDITAR
+                </button>
+                <button class="btn btn-danger btn-round" type="button">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                    ELIMINAR
+                </button>
+            </td>
+        </tr>
         </tbody>
     </table>
 

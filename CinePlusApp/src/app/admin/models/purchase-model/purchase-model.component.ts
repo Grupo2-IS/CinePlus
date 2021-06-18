@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-purchase-model',
@@ -11,5 +13,6 @@ export class PurchaseModelComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
 
 }

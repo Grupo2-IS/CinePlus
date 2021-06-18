@@ -20,6 +20,14 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
+        // GET: api/artist
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Artist>))]
+        public async Task<IEnumerable<Artist>> GetAll(string genre)
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+
         // GET: api/artists/[id]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Artist))]

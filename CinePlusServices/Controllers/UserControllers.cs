@@ -19,8 +19,18 @@ namespace CinePlusServices.Controllers
         {
             this.repository = repository;
         }
-        // GET: api/users/[id]
+
+
+         // GET: api/users
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
+        public async  Task<IEnumerable<User>>  GetAll()
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+
+        // GET: api/users/[id]
+        [HttpGet("{id:int")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetUser(int id)

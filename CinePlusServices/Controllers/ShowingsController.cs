@@ -21,8 +21,16 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
-        // GET: api/showings/[id]
+        // GET: api/showings
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Showing>))]
+        public async Task<IEnumerable<Showing>> GetAll()
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+
+        // GET: api/showings/[FilmID]/[RoomID]/[ShowingStar]/[ShowingEnd]
+        [HttpGet("{FilmId:int}/{RoomID:int}/{ShowingStart:DateTime}/{ShowingEnd:DateTime}")]
         [ProducesResponseType(200, Type = typeof(Showing))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetShowing(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd)
@@ -65,9 +73,9 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/Showings/[id]
+        // PUT: api/Showings/[FilmID]/[RoomID]/[ShowingStar]/[ShowingEnd]
         // BODY: Showing (JSON)
-        [HttpPut("{id}")]
+        [HttpPut("{FilmId:int}/{RoomID:int}/{ShowingStart:DateTime}/{ShowingEnd:DateTime}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -95,8 +103,8 @@ namespace CinePlusServices.Controllers
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/showings/[id]
-        [HttpDelete("{id}")]
+        // DELETE: api/showings/[FilmID]/[RoomID]/[ShowingStar]/[ShowingEnd]
+        [HttpDelete("{FilmId:int}/{RoomID:int}/{ShowingStart:DateTime}/{ShowingEnd:DateTime}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

@@ -21,6 +21,14 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
+
+        // GET: api/directors
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Director>))]
+        public async Task<IEnumerable<Director>> GetAll(string genre)
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
         public async Task<IActionResult> GetDirector(int FilmID, int ArtistID)
         {
             Director director = await this.repository.RetrieveAsync(FilmID, ArtistID);

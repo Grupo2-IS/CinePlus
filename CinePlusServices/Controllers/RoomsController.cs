@@ -21,9 +21,15 @@ namespace CinePlusServices.Controllers
         }
 
         // GET: api/rooms
-        // This will return a list offilms that may be empty.
-        // GET: api/rooms/[id]
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Room>))]
+        public async  Task<IEnumerable<Room>>  GetAll()
+        {
+            return await this.repository.RetrieveAllAsync();
+        }
+
+        // GET: api/rooms/[id]
+        [HttpGet("{id:int")]
         [ProducesResponseType(200, Type = typeof(Room))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetRoom(int id)

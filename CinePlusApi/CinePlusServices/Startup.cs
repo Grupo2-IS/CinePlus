@@ -12,6 +12,7 @@ using CinePlus.Helpers;
 using CinePlus.Authorization;
 using Microsoft.AspNetCore.Identity;
 using BCryptNet = BCrypt.Net.BCrypt;
+using System.Text.Json.Serialization;
 
 
 
@@ -36,7 +37,10 @@ namespace CinePlus.Services
                 options.AddDefaultPolicy(p => p.AllowAnyOrigin()));
 
             services.AddControllers().AddJsonOptions(options =>
-                options.JsonSerializerOptions.IgnoreNullValues = true);
+                {
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CinePlusServices", Version = "v1" });
@@ -72,6 +76,7 @@ namespace CinePlus.Services
         {
             if (env.IsDevelopment())
             {
+                this.CreateDatabase(app);
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CinePlusServices v1"));
@@ -94,7 +99,10 @@ namespace CinePlus.Services
             // app.UseAuthentication();
             // app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
 
         private void createTestUser(CinePlusDb context)
@@ -108,6 +116,17 @@ namespace CinePlus.Services
             };
             context.Users.Add(testUser);
             context.SaveChanges();
+        }
+
+        private void CreateDatabase(IApplicationBuilder app)
+        {
+            using (var provider = app.ApplicationServices.CreateScope())
+            {
+                using (var context = provider.ServiceProvider.GetService<CinePlusDb>())
+                {
+                    context.Database.EnsureCreated();
+                }
+            }
         }
     }
 }

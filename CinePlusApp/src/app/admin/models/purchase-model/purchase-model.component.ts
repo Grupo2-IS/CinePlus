@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Purchase } from './purchase-model.model';
 import {PurchaseService } from './purchase-model.service';
+import { Router,ActivatedRoute} from '@angular/router';
+
 
 
 @Component({
@@ -13,12 +15,14 @@ export class PurchaseModelComponent implements OnInit {
   normalPurchaseList : Purchase[]= [];
   memberPurchaseList : Purchase[]= [];
 
-  constructor( private purchaseService: PurchaseService ){ }
+  constructor( private router:Router, private route:ActivatedRoute, private purchaseService: PurchaseService ){ }
 
   ngOnInit() {
      this.OnGet1();
      this.OnGet2();
   }
+  createPurchase() {
+    this.router.navigate(['create'], { relativeTo: this.route })}
    
     OnGet1(){
       this.purchaseService.GetNormalPurchase().subscribe(

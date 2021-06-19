@@ -43,6 +43,7 @@ import { FilmService } from './admin/models/film-model/film-model.service';
 import { MemberService} from './admin/models/member-model/member-model.service';
 import { PurchaseService} from './admin/models/purchase-model/purchase-model.service';
 import {ShowingService} from './admin/models/showing-model/showing-model.service';
+import {AuthService} from './auth/auth.service'
 
 @NgModule({
     declarations: [
@@ -82,7 +83,7 @@ import {ShowingService} from './admin/models/showing-model/showing-model.service
         // ComponentsModule
         // ExamplesModule
     ],
-    providers: [FilmService, MemberService, PurchaseService, ShowingService],
+    providers: [FilmService, MemberService, PurchaseService, ShowingService, AuthService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

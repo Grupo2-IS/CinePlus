@@ -106,15 +106,9 @@
 .ui-1_simple-remove:hover{
   cursor: pointer
 }
-
- /* .genero{
-  width: 40%;
-  min-width: fit-content;
-  display: flex;
+.title{
+  color: #45a049;
+  display: flex; 
+  align-content: center;
 }
 
-.genero select{
-  border-block-color: #17a2b8;
-  background-color: #17a2b8;
-
-} */

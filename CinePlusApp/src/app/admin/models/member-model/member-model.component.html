@@ -16,50 +16,6 @@
             </tr>
         </thead>
         <tbody>
-            <!-- <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr> -->
-
-
             <tr  *ngFor="let d of memberList"  > 
                 <th scope="row">{{d.id }} </th>
                 <td>{{d.nombre}}</td>

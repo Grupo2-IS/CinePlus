@@ -36,7 +36,7 @@ export class MemberModelComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private memberService:MemberService) { }
 
   ngOnInit() {
-     this.OnGet();
+     //this.OnGet();
   }
   createMember() {
     this.router.navigate(['create'], { relativeTo: this.route })}

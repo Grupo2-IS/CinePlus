@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-film-form',
@@ -6,13 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./film-form.component.css']
 })
 export class FilmFormComponent implements OnInit {
-  // generos = [
-  //   { id: 1, name: "Emma Lalaland" },
-  //   { id: 2, name: "Jack Depp" },
-  //   { id: 3, name: "Tom Gump" },
-  //   { id: 4, name: "Teresa Binoche" },
-  //   { id: 5, name: "Audrey Poulan" },
-  // ];
+  
   genres :string[] = ["Drama","Accion", "Romantica","Suspenso" ];
 
   selectedGenres = [];
@@ -36,4 +31,15 @@ export class FilmFormComponent implements OnInit {
       this.selectedGenres.splice(index, 1);
     }
   }
+  onSignin(form: NgForm) {
+    const filmName = form.value.name;
+    const country = form.value.country;
+    const rating = form.value.rating;
+    const duration = form.value.duracion;
+    const genre = form.value.genero;
+    const sinopsis = form.value.sinopsis;
+
+  }
+
+
 }

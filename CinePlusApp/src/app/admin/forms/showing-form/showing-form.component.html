@@ -1,1 +1,32 @@
-<p>showing-form works!</p>
+<app-book-header></app-book-header>
+<div class="row">
+    <div class="col-75">
+        <div class="container">
+            <form (ngSubmit)='onSignin(f)'  #f='ngForm' action="/action_page.php">
+                <div class="row">
+                    <div class="col-50">
+                        <h2 class="title "> Proyección</h2>
+                        <h3>Datos</h3>
+                        <label for="film"><i class="fa fa-film"></i> Pelicula</label>
+                        <!-- <input type="text" id="film" name="film" placeholder="Titanic"> -->
+                        <div id="film">
+                            <select [(ngModel)]="film" name="film">
+                                <option *ngFor="let a of genres" [ngValue]="a">{{a}}</option>
+                            </select>
+                            <!-- <button class="btn btn-success" (click)="addFilm()">
+                                <i class="now-ui-icons ui-1_simple-add"></i>
+                            </button> -->
+                        </div>
+                        <label for="room"> Sala</label>
+                        <input type="number" min="1" max="10" id="room" name="room" placeholder="1" ngModel>
+                        <label for="start"> Hora de Inicio</label>
+                        <input type="time" id="start" name="start" placeholder="12:45 PM" ngModel>
+                        <label for="end"> Hora de Finalización</label>
+                        <input type="time" id="end" name="end" placeholder="02:45 PM" ngModel>
+                    </div>
+                </div>
+                <input type="submit" value="Añadir Proyección" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>

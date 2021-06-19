@@ -40,6 +40,9 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.component';
 
 import { FilmService } from './admin/models/film-model/film-model.service';
+import { MemberService} from './admin/models/member-model/member-model.service';
+import { PurchaseService} from './admin/models/purchase-model/purchase-model.service';
+import {ShowingService} from './admin/models/showing-model/showing-model.service';
 
 @NgModule({
     declarations: [
@@ -79,7 +82,7 @@ import { FilmService } from './admin/models/film-model/film-model.service';
         // ComponentsModule
         // ExamplesModule
     ],
-    providers: [FilmService],
+    providers: [FilmService, MemberService, PurchaseService, ShowingService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

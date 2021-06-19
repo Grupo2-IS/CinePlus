@@ -21,28 +21,28 @@ namespace CinePlusServices.Controllers
             this.repo = repo;
         }
 
-        [HttpGet("sellsByDay")]
+        [HttpGet("sellsByDay/{year:int}/{month:int}/{day:int}")]
         [ProducesResponseType(200, Type = typeof(int))]
-        public async Task<int> GetEntradasPorDia(int dia, int mes, int año)
+        public async Task<int> GetEntradasPorDia(int day, int month, int year)
         {
-            return await this.repo.GetEntradasPorDia(dia, mes, año);
+            return await this.repo.GetEntradasPorDia(day, month, year);
         }
 
-        [HttpGet("sellsByMoth")]
+        [HttpGet("sellsByMoth/{year:int}/{month:int}")]
         [ProducesResponseType(200, Type = typeof(int))]
-        public async Task<int> GetEntradasPorMes(int mes, int año)
+        public async Task<int> GetEntradasPorMes(int month, int year)
         {
-            return await this.repo.GetEntradasPorMes(mes, año);
+            return await this.repo.GetEntradasPorMes(month, year);
         }
 
-        [HttpGet("sellsByYear")]
+        [HttpGet("sellsByYear/{year:int}")]
         [ProducesResponseType(200, Type = typeof(int))]
         public async Task<int> GetEntradasPoraño(int year)
         {
             return await this.repo.GetEntradasPoraño(year);
         }
 
-        [HttpGet("sellsByFilm")]
+        [HttpGet("sellsByFilm/{idfilm:int}")]
         [ProducesResponseType(200, Type = typeof(int))]
         public async Task<int> GetEntradasPorPelicula(int idfilm)
         {

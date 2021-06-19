@@ -1,7 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {Film} from './film-model.model';
-import{FilmService} from './film-model.service';
+import { Film } from './film-model.model';
+import { FilmService } from './film-model.service';
 
 // interface Idata {
 //   id:string;
@@ -43,20 +43,20 @@ import{FilmService} from './film-model.service';
 })
 export class FilmModelComponent implements OnInit {
 
-  filmsList: Film []=[]
+  filmsList: Film[] = []
 
-  constructor(private router: Router, private route: ActivatedRoute, private filmService : FilmService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private filmService: FilmService) { }
 
   ngOnInit() {
-    this.OnGet();
+    // this.OnGet();
   }
 
   createFilm() {
     this.router.navigate(['create'], { relativeTo: this.route })
   }
-  
 
-  OnGet(){
+
+  OnGet() {
     this.filmService.GetFilm().subscribe(
       (response) => {
         this.filmsList = response;
@@ -64,6 +64,6 @@ export class FilmModelComponent implements OnInit {
       },
       (err) => console.log(err),
     );
-  
+
   }
 }

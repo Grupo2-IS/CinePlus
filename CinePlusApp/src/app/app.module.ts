@@ -39,6 +39,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 // import { ComponentsModule } from './components/components.module';
 import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.component';
 
+import { FilmService } from './admin/models/film-model/film-model.service';
 
 @NgModule({
     declarations: [
@@ -78,7 +79,7 @@ import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.compo
         // ComponentsModule
         // ExamplesModule
     ],
-    providers: [],
+    providers: [FilmService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

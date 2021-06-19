@@ -20,25 +20,25 @@
             </tr>
         </thead>
         <tbody>
-           
-        <tr  *ngFor="let d of data"  > 
-            <th scope="row">{{d.id }} </th>
-            <td>{{d.nombre}}</td>
-            <td>{{d.duracion}}</td>
-            <td>{{d.pais}}</td>
-            <td>{{d.genero}}</td>
-            <td>{{d.rating}}</td>
-            <td>
-                <button class="btn btn-warning btn-round" type="button">
-                    <i class="now-ui-icons arrows-1_refresh-69"></i>
-                    EDITAR
-                </button>
-                <button class="btn btn-danger btn-round" type="button">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                    ELIMINAR
-                </button>
-            </td>
-        </tr>
+
+            <tr *ngFor="let d of data">
+                <th scope="row">{{d.id }} </th>
+                <td>{{d.nombre}}</td>
+                <td>{{d.duracion}}</td>
+                <td>{{d.pais}}</td>
+                <td>{{d.genero}}</td>
+                <td>{{d.rating}}</td>
+                <td>
+                    <button class="btn btn-warning btn-round" type="button">
+                        <i class="now-ui-icons arrows-1_refresh-69"></i>
+                        EDITAR
+                    </button>
+                    <button class="btn btn-danger btn-round" type="button">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                        ELIMINAR
+                    </button>
+                </td>
+            </tr>
         </tbody>
     </table>
 

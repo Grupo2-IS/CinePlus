@@ -71,6 +71,7 @@ const routes: Routes = [
             { path: 'main', component: AdminMainComponent },
             { path: 'films', component: FilmModelComponent },
             { path: 'films/create', component: FilmFormComponent },
+
             { path: 'members', component: MemberModelComponent },
             { path: 'members/create', component: MemberFormComponent },
             { path: 'purchases', component: PurchaseModelComponent },

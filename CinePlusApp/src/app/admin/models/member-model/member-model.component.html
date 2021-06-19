@@ -1,7 +1,7 @@
 <app-book-header></app-book-header>
 
 <div class="container">
-    <button class="btn btn-primary btn-round btn-add" type="button" (click )="createMember()">
+    <button class="btn btn-primary btn-round btn-add" type="button" (click)="createMember()">
         <i class="now-ui-icons ui-1_simple-add"></i>
         NUEVO MIEMBRO
     </button>
@@ -12,12 +12,12 @@
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Puntos</th>
-                <th scope="col">Acciones</th>
+                <th scope="col" style="width: 30%;">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr  *ngFor="let d of memberList"  > 
-                <th scope="row">{{d.id }} </th>
+            <tr *ngFor="let d of memberTest">
+                <th scope=" row">{{d.id }} </th>
                 <td>{{d.nombre}}</td>
                 <td>{{d.puntos}}</td>
                 <td>

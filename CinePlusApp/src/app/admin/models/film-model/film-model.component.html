@@ -11,22 +11,22 @@
         <thead>
             <tr>
                 <th scope="col" style="width: 5%;">Id</th>
-                <th scope="col" style="width: 10%;">Nombre</th>
+                <th scope="col" style="width: 20%;">Nombre</th>
                 <th scope="col" style="width: 10%;">Duracion</th>
                 <th scope="col" style="width: 10%;">Pais</th>
-                <th scope="col" style="width: 10%;">Genero</th>
-                <th scope="col" style="width: 40%;">Rating</th>
-                <th scope="col" style="width: 20%;">Acciones</th>
+                <th scope="col" style="width: 20%;">Genero</th>
+                <th scope="col" style="width: 5%;">Rating</th>
+                <th scope="col" style="width: 30%;">Acciones</th>
             </tr>
         </thead>
         <tbody>
 
-            <tr *ngFor="let d of data">
-                <th scope="row">{{d.id }} </th>
-                <td>{{d.nombre}}</td>
-                <td>{{d.duracion}}</td>
-                <td>{{d.pais}}</td>
-                <td>{{d.genero}}</td>
+            <tr *ngFor="let d of filmsList">
+                <th scope="row">{{d.filmID }} </th>
+                <td>{{d.name}}</td>
+                <td>{{d.filmLength}}</td>
+                <td>{{d.country}}</td>
+                <td>{{d.genre}}</td>
                 <td>{{d.rating}}</td>
                 <td>
                     <button class="btn btn-warning btn-round" type="button">

@@ -57,7 +57,7 @@ export class FilmModelComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private filmService: FilmService) { }
 
   ngOnInit() {
-    // this.OnGet();
+    this.OnGet();
   }
 
   createFilm() {
@@ -68,8 +68,8 @@ export class FilmModelComponent implements OnInit {
   OnGet() {
     this.filmService.GetFilm().subscribe(
       (response) => {
-        this.filmsList = response;
-        console.log(this.filmsList);
+        this.filmsList = response["$values"];
+        console.log(response);
       },
       (err) => console.log(err),
     );

@@ -5834,32 +5834,37 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Cynthia-PC\\.nuget\\packages\\": {}
+    "C:\\Users\\Peny\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
+      "projectUniqueName": "C:\\Users\\Peny\\Desktop\\IS\\Proyecto Final\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
       "projectName": "CinePlusServices",
-      "projectPath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
-      "packagesPath": "C:\\Users\\Cynthia-PC\\.nuget\\packages\\",
-      "outputPath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusServices\\obj\\",
+      "projectPath": "C:\\Users\\Peny\\Desktop\\IS\\Proyecto Final\\CinePlus\\CinePlusServices\\CinePlusServices.csproj",
+      "packagesPath": "C:\\Users\\Peny\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Peny\\Desktop\\IS\\Proyecto Final\\CinePlus\\CinePlusServices\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Cynthia-PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Peny\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "C:\\Paquetes VS\\.dotnet": {},
+        "C:\\Paquetes VS\\NuGetPackages": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\5.0.102": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusContext\\CinePlusContext.csproj": {
-              "projectPath": "D:\\Vik\\Univ\\3er año\\IngenieríaDeSoftware\\Proyecto Final\\CinePlus\\CinePlusContext\\CinePlusContext.csproj"
+            "C:\\Users\\Peny\\Desktop\\IS\\Proyecto Final\\CinePlus\\CinePlusContext\\CinePlusContext.csproj": {
+              "projectPath": "C:\\Users\\Peny\\Desktop\\IS\\Proyecto Final\\CinePlus\\CinePlusContext\\CinePlusContext.csproj"
             }
           }
         }

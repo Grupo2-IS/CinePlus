@@ -1,7 +1,7 @@
 <app-book-header></app-book-header>
  <!-- Hacer uns tabla psrs compras normales y otra para compras d socios -->
 <div class="container">
-    <h1> Compras</h1> 
+    <h1> Compras </h1> 
 
     <table class="table table-hover">
         <thead>
@@ -12,64 +12,54 @@
                 <th scope="col">Precio</th>
                 <th scope="col">Codigo</th>
                 <th scope="col">Acciones</th>
-                
-
             </tr>
         </thead>
         <tbody>
-             <!-- <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
+            <tr  *ngFor="let p of normalPurchaseList"  > 
+                <th scope="row">{{p.usuario}} </th>
+                <td>{{p.pelicula}}</td>
+                <td>{{p.sala}}</td>
+                <td> {{p.precio}}</td>
+                <td>{{p.codigo}} </td>
+
                 <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
                     <button class="btn btn-danger btn-round" type="button">
                         <i class="now-ui-icons ui-1_simple-remove"></i>
                         ELIMINAR
                     </button>
                 </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr>
-             <tr>
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>
-                    
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr>  -->
-
-
-            <!-- <tr  *ngFor="let d of data"  > 
-                <th scope="row">{{d.id }} </th>
-                <td>{{d.nombre}}</td>
-                <td>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr> -->
         </tbody>
     </table>
 
+    <h1> Compras de Miembros</h1> 
 
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Usuario</th>
+                <th scope="col">Película</th>
+                <th scope="col">Sala</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  *ngFor="let p of memberPurchaseList"  > 
+                <th scope="row">{{p.usuario}} </th>
+                <td>{{p.pelicula}}</td>
+                <td>{{p.sala}}</td>
+                <td> {{p.precio}}</td>
+                <td>{{p.codigo}} </td>
+
+                <td>
+                    <button class="btn btn-danger btn-round" type="button">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                        ELIMINAR
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

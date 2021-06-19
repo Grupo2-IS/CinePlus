@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Showing } from './showing-model.model';
+import { ShowingService} from './showing-model.service';
 
 
 @Component({
@@ -8,13 +10,26 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./showing-model.component.css']
 })
 export class ShowingModelComponent implements OnInit {
+  
+  showingList: Showing[]= [];
+  constructor(private router: Router, private route: ActivatedRoute, private showingService:ShowingService) { }
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.OnGet();
   }
   createShowing() {
     this.router.navigate(['create'], { relativeTo: this.route })
+  }
+
+  OnGet(){
+    this.showingService.GetShowing().subscribe(
+      (response) => {
+        this.showingList = response;
+        console.log(this.showingList);
+      },
+      (err) => console.log(err),
+    );
+
   }
 
 }

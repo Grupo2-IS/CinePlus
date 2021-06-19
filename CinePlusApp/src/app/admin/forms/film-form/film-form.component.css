@@ -84,25 +84,37 @@
     }
   }
 
-#artist{
+#genero{
   width: 40%;
   min-width: fit-content;
   display: flex;
 }
-#artist select{
+#genero select{
   border-block-color: #17a2b8;
   background-color: #17a2b8;
 }
-#artist .btn{
+#genero .btn{
   width: 45px;
   border-radius: 30px;
   margin-left: 10px;
 }
-#artist-list{
+#genero-list{
   display: flex;
   flex-wrap: wrap;
-}
+} 
 
 .ui-1_simple-remove:hover{
   cursor: pointer
 }
+
+ /* .genero{
+  width: 40%;
+  min-width: fit-content;
+  display: flex;
+}
+
+.genero select{
+  border-block-color: #17a2b8;
+  background-color: #17a2b8;
+
+} */

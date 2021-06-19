@@ -8,14 +8,36 @@
                 <div class="row">
                     <div class="col-50">
                         <h3>DATOS</h3>
-                        <label for="fname"><i class="fa fa-user"></i>NOMBRE PELICULA</label>
+                        <label for="fname"><i class="fa fa-user"></i>NOMBRE PELÍCULA</label>
                         <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
-                        <label for="country"><i class="fa fa-envelope"></i>PAIS</label>
-                        <input type="text" id="email" name="country" placeholder="john@example.com">
-                        <label for="adr"><i class="fa fa-address-card-o"></i>GENERO</label>
-                        <input type="number" max="400" min="10" id="adr" name="address" placeholder="542 W. 15th Street">
-                        <label for="city"><i class="fa fa-institution"></i> DURACION</label>
-                        <input type="text" id="city" name="city" placeholder="New York">
+                        <label for="country"><i class="fa fa-envelope"></i>PAÍS</label>
+                        <input type="text" id="email" name="country" placeholder="USA">
+                        <label for="rating"><i class="fa fa-address-card-o"></i>RATING</label>
+                        <input type="number" max="10" min="0" id="adr" name="address" placeholder="10">
+                        <label for="duracion"><i class="fa fa-institution"></i> DURACIÓN</label>
+                        <input type="number" id="city" name="city" placeholder="2:10:00">
+                        <label for="genero"><i class="fa fa-institution"></i> GENERO</label>
+                        <!-- <div class="genero">
+                            <select [(ngModel)]="selectedGenero" name="artistSelector">
+                                <option *ngFor="let a of generos" [ngValue]="a">{{a.name}}</option>
+                            </select>
+                        </div> -->
+                        <label for="ccnum">GÉNERO</label>
+                        <div id="genero">
+                            <select [(ngModel)]="selectedGenre" name="generoSelector">
+                                <option *ngFor="let a of genres" [ngValue]="a">{{a}}</option>
+                            </select>
+                            <button class="btn btn-success" (click)="addGenre()">
+                                <i class="now-ui-icons ui-1_simple-add"></i>
+                            </button>
+                        </div>
+                        <div id="genero-list">
+                            <span *ngFor="let a of selectedGenres" class="badge badge-primary">
+                                {{ a}} <i class="now-ui-icons ui-1_simple-remove" style="margin-left: 3px;"
+                                    (click)="removeGenero(a)"></i></span>
+                        </div>
+
+                        
                     </div>
 
                     <div class="col-50">
@@ -24,29 +46,17 @@
                         <label for="cname">SINOPSIS</label>
                         <textarea [(ngModel)]="sinopsis" id="cname" name="cardname" placeholder="Sinopsis"
                             style="width: 100%;"></textarea>
-                        <label for="ccnum">ACTORES</label>
-                        <div id="artist">
-                            <select [(ngModel)]="selectedArtist" name="artistSelector">
-                                <option *ngFor="let a of artists" [ngValue]="a">{{a.name}}</option>
-                            </select>
-                            <button class="btn btn-success" (click)="addArtist()">
-                                <i class="now-ui-icons ui-1_simple-add"></i>
-                            </button>
-                        </div>
-                        <div id="artist-list">
-                            <span *ngFor="let a of selectedArtists" class="badge badge-primary">
-                                {{ a.name }} <i class="now-ui-icons ui-1_simple-remove" style="margin-left: 3px;"
-                                    (click)="removeArtist(a)"></i></span>
-                        </div>
 
-                        <label for="expmonth">DIRECTORES</label>
-                        <input type="text" id="expmonth" name="expmonth" placeholder="September">
+                            
+                        
+
+                        <!-- <label for="expmonth">DIRECTORES</label>
+                        <input type="text" id="expmonth" name="expmonth" placeholder="September"> -->
 
 
                     </div>
-
                 </div>
-                <input type="submit" value="Continue to checkout" class="btn">
+                <input type="submit" value="Añadir Película" class="btn">
             </form>
         </div>
     </div>

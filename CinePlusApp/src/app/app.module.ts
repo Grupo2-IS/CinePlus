@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
+import { HttpClientModule } from "@angular/common/http";
+
 //import { ComponentsModule } from './components/components.module';
 // import { ExamplesModule } from './examples/examples.module';
 
@@ -12,14 +14,12 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
 import { BookHeaderComponent } from './shared/book-header/book-header.component';
 
-import { ArtistModelComponent } from './admin/models/artist-model/artist-model.component';
 import { FilmModelComponent } from './admin/models/film-model/film-model.component';
 import { MemberModelComponent } from './admin/models/member-model/member-model.component';
 import { ShowingModelComponent } from './admin/models/showing-model/showing-model.component';
 import { PurchaseModelComponent } from './admin/models/purchase-model/purchase-model.component';
 import { AdminMainComponent } from './admin/admin-main/admin-main.component';
 import { FilmFormComponent } from './admin/forms/film-form/film-form.component';
-import { ArtistFormComponent } from './admin/forms/artist-form/artist-form.component';
 import { MemberFormComponent } from './admin/forms/member-form/member-form.component';
 import { PurchaseFormComponent } from './admin/forms/purchase-form/purchase-form.component';
 import { ShowingFormComponent } from './admin/forms/showing-form/showing-form.component';
@@ -46,14 +46,12 @@ import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.compo
         NavbarComponent,
         MainComponent,
         BookHeaderComponent,
-        ArtistModelComponent,
         FilmModelComponent,
         MemberModelComponent,
         ShowingModelComponent,
         PurchaseModelComponent,
         AdminMainComponent,
         FilmFormComponent,
-        ArtistFormComponent,
         MemberFormComponent,
         PurchaseFormComponent,
         ShowingFormComponent,
@@ -76,6 +74,7 @@ import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.compo
         FormsModule,
         RouterModule,
         AppRoutingModule,
+        HttpClientModule
         // ComponentsModule
         // ExamplesModule
     ],

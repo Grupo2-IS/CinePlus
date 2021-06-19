@@ -13,13 +13,11 @@ import { UserPaymentComponent } from './user/user-payment/user-payment.component
 
 
 import { AdminMainComponent } from './admin/admin-main/admin-main.component';
-import { ArtistModelComponent } from './admin/models/artist-model/artist-model.component';
 import { FilmModelComponent } from './admin/models/film-model/film-model.component';
 import { MemberModelComponent } from './admin/models/member-model/member-model.component';
 import { PurchaseModelComponent } from './admin/models/purchase-model/purchase-model.component';
 import { ShowingModelComponent } from './admin/models/showing-model/showing-model.component';
 import { FilmFormComponent } from './admin/forms/film-form/film-form.component';
-import { ArtistFormComponent } from './admin/forms/artist-form/artist-form.component';
 import { MemberFormComponent } from './admin/forms/member-form/member-form.component';
 import { PurchaseFormComponent } from './admin/forms/purchase-form/purchase-form.component';
 import { ShowingFormComponent } from './admin/forms/showing-form/showing-form.component';
@@ -71,8 +69,6 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'main', pathMatch: 'full' },
             { path: 'main', component: AdminMainComponent },
-            { path: 'artists', component: ArtistModelComponent },
-            { path: 'artists/create', component: ArtistFormComponent },
             { path: 'films', component: FilmModelComponent },
             { path: 'films/create', component: FilmFormComponent },
             { path: 'members', component: MemberModelComponent },

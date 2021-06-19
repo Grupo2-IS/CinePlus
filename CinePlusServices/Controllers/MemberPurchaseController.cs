@@ -28,14 +28,7 @@ namespace CinePlusServices.Controllers
         {
             return await this.repository.RetrieveAllAsync();
         }
-         // GET: api/memberpurchases
-        [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<MemberPurchase>))]
-        public async Task<IEnumerable<MemberPurchase>> GetAll()
-        {
-            return await this.repository.RetrieveAllAsync();
-        }
-
+        
         // GET: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
         [HttpGet("{UserId:int}/{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(200, Type = typeof(MemberPurchase))]

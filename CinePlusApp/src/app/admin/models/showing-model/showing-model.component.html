@@ -17,71 +17,8 @@
                 <th scope="col" style="width: 20%;">Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            <!-- <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Lorem, ipsum.</td>
-                <td>Lorem, ipsum dolor.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore harum impedit consequuntur modi est
-                    minima quasi alias consequatur, reprehenderit magnam officia pariatur velit eos dolorum illum unde
-                    culpa quidem recusandae?</td>
-                <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr>
-
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Lorem, ipsum.</td>
-                <td>Lorem, ipsum dolor.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore harum impedit consequuntur modi est
-                    minima quasi alias consequatur, reprehenderit magnam officia pariatur velit eos dolorum illum unde
-                    culpa quidem recusandae?</td>
-                <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr>
-            <tr> 
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>Lorem, ipsum.</td>
-                <td>Lorem, ipsum dolor.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore harum impedit consequuntur modi est
-                    minima quasi alias consequatur, reprehenderit magnam officia pariatur velit eos dolorum illum unde
-                    culpa quidem recusandae?</td>
-                <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr> -->
-
-          
-        <!-- <tr  *ngFor="let d of data"  > 
+        <tbody>          
+        <tr  *ngFor="let d of showingList"  > 
             <th scope="row">{{d.id }} </th>
             <td>{{d.nombre}}</td>
             <td>{{d.duracion}}</td>
@@ -98,7 +35,7 @@
                     ELIMINAR
                 </button>
             </td>
-        </tr> -->
+        </tr>
         </tbody>
     </table>
 

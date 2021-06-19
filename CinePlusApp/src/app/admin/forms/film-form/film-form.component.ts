@@ -6,32 +6,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./film-form.component.css']
 })
 export class FilmFormComponent implements OnInit {
-  artists = [
-    { id: 1, name: "Emma Lalaland" },
-    { id: 2, name: "Jack Depp" },
-    { id: 3, name: "Tom Gump" },
-    { id: 4, name: "Teresa Binoche" },
-    { id: 5, name: "Audrey Poulan" },
-  ];
-  selectedArtists = [];
-  selectedArtist = null;
+  // generos = [
+  //   { id: 1, name: "Emma Lalaland" },
+  //   { id: 2, name: "Jack Depp" },
+  //   { id: 3, name: "Tom Gump" },
+  //   { id: 4, name: "Teresa Binoche" },
+  //   { id: 5, name: "Audrey Poulan" },
+  // ];
+  genres :string[] = ["Drama","Accion", "Romantica","Suspenso" ];
+
+  selectedGenres = [];
+  selectedGenre = null;
   sinopsis = "";
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  addArtist() {
+  addGenre() {
 
-    if (this.selectedArtist !== null && !this.selectedArtists.includes(this.selectedArtist)) {
-      this.selectedArtists.push(this.selectedArtist);
+    if (this.selectedGenre !== null && !this.selectedGenres.includes(this.selectedGenre)) {
+      this.selectedGenres.push(this.selectedGenre);
     }
   }
 
-  removeArtist(artist: { id: number, name: string }) {
-    const index = this.selectedArtists.indexOf(artist);
+  removeGenre(genre: string) {
+    const index = this.selectedGenres.indexOf(genre);
     if (index > -1) {
-      this.selectedArtists.splice(index, 1);
+      this.selectedGenres.splice(index, 1);
     }
   }
 }

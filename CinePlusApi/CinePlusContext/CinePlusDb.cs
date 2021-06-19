@@ -29,6 +29,7 @@ namespace CinePlus.Context
 
             // in memory database used for simplicity, change to a real db for production applications
             optionsBuilder.UseInMemoryDatabase("TestDb");
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -161,129 +162,20 @@ namespace CinePlus.Context
 
 
             //Configuring Film Entity
-            builder.Entity<Film>().HasData(
-                new
-                {
-                    FilmID = 1,
-                    Name = "The Notebook",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(2, 04, 0),
-                    Genre = "Romance/Drama",
-                    Synopsis = "En un hogar de retiro un hombre le lee a una mujer, que sufre de Alzheimer, la historia de dos jóvenes de distintas clases sociales que se enamoraron " +
-                    "durante la convulsionada década del 40, y de cómo fueron separados por terceros, y por la guerra",
-                    Rating = 6
-                },
-                new
-                {
-                    FilmID = 2,
-                    Name = "Rain Man",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(2, 14, 0),
-                    Genre = "Drama/Melodrama",
-                    Synopsis = "Un joven codicioso entabla una rara relación con el hermano autista que nunca conoció, y quien heredó la fortuna de su padre.",
-                    Rating = 4
-                },
-                new
-                {
-                    FilmID = 3,
-                    Name = "Scent of a Woman",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(2, 37, 0),
-                    Genre = "Drama",
-                    Synopsis = "Un excoronel invidente lleva a su joven guía a pasar una aventura maravillosa en Nueva York y enseñarle los placeres de la vida.",
-                    Rating = 7
+            this.SeedFilms(builder);
 
-                },
-                new
-                {
-                    FilmID = 4,
-                    Name = "The Shawshank Redemption",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(2, 22, 0),
-                    Genre = "Drama/Crimen",
-                    Synopsis = "Un hombre inocente es enviado a una corrupta penitenciaria de Maine en 1947 y sentenciado a dos cadenas perpetuas por un doble asesinato.",
-                    Rating = 8
-                },
-                new
-                {
-                    FilmID = 5,
-                    Name = "Before Sunrise",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(1, 45, 0),
-                    Genre = "Romance/Independiente",
-                    Synopsis = "Dos viajeros, un joven estadounidense y una mujer francesa, se conocen en un tren y pasan un día romántico en Viena, Austria.",
-                    Rating = 4
-                },
-                new
-                {
-                    FilmID = 6,
-                    Name = "Good Will Hunting",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(2, 07, 0),
-                    Genre = "Romance/Drama",
-                    Synopsis = "Un joven, tras descubrir su talento con las matemáticas, " +
-                    "deberá decidir si seguir con su vida de siempre o aprovechar sus grandes cualidades intelectuales en alguna universidad.",
-                    Rating = 6
-                },
-                new
-                {
-                    FilmID = 7,
-                    Name = "Forrest Gump",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(2, 22, 0),
-                    Genre = "Romance/Drama",
-                    Synopsis = "Forrest Gump, un joven sureño, tenaz e inocente, es protagonista de acontecimientos cruciales en la historia de los Estados Unidos.",
-                    Rating = 8
-                },
-                new
-                {
-                    FilmID = 8,
-                    Name = "The Shining",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(2, 26, 0),
-                    Genre = "Suspenso/Terror",
-                    Synopsis = "Jack Torrance se convierte en cuidador de invierno en el Hotel Overlook, en Colorado, con la esperanza de vencer su bloqueo con la escritura. " +
-                    "Se instala allí junto con su esposa, Wendy, y su hijo, Danny, que está plagado de premoniciones psíquicas. Mientras la escritura de Jack no fluye " +
-                    "y las visiones de Danny se vuelven más preocupantes, " +
-                    "Jack descubre oscuros secretos del hotel y comienza a convertirse en un maníaco homicida, empeñado en aterrorizar a su familia.",
-                    Rating = 9
-                },
-                new
-                {
-                    FilmID = 9,
-                    Name = "Interstellar",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(2, 49, 0),
-                    Genre = "Ciencia ficción/Aventura",
-                    Synopsis = "Gracias a un descubrimiento, un grupo de científicos y exploradores, encabezados por Cooper, " +
-                    "se embarcan en un viaje espacial para encontrar un lugar con las condiciones necesarias para reemplazar a la Tierra" +
-                    " y comenzar una nueva vida allí.",
-                    Rating = 8
-                },
-                new
-                {
-                    FilmID = 10,
-                    Name = "Eternal Sunshine Of The Spotless Mind",
-                    Country = "Estados Unidos",
-                    FilmLength = new TimeSpan(1, 48, 0),
-                    Genre = "Romance/Ciencia ficción",
-                    Synopsis = "Parecían la pareja ideal, su primer encuentro fue mágico, pero con el paso del tiempo ella deseó nunca haberlo conocido." +
-                    " Su anhelo se hace realidad gracias a un polémico y radical invento. Sin embargo descubrirán que el destino no se puede controlar.",
-                    Rating = 5
-                }
-                );
 
             //Configuring Artist Entity
 
 
             //Configuring User Entity
             builder.Entity<User>().HasData(
-                new { UserID = 1, Nick = 232456, Name = "Pablo" },
-                new { UserID = 2, Nick = 893484334353, Name = "Juan" },
-                new { UserID = 3, Nick = 6433334343, Name = "Peny" },
-                new { UserID = 4, Nick = 6576423433, Name = "Ana" },
-                new { UserID = 5, Nick = 945848452433, Name = "Luis" },
-                new { UserID = 6, Nick = 2656565653433, Name = "Jose" }
+                new { UserID = 1, Nick = "pablito", Name = "Pablo" },
+                new { UserID = 2, Nick = "juanitin", Name = "Juan" },
+                new { UserID = 3, Nick = "penelope", Name = "Peny" },
+                new { UserID = 4, Nick = "anacleta", Name = "Ana" },
+                new { UserID = 5, Nick = "el ruso", Name = "Luis" },
+                new { UserID = 6, Nick = "el sueco", Name = "Jose" }
                 );
 
             //Configuring Room Entity
@@ -474,6 +366,121 @@ namespace CinePlus.Context
                 new { SeatID = 46, RoomID = 3, Row = 6, Column = 6 },
                 new { SeatID = 47, RoomID = 3, Row = 6, Column = 7 },
                 new { SeatID = 48, RoomID = 3, Row = 6, Column = 8 }
+                );
+        }
+
+        private void SeedFilms(ModelBuilder builder)
+        {
+            builder.Entity<Film>().HasData(
+                new
+                {
+                    FilmID = 1,
+                    Name = "The Notebook",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(2, 04, 0).TotalMinutes,
+                    Genre = "Romance/Drama",
+                    Synopsis = "En un hogar de retiro un hombre le lee a una mujer, que sufre de Alzheimer, la historia de dos jóvenes de distintas clases sociales que se enamoraron " +
+                    "durante la convulsionada década del 40, y de cómo fueron separados por terceros, y por la guerra",
+                    Rating = 6
+                },
+                new
+                {
+                    FilmID = 2,
+                    Name = "Rain Man",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(2, 14, 0).TotalMinutes,
+                    Genre = "Drama/Melodrama",
+                    Synopsis = "Un joven codicioso entabla una rara relación con el hermano autista que nunca conoció, y quien heredó la fortuna de su padre.",
+                    Rating = 4
+                },
+                new
+                {
+                    FilmID = 3,
+                    Name = "Scent of a Woman",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(2, 37, 0).TotalMinutes,
+                    Genre = "Drama",
+                    Synopsis = "Un excoronel invidente lleva a su joven guía a pasar una aventura maravillosa en Nueva York y enseñarle los placeres de la vida.",
+                    Rating = 7
+
+                },
+                new
+                {
+                    FilmID = 4,
+                    Name = "The Shawshank Redemption",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(2, 22, 0).TotalMinutes,
+                    Genre = "Drama/Crimen",
+                    Synopsis = "Un hombre inocente es enviado a una corrupta penitenciaria de Maine en 1947 y sentenciado a dos cadenas perpetuas por un doble asesinato.",
+                    Rating = 8
+                },
+                new
+                {
+                    FilmID = 5,
+                    Name = "Before Sunrise",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(1, 45, 0).TotalMinutes,
+                    Genre = "Romance/Independiente",
+                    Synopsis = "Dos viajeros, un joven estadounidense y una mujer francesa, se conocen en un tren y pasan un día romántico en Viena, Austria.",
+                    Rating = 4
+                },
+                new
+                {
+                    FilmID = 6,
+                    Name = "Good Will Hunting",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(2, 07, 0).TotalMinutes,
+                    Genre = "Romance/Drama",
+                    Synopsis = "Un joven, tras descubrir su talento con las matemáticas, " +
+                    "deberá decidir si seguir con su vida de siempre o aprovechar sus grandes cualidades intelectuales en alguna universidad.",
+                    Rating = 6
+                },
+                new
+                {
+                    FilmID = 7,
+                    Name = "Forrest Gump",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(2, 22, 0).TotalMinutes,
+                    Genre = "Romance/Drama",
+                    Synopsis = "Forrest Gump, un joven sureño, tenaz e inocente, es protagonista de acontecimientos cruciales en la historia de los Estados Unidos.",
+                    Rating = 8
+                },
+                new
+                {
+                    FilmID = 8,
+                    Name = "The Shining",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(2, 26, 0).TotalMinutes,
+                    Genre = "Suspenso/Terror",
+                    Synopsis = "Jack Torrance se convierte en cuidador de invierno en el Hotel Overlook, en Colorado, con la esperanza de vencer su bloqueo con la escritura. " +
+                    "Se instala allí junto con su esposa, Wendy, y su hijo, Danny, que está plagado de premoniciones psíquicas. Mientras la escritura de Jack no fluye " +
+                    "y las visiones de Danny se vuelven más preocupantes, " +
+                    "Jack descubre oscuros secretos del hotel y comienza a convertirse en un maníaco homicida, empeñado en aterrorizar a su familia.",
+                    Rating = 9
+                },
+                new
+                {
+                    FilmID = 9,
+                    Name = "Interstellar",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(2, 49, 0).TotalMinutes,
+                    Genre = "Ciencia ficción/Aventura",
+                    Synopsis = "Gracias a un descubrimiento, un grupo de científicos y exploradores, encabezados por Cooper, " +
+                    "se embarcan en un viaje espacial para encontrar un lugar con las condiciones necesarias para reemplazar a la Tierra" +
+                    " y comenzar una nueva vida allí.",
+                    Rating = 8
+                },
+                new
+                {
+                    FilmID = 10,
+                    Name = "Eternal Sunshine Of The Spotless Mind",
+                    Country = "Estados Unidos",
+                    FilmLength = new TimeSpan(1, 48, 0).TotalMinutes,
+                    Genre = "Romance/Ciencia ficción",
+                    Synopsis = "Parecían la pareja ideal, su primer encuentro fue mágico, pero con el paso del tiempo ella deseó nunca haberlo conocido." +
+                    " Su anhelo se hace realidad gracias a un polémico y radical invento. Sin embargo descubrirán que el destino no se puede controlar.",
+                    Rating = 5
+                }
                 );
         }
     }

@@ -15,7 +15,7 @@ namespace CinePlus.Entities
         public string Name { get; set; }
 
         [Required]
-        public TimeSpan FilmLength { get; set; }
+        public double FilmLength { get; set; }
 
         [MaxLength(20)]
         public string Country { get; set; }

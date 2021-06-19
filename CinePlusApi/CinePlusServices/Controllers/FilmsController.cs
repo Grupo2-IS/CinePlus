@@ -24,7 +24,7 @@ namespace CinePlusServices.Controllers
         // GET: api/films
         // GET: api/films/?genre=[genre]
         // This will return a list offilms that may be empty.
-        [HttpGet("{genre:string}")]
+        [HttpGet("{genre}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Film>))]
         public async Task<IEnumerable<Film>> GetFilms(string genre)
         {

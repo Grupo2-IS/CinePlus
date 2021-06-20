@@ -29,6 +29,13 @@ namespace CinePlusServices.Controllers
             return await this.repository.RetrieveAllAsync();
         }
 
+        [HttpGet("active")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ShowingWrapper>))]
+        public async Task<IEnumerable<ShowingWrapper>> GetActive()
+        {
+            return await this.repository.GetActiveShowings();
+        }
+
         // GET: api/showings/[FilmID]/[RoomID]/[ShowingStar]/[ShowingEnd]
         [HttpGet("{FilmId:int}/{RoomID:int}/{ShowingStart:DateTime}/{ShowingEnd:DateTime}")]
         [ProducesResponseType(200, Type = typeof(ShowingWrapper))]

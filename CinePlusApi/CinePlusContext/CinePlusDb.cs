@@ -1,9 +1,6 @@
 ﻿using System;
 using CinePlus.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft;
 
 namespace CinePlus.Context
 {
@@ -66,7 +63,12 @@ namespace CinePlus.Context
                 new { ShowingStart = new DateTime(2021, 05, 28, 11, 00, 00), FilmID = 2, RoomID = 2, ShowingEnd = new DateTime(2021, 05, 28, 13, 00, 00) },
                 new { ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 3, RoomID = 3, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00) },
                 new { ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00) },
-                new { ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00) }
+                new { ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00) },
+                new { ShowingStart = new DateTime(2021, 07, 28, 10, 00, 00), FilmID = 1, RoomID = 1, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00) },
+                new { ShowingStart = new DateTime(2021, 07, 28, 11, 00, 00), FilmID = 2, RoomID = 2, ShowingEnd = new DateTime(2021, 05, 28, 13, 00, 00) },
+                new { ShowingStart = new DateTime(2021, 07, 28, 10, 00, 00), FilmID = 3, RoomID = 3, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00) },
+                new { ShowingStart = new DateTime(2021, 07, 29, 10, 00, 00), FilmID = 4, RoomID = 1, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00) },
+                new { ShowingStart = new DateTime(2021, 07, 29, 11, 00, 00), FilmID = 5, RoomID = 4, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00) }
 
                 );
 

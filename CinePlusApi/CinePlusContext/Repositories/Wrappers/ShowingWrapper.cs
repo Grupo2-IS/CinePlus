@@ -10,6 +10,8 @@ namespace CinePlus.Context.Repositories
         public double FilmLength { get; set; }
         public int RoomID { get; set; }
         public int FilmID { get; set; }
+        public string FilmSynopsis { get; set; }
+        public string FilmGenre { get; set; }
 
         public ShowingWrapper(string filmName, string roomName, DateTime startDate, double filmLength, int roomID, int filmID)
         {

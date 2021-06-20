@@ -60,6 +60,15 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
+        public async Task<IEnumerable<ShowingWrapper>> GetActiveShowings()
+        {
+            return await Task.Run<IEnumerable<ShowingWrapper>>(
+                () => showingCache.Values.Select(
+                    sh => new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
+                        sh.RoomID, sh.FilmID))
+                    .Where(shw => shw.StartDate >= DateTime.Now)
+            );
+        }
         public async Task<bool?> DeleteAsync(int FilmId, int RoomID, DateTime ShowingStart, DateTime ShowingEnd)
         {
             var clave = (FilmId, RoomID, ShowingStart, ShowingEnd);
@@ -76,9 +85,9 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        public Task<IEnumerable<ShowingWrapper>> RetrieveAllAsync()
+        public async Task<IEnumerable<ShowingWrapper>> RetrieveAllAsync()
         {
-            return Task.Run<IEnumerable<ShowingWrapper>>(
+            return await Task.Run<IEnumerable<ShowingWrapper>>(
                 () => showingCache.Values.Select(
                     sh => new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
                         sh.RoomID, sh.FilmID)

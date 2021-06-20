@@ -170,7 +170,8 @@ namespace CinePlus.Context
                 new { UserID = 3, Nick = "penelope", Name = "Peny", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.Member },
                 new { UserID = 4, Nick = "anacleta", Name = "Ana", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User },
                 new { UserID = 5, Nick = "el ruso", Name = "Luis", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.Member },
-                new { UserID = 6, Nick = "el sueco", Name = "Jose", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User }
+                new { UserID = 6, Nick = "el sueco", Name = "Jose", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User },
+                new { UserID = 7, Nick = "el jefe", Name = "admin", PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin"), Role = Role.Admin }
                 );
 
             //Configuring Room Entity

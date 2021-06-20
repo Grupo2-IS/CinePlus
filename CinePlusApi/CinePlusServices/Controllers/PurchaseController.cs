@@ -10,7 +10,7 @@ using System;
 namespace CinePlusServices.Controllers
 {
     // base address: api/memberpurchases
-    [Authorize]
+    [Authorize("Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PurchasesController : ControllerBase

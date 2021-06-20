@@ -20,17 +20,8 @@ namespace CinePlus.Entities
         [MaxLength(100)]
         public string Name { get; set; }
 
-        //esto muy probable se use para las autorizaciones.
-        //[Required]
-        [MaxLength(100)]
-        public string Level { get; set; }
-
+        [Required]
         public string Role { get; set; }
-
-        // [MaxLength(120)]
-        // [RegularExpression(@"[a-zA-Z0-9\.-_]+@[a-zA-Z0-9\.-_]+")]
-        //[Required]
-        //public string Email { get; set; }
 
         [JsonIgnore]
         public string PasswordHash { get; set; }
@@ -38,13 +29,14 @@ namespace CinePlus.Entities
         [JsonIgnore]
         public List<RefreshToken> RefreshTokens { get; set; }
 
+        public virtual ICollection<Purchase> Purchases { get; set; }
 
-        public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }
+        // public virtual ICollection<NormalPurchase> NormalPurchases { get; set; }
         public virtual Member Member { get; set; }
 
         public User()
         {
-            this.NormalPurchases = new HashSet<NormalPurchase>();
+            this.Purchases = new HashSet<Purchase>();
         }
 
     }

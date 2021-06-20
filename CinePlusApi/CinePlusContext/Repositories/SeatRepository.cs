@@ -23,8 +23,7 @@ namespace CinePlus.Context.Repositories
             {
                 seatCache = new ConcurrentDictionary<int, Seat>(
                     db.Seats
-                    .Include(f => f.NormalPurchases)
-                    .Include(f => f.MemberPurchases)
+                    .Include(f => f.Purchases)
                     .ToDictionary(f => f.SeatID)
                 );
             }
@@ -91,7 +90,7 @@ namespace CinePlus.Context.Repositories
 
         }
 
- public async Task<Seat> UpdateAsync(int id, Seat seat)
+        public async Task<Seat> UpdateAsync(int id, Seat seat)
         {
             this.db.Seats.Update(seat);
 
@@ -103,6 +102,6 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-       
+
     }
 }

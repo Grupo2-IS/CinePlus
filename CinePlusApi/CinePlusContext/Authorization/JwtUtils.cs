@@ -34,7 +34,9 @@ namespace CinePlus.Authorization
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.UserID.ToString()) }),
+                Subject = new ClaimsIdentity(new[] {
+                    new Claim("id", user.UserID.ToString()) //,new Claim(ClaimTypes.Role, user.Role) 
+                    }),
                 Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

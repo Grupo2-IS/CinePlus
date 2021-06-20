@@ -19,8 +19,7 @@ namespace CinePlus.Context
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Showing> Showings { get; set; }
-        public DbSet<NormalPurchase> NormalPurchases { get; set; }
-        public DbSet<MemberPurchase> MemberPurchases { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -72,81 +71,77 @@ namespace CinePlus.Context
                 );
 
             // Configuring NormalPurchase Entity
-            builder.Entity<NormalPurchase>().HasKey(
-                np => new { np.UserId, np.ShowingStart, np.FilmID, np.RoomID, np.SeatID }
+            builder.Entity<Purchase>().HasKey(
+                np => new { np.ShowingStart, np.FilmID, np.RoomID, np.SeatID }
             );
 
-            builder.Entity<NormalPurchase>()
+            builder.Entity<Purchase>()
                 .HasOne(np => np.Seat)
-                .WithMany(s => s.NormalPurchases)
+                .WithMany(s => s.Purchases)
                 .HasForeignKey(np => new { np.SeatID, np.RoomID });
 
-            builder.Entity<NormalPurchase>()
+            builder.Entity<Purchase>()
                 .HasOne(np => np.Showing)
-                .WithMany(sh => sh.NormalPurchases)
+                .WithMany(sh => sh.Purchases)
                 .HasForeignKey(np => new { np.ShowingStart, np.FilmID, np.RoomID });
 
-            builder.Entity<NormalPurchase>()
+            builder.Entity<Purchase>()
                 .HasOne(np => np.User)
-                .WithMany(u => u.NormalPurchases)
-                .HasForeignKey(np => np.UserId);
+                .WithMany(u => u.Purchases)
+                .HasForeignKey(np => np.UserID);
 
-            builder.Entity<NormalPurchase>().HasData(
-                new { UserId = 1, PurchaseCode = "npc1111", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 1, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10 },
-                new { UserId = 2, PurchaseCode = "npc1112", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 2, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10 },
-                new { UserId = 3, PurchaseCode = "npc1113", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 3, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12 },
-                new { UserId = 4, PurchaseCode = "npc1114", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 4, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12 },
-                new { UserId = 5, PurchaseCode = "npc1115", ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 4, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13 },
-                new { UserId = 6, PurchaseCode = "npc1116", ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 5, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13 }
-                );
+            this.SeedPurchases(builder);
 
             // Configuring MemberPurchase Entity
-            builder.Entity<MemberPurchase>().HasKey(
-                mp => new { mp.MemberId, mp.ShowingStart, mp.FilmID, mp.RoomID, mp.SeatID }
-            );
+            #region 
+            // builder.Entity<MemberPurchase>().HasKey(
+            //     mp => new { mp.MemberId, mp.ShowingStart, mp.FilmID, mp.RoomID, mp.SeatID }
+            // );
 
-            builder.Entity<MemberPurchase>()
-                .HasOne(mp => mp.Seat)
-                .WithMany(s => s.MemberPurchases)
-                .HasForeignKey(mp => new { mp.SeatID, mp.RoomID });
+            // builder.Entity<MemberPurchase>()
+            //     .HasOne(mp => mp.Seat)
+            //     .WithMany(s => s.MemberPurchases)
+            //     .HasForeignKey(mp => new { mp.SeatID, mp.RoomID });
 
-            builder.Entity<MemberPurchase>()
-                .HasOne(mp => mp.Showing)
-                .WithMany(sh => sh.MemberPurchases)
-                .HasForeignKey(mp => new { mp.ShowingStart, mp.FilmID, mp.RoomID });
+            // builder.Entity<MemberPurchase>()
+            //     .HasOne(mp => mp.Showing)
+            //     .WithMany(sh => sh.MemberPurchases)
+            //     .HasForeignKey(mp => new { mp.ShowingStart, mp.FilmID, mp.RoomID });
 
-            builder.Entity<MemberPurchase>()
-                .HasOne(mp => mp.Member)
-                .WithMany(m => m.MemberPurchases)
-                .HasForeignKey(mp => mp.MemberId);
+            // builder.Entity<MemberPurchase>()
+            //     .HasOne(mp => mp.Member)
+            //     .WithMany(m => m.MemberPurchases)
+            //     .HasForeignKey(mp => mp.MemberId);
 
-            builder.Entity<MemberPurchase>().HasData(
-                new
-                {
-                    MemberId = 1,
-                    FilmID = 1,
-                    RoomID = 1,
-                    SeatID = 10,
-                    PayWithPoints = true,
-                    Price = 30,
-                    PurchaseCode = "ABCDEFGA",
-                    UsedPoints = 5,
-                    ShowingStart = new DateTime(2021, 05, 28, 12, 00, 00)
-                },
 
-                new
-                {
-                    MemberId = 3,
-                    FilmID = 3,
-                    RoomID = 3,
-                    SeatID = 15,
-                    PayWithPoints = false,
-                    Price = 10,
-                    PurchaseCode = "DEDFGRHA",
-                    UsedPoints = 0,
-                    ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00)
-                }
-                );
+            // builder.Entity<MemberPurchase>().HasData(
+            //     new
+            //     {
+            //         MemberId = 1,
+            //         FilmID = 1,
+            //         RoomID = 1,
+            //         SeatID = 10,
+            //         PayWithPoints = true,
+            //         Price = 30,
+            //         PurchaseCode = "ABCDEFGA",
+            //         UsedPoints = 5,
+            //         ShowingStart = new DateTime(2021, 05, 28, 12, 00, 00)
+            //     },
+
+            //     new
+            //     {
+            //         MemberId = 3,
+            //         FilmID = 3,
+            //         RoomID = 3,
+            //         SeatID = 15,
+            //         PayWithPoints = false,
+            //         Price = 10,
+            //         PurchaseCode = "DEDFGRHA",
+            //         UsedPoints = 0,
+            //         ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00)
+            //     }
+            //     );
+            #endregion
 
             // Configuring Member Entity.
 
@@ -155,9 +150,9 @@ namespace CinePlus.Context
                 .WithOne(u => u.Member);
 
             builder.Entity<Member>().HasData(
-                new { MemberID = 1, UserID = 2, Points = 35 },
-                new { MemberID = 2, UserID = 3, Points = 25 },
-                new { MemberID = 3, UserID = 5, Points = 10 }
+                new { MemberID = 1, UserID = 2, Points = 35, Email = "juan@test.com" },
+                new { MemberID = 2, UserID = 3, Points = 25, Email = "peny@test.com" },
+                new { MemberID = 3, UserID = 5, Points = 10, Email = "luis@test.com" }
                 );
 
 
@@ -170,12 +165,12 @@ namespace CinePlus.Context
 
             //Configuring User Entity
             builder.Entity<User>().HasData(
-                new { UserID = 1, Nick = "pablito", Name = "Pablo" },
-                new { UserID = 2, Nick = "juanitin", Name = "Juan" },
-                new { UserID = 3, Nick = "penelope", Name = "Peny" },
-                new { UserID = 4, Nick = "anacleta", Name = "Ana" },
-                new { UserID = 5, Nick = "el ruso", Name = "Luis" },
-                new { UserID = 6, Nick = "el sueco", Name = "Jose" }
+                new { UserID = 1, Nick = "pablito", Name = "Pablo", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User },
+                new { UserID = 2, Nick = "juanitin", Name = "Juan", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.Member },
+                new { UserID = 3, Nick = "penelope", Name = "Peny", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.Member },
+                new { UserID = 4, Nick = "anacleta", Name = "Ana", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User },
+                new { UserID = 5, Nick = "el ruso", Name = "Luis", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.Member },
+                new { UserID = 6, Nick = "el sueco", Name = "Jose", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User }
                 );
 
             //Configuring Room Entity
@@ -482,6 +477,21 @@ namespace CinePlus.Context
                     Rating = 5
                 }
                 );
+        }
+
+        private void SeedPurchases(ModelBuilder builder)
+        {
+            builder.Entity<Purchase>().HasData(
+                new { UserID = 1, PurchaseCode = "npc1111", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 1, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10, UsedPoints = 0 },
+                new { UserID = 2, PurchaseCode = "npc1112", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 2, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10, UsedPoints = 0 },
+                new { UserID = 3, PurchaseCode = "npc1113", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 3, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12, UsedPoints = 0 },
+                new { UserID = 4, PurchaseCode = "npc1114", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12, UsedPoints = 0 },
+                new { UserID = 5, PurchaseCode = "npc1115", ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0 },
+                new { UserID = 6, PurchaseCode = "npc1116", ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 5, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0 },
+                new { UserID = 1, PurchaseCode = "ABCDEFGA", ShowingStart = new DateTime(2021, 05, 28, 12, 00, 00), FilmID = 1, RoomID = 1, SeatID = 10, PayWithPoints = true, Price = 30, UsedPoints = 5 },
+                new { UserID = 3, PurchaseCode = "DEDFGRHA", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 3, RoomID = 3, SeatID = 15, PayWithPoints = false, Price = 10, UsedPoints = 0 }
+                );
+
         }
     }
 }

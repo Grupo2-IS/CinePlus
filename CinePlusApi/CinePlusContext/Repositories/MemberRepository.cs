@@ -23,8 +23,7 @@ namespace CinePlus.Context.Repositories
             {
                 memberCache = new ConcurrentDictionary<int, Member>(
                     db.Members
-                    .Include(f => f.MemberPurchases)
-                    .AsSplitQuery()
+                    .Include(f => f.User)
                     .ToDictionary(f => f.MemberID)
                 );
             }

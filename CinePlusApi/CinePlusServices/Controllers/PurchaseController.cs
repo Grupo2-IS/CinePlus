@@ -10,7 +10,6 @@ using System;
 namespace CinePlusServices.Controllers
 {
     // base address: api/memberpurchases
-    [Authorize("Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PurchasesController : ControllerBase
@@ -24,7 +23,6 @@ namespace CinePlusServices.Controllers
         }
 
         // GET: api/memberpurchases
-        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Purchase>))]
         public async Task<IEnumerable<Purchase>> GetAll()

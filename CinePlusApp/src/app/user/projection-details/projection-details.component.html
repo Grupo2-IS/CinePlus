@@ -1,38 +1,34 @@
-<app-book-header></app-book-header>
-
-<div class="container">
-    <div id="film">
-        <h1>Pelicula</h1>
-        <h2>Genero</h2>
-        <h3>Duracion</h3>
-        <h4>Sinopsis</h4>
-        <h4>Actores:</h4>
-        <ul>
-            <li>Actor1</li>
-            <li>Actor2</li>
-        </ul>
-        <h4>Directores</h4>
-        <ul>
-            <li>Director</li>
-        </ul>
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(assets/img/book-banner.jpg)"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div id="film">
+                <h1>{{film.name}}</h1>
+                <h2>Género: {{film.genre}}</h2>
+                <h3>Duración: {{film.filmLength}} min</h3>
+                <h4>Sinopsis: {{film.synopsis}}</h4>
+            </div>
+        </div>
     </div>
-    <div class="proyeccion">
-        <table class="table table-hove" style="table-layout: auto;">
-            <thead>
-                <tr>
-                    <th>SALA</th>
-                    <th>FECHA Y HORA</th>
-                    <th>RESERVAR</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>#</td>
-                    <td>DD:MM:YY:HH:MM</td>
-                    <td><button class="btn btn-warning" (click)="onReserve()">Reservar</button></td>
-                </tr>
-            </tbody>
-        </table>
+</div>
 
-    </div>
+
+<div class="container proj">
+    <table class="table table-hove" style="table-layout: auto;">
+        <thead>
+            <tr>
+                <th>SALA</th>
+                <th>FECHA Y HORA</th>
+                <th>RESERVAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let show of showings">
+                <td>{{show.roomName}}</td>
+                <td>{{show.startDate | date : 'short'}}</td>
+                <td><button class="btn btn-warning" (click)="onReserve()">Reservar</button></td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>

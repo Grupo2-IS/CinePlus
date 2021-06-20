@@ -28,11 +28,10 @@ export class ShowingService {
     );
   }
 
-  GetActiveShowingSubs(list: Showing[]) {
+  GetActiveShowingSubs() {
     this.GetActiveShowing().subscribe(
       (response) => {
         this.showingListActive = response['$values'];
-        list = this.showingListActive;
         console.log(response);
         console.log(this.showingListActive);
       },

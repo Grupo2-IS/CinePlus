@@ -39,7 +39,7 @@ namespace CinePlus.Context.Repositories
             {
                 var sh = showingCache.AddOrUpdate((showing.FilmID, showing.RoomID, showing.ShowingStart, showing.ShowingEnd), showing, UpdateCache);
                 return new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
-                        sh.RoomID, sh.FilmID);
+                        sh.RoomID, sh.FilmID, sh.Film.Synopsis, sh.Film.Genre, sh.Film.Country);
             }
             else
             {
@@ -65,7 +65,7 @@ namespace CinePlus.Context.Repositories
             return await Task.Run<IEnumerable<ShowingWrapper>>(
                 () => showingCache.Values.Select(
                     sh => new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
-                        sh.RoomID, sh.FilmID))
+                        sh.RoomID, sh.FilmID, sh.Film.Synopsis, sh.Film.Genre, sh.Film.Country))
                     .Where(shw => shw.StartDate >= DateTime.Now)
             );
         }
@@ -90,7 +90,7 @@ namespace CinePlus.Context.Repositories
             return await Task.Run<IEnumerable<ShowingWrapper>>(
                 () => showingCache.Values.Select(
                     sh => new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
-                        sh.RoomID, sh.FilmID)
+                        sh.RoomID, sh.FilmID, sh.Film.Synopsis, sh.Film.Genre, sh.Film.Country)
                 )
             );
         }
@@ -102,7 +102,7 @@ namespace CinePlus.Context.Repositories
             {
                 showingCache.TryGetValue(clave, out Showing sh);
                 return new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
-                        sh.RoomID, sh.FilmID);
+                        sh.RoomID, sh.FilmID, sh.Film.Synopsis, sh.Film.Genre, sh.Film.Country);
             });
 
         }

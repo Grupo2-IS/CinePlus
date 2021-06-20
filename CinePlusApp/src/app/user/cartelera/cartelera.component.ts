@@ -16,20 +16,23 @@ export class CarteleraComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.showingService.showingListActive.length === 0) {
-      this.showingService.GetActiveShowingSubs(this.showingList);
+      this.onGetActive();
     }
     else {
       this.showingList = this.showingService.showingListActive;
     }
   }
 
-  seeDetails() {
-    this.router.navigate(['detalles'], { relativeTo: this.route })
+  seeDetails(id: number) {
+    this.router.navigate(['detalles', id], { relativeTo: this.route })
   }
 
   onGetActive() {
     this.showingService.GetActiveShowing().subscribe(
-      (response) => this.showingList = response['$values'],
+      (response) => {
+        this.showingList = response['$values'];
+        this.showingService.showingListActive = response['$values'];
+      },
       (err) => console.log(err)
     );
   }

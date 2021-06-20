@@ -17,13 +17,16 @@ namespace CinePlus.Entities
         [Required]
         public int Points { get; set; }
 
-        public virtual ICollection<MemberPurchase> MemberPurchases { get; set; }
+        [Required]
+        public string Email { get; set; }
+
+        // public virtual ICollection<MemberPurchase> MemberPurchases { get; set; }
 
         public virtual User User { get; set; }
 
         public Member()
         {
-            this.MemberPurchases = new HashSet<MemberPurchase>();
+            // this.MemberPurchases = new HashSet<MemberPurchase>();
         }
 
 

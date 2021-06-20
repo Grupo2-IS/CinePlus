@@ -10,31 +10,31 @@ using System;
 
 namespace CinePlus.Context.Repositories
 {
-    public class MemberPurchaseRepository : IMemberPurchaseRepository
+    public class PurchaseRepository : IPurchaseRepository
     {
-        private static ConcurrentDictionary<(int, int, int, int, DateTime), MemberPurchase> memberPurchaseCache;
+        private static ConcurrentDictionary<(int, int, int, DateTime), Purchase> purchaseCache;
         private CinePlusDb db;
 
-        public MemberPurchaseRepository(CinePlusDb db)
+        public PurchaseRepository(CinePlusDb db)
         {
             this.db = db;
-            if (memberPurchaseCache == null)
+            if (purchaseCache == null)
             {
-                memberPurchaseCache = new ConcurrentDictionary<(int,int,int,int,DateTime), MemberPurchase>(
-                    this.db.MemberPurchases
-                    .ToDictionary(d => (d.MemberId, d.SeatID, d.FilmID, d.RoomID, d.ShowingStart))
+                purchaseCache = new ConcurrentDictionary<(int, int, int, DateTime), Purchase>(
+                    this.db.Purchases
+                    .ToDictionary(d => (d.SeatID, d.FilmID, d.RoomID, d.ShowingStart))
                 );
             }
         }
-        public async Task<MemberPurchase> CreateAsync(MemberPurchase memberPurchase)
+        public async Task<Purchase> CreateAsync(Purchase purchase)
         {
 
-            EntityEntry<MemberPurchase> added = await db.MemberPurchases.AddAsync(memberPurchase);
+            EntityEntry<Purchase> added = await db.Purchases.AddAsync(purchase);
             int affected = await db.SaveChangesAsync();
 
             if (affected == 1)
             {
-                return memberPurchaseCache.AddOrUpdate((memberPurchase.MemberId, memberPurchase.SeatID, memberPurchase.FilmID, memberPurchase.RoomID, memberPurchase.ShowingStart), memberPurchase, UpdateCache);
+                return purchaseCache.AddOrUpdate((purchase.SeatID, purchase.FilmID, purchase.RoomID, purchase.ShowingStart), purchase, UpdateCache);
             }
             else
             {
@@ -42,28 +42,28 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private MemberPurchase UpdateCache((int, int, int, int, DateTime) clave, MemberPurchase memberPurchase)
+        private Purchase UpdateCache((int, int, int, DateTime) clave, Purchase purchase)
         {
-            MemberPurchase old;
-            if (memberPurchaseCache.TryGetValue(clave, out old))
+            Purchase old;
+            if (purchaseCache.TryGetValue(clave, out old))
             {
-                if (memberPurchaseCache.TryUpdate(clave, memberPurchase, old))
+                if (purchaseCache.TryUpdate(clave, purchase, old))
                 {
-                    return memberPurchase;
+                    return purchase;
                 }
             }
             return null;
         }
 
-        public async Task<bool?> DeleteAsync(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
+        public async Task<bool?> DeleteAsync(int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            var key = (MemberID, SeatID, FilmID, RoomID, ShowingStart);
-            MemberPurchase memberPurchase = await this.db.MemberPurchases.FindAsync(MemberID, SeatID, FilmID, RoomID, ShowingStart);
-            this.db.MemberPurchases.Remove(memberPurchase);
+            var key = (SeatID, FilmID, RoomID, ShowingStart);
+            Purchase memberPurchase = await this.db.Purchases.FindAsync(SeatID, FilmID, RoomID, ShowingStart);
+            this.db.Purchases.Remove(memberPurchase);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return memberPurchaseCache.TryRemove(key, out memberPurchase);
+                return purchaseCache.TryRemove(key, out memberPurchase);
             }
             else
             {
@@ -71,28 +71,28 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        public Task<IEnumerable<MemberPurchase>> RetrieveAllAsync()
+        public Task<IEnumerable<Purchase>> RetrieveAllAsync()
         {
-            return Task.Run<IEnumerable<MemberPurchase>>(
-                () => memberPurchaseCache.Values
+            return Task.Run<IEnumerable<Purchase>>(
+                () => purchaseCache.Values
             );
         }
 
-        public Task<MemberPurchase> RetrieveAsync(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
+        public Task<Purchase> RetrieveAsync(int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            var clave = (MemberID, SeatID, FilmID, RoomID, ShowingStart);
+            var clave = (SeatID, FilmID, RoomID, ShowingStart);
             return Task.Run(() =>
             {
-                memberPurchaseCache.TryGetValue(clave, out MemberPurchase memberPurchase);
+                purchaseCache.TryGetValue(clave, out Purchase memberPurchase);
                 return memberPurchase;
             });
 
         }
 
-        public async Task<MemberPurchase> UpdateAsync(int MemberID, int SeatID, int FilmID, int RoomID, DateTime ShowingStart, MemberPurchase memberPurchase)
+        public async Task<Purchase> UpdateAsync(int SeatID, int FilmID, int RoomID, DateTime ShowingStart, Purchase memberPurchase)
         {
-            var key = (MemberID, SeatID, FilmID, RoomID, ShowingStart);
-            this.db.MemberPurchases.Update(memberPurchase);
+            var key = (SeatID, FilmID, RoomID, ShowingStart);
+            this.db.Purchases.Update(memberPurchase);
 
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)

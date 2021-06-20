@@ -57,8 +57,7 @@ namespace CinePlus.Services
             services.AddScoped<IRepository<Room>, RoomRepository>();
             services.AddScoped<IRepository<Seat>, SeatRepository>();
             services.AddScoped<IRepository<User>, UserRepository>();
-            services.AddScoped<IMemberPurchaseRepository, MemberPurchaseRepository>();
-            services.AddScoped<INormalPurchaseRepository, NormalPurchaseRepository>();
+            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
             services.AddScoped<IShowingRepository, ShowingRepository>();
             services.AddScoped<IRepository<Member>, MemberRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();

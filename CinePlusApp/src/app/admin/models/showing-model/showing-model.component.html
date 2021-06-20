@@ -10,32 +10,30 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th scope="col" style="width: 10%;">Hora de Inicio</th>
                 <th scope="col" style="width: 10%;">Película</th>
                 <th scope="col" style="width: 10%;">Sala</th>
-                <th scope="col" style="width: 10%;">Hora de Inicio</th>
-                <th scope="col" style="width: 10%;">Hora de Finalización</th>
+                <th scope="col" style="width: 10%;">Duración</th>
                 <th scope="col" style="width: 20%;">Acciones</th>
             </tr>
         </thead>
-        <tbody>          
-        <tr  *ngFor="let d of showingList"  > 
-            <th scope="row">{{d.id }} </th>
-            <td>{{d.nombre}}</td>
-            <td>{{d.duracion}}</td>
-            <td>{{d.pais}}</td>
-            <td>{{d.genero}}</td>
-            <td>{{d.rating}}</td>
-            <td>
-                <button class="btn btn-warning btn-round" type="button">
-                    <i class="now-ui-icons arrows-1_refresh-69"></i>
-                    EDITAR
-                </button>
-                <button class="btn btn-danger btn-round" type="button">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                    ELIMINAR
-                </button>
-            </td>
-        </tr>
+        <tbody>
+            <tr *ngFor="let d of showingList">
+                <th scope="row">{{d.startDate | date : 'short'}}</th>
+                <td>{{d.filmName}}</td>
+                <td>{{d.roomName}}</td>
+                <td>{{d.filmLength}} min</td>
+                <td>
+                    <button class="btn btn-warning btn-round" type="button">
+                        <i class="now-ui-icons arrows-1_refresh-69"></i>
+                        EDITAR
+                    </button>
+                    <button class="btn btn-danger btn-round" type="button">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                        ELIMINAR
+                    </button>
+                </td>
+            </tr>
         </tbody>
     </table>
 

@@ -23,19 +23,19 @@ namespace CinePlusServices.Controllers
 
         // GET: api/showings
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Showing>))]
-        public async Task<IEnumerable<Showing>> GetAll()
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ShowingWrapper>))]
+        public async Task<IEnumerable<ShowingWrapper>> GetAll()
         {
             return await this.repository.RetrieveAllAsync();
         }
 
         // GET: api/showings/[FilmID]/[RoomID]/[ShowingStar]/[ShowingEnd]
         [HttpGet("{FilmId:int}/{RoomID:int}/{ShowingStart:DateTime}/{ShowingEnd:DateTime}")]
-        [ProducesResponseType(200, Type = typeof(Showing))]
+        [ProducesResponseType(200, Type = typeof(ShowingWrapper))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetShowing(int FilmId, int RoomID, DateTime ShowingStart, DateTime ShowingEnd)
         {
-            Showing showing = await this.repository.RetrieveAsync(FilmId, RoomID, ShowingStart, ShowingEnd);
+            ShowingWrapper showing = await this.repository.RetrieveAsync(FilmId, RoomID, ShowingStart, ShowingEnd);
 
             if (showing == null)
             {
@@ -50,7 +50,7 @@ namespace CinePlusServices.Controllers
         // POST: api/showings
         // BODY: Showings (JSON)
         [HttpPost]
-        [ProducesResponseType(201, Type = typeof(Showing))]
+        [ProducesResponseType(201, Type = typeof(ShowingWrapper))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Create([FromBody] Showing showing)
         {
@@ -64,7 +64,7 @@ namespace CinePlusServices.Controllers
                 return BadRequest(ModelState); // 400 Bad Request
             }
 
-            Showing added = await repository.CreateAsync(showing);
+            ShowingWrapper added = await repository.CreateAsync(showing);
 
             return StatusCode(201);
         }
@@ -106,7 +106,7 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Delete(int FilmID, int RoomID, DateTime ShowingStart, DateTime ShowingEnd)
         {
-            Showing showing = await this.repository.RetrieveAsync(FilmID, RoomID, ShowingStart, ShowingEnd);
+            ShowingWrapper showing = await this.repository.RetrieveAsync(FilmID, RoomID, ShowingStart, ShowingEnd);
             if (showing == null)
             {
                 return NotFound();  // 404 Resource No Found

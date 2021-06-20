@@ -53,8 +53,8 @@ export class MemberModelComponent implements OnInit {
   OnGet() {
     this.memberService.GetMember().subscribe(
       (response) => {
-        this.memberList = response;
-        console.log(this.memberList);
+        this.memberList = response["$values"];
+        console.log(response);
       },
       (err) => console.log(err),
     );

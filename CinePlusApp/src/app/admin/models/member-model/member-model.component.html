@@ -16,10 +16,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let d of memberTest">
+            <tr *ngFor="let d of memberList">
                 <th scope=" row">{{d.id }} </th>
-                <td>{{d.nombre}}</td>
-                <td>{{d.puntos}}</td>
+                <td>{{d.memberID}}</td>
+                <td> {{d.userID} }</td>
+                <td>{{d.points}}</td>
                 <td>
                     <button class="btn btn-warning btn-round" type="button">
                         <i class="now-ui-icons arrows-1_refresh-69"></i>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Purchase } from './purchase-model.model';
+import {NormalPurchase,MemberPurchase } from './purchase-model.model';
 import {PurchaseService } from './purchase-model.service';
 import { Router,ActivatedRoute} from '@angular/router';
 
@@ -12,8 +12,8 @@ import { Router,ActivatedRoute} from '@angular/router';
 })
 export class PurchaseModelComponent implements OnInit {
 
-  normalPurchaseList : Purchase[]= [];
-  memberPurchaseList : Purchase[]= [];
+  normalPurchaseList : NormalPurchase[]= [];
+  memberPurchaseList : MemberPurchase[]= [];
 
   constructor( private router:Router, private route:ActivatedRoute, private purchaseService: PurchaseService ){ }
 
@@ -27,8 +27,8 @@ export class PurchaseModelComponent implements OnInit {
     OnGet1(){
       this.purchaseService.GetNormalPurchase().subscribe(
         (response) => {
-          this.normalPurchaseList = response;
-          console.log(this.normalPurchaseList);
+          this.normalPurchaseList = response["$values"];
+          console.log(response);
         },
         (err) => console.log(err),
       );
@@ -37,8 +37,8 @@ export class PurchaseModelComponent implements OnInit {
     OnGet2(){
       this.purchaseService.GetMemberPurchase().subscribe(
         (response) => {
-          this.memberPurchaseList = response;
-          console.log(this.memberPurchaseList);
+          this.memberPurchaseList = response["$values"];
+          console.log(response);
         },
         (err) => console.log(err),
       );

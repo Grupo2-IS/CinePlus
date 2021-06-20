@@ -1,12 +1,14 @@
 export class Member{
-    memberId : string;
-    name : string ;
-    points : string;
+    memberID : number;
+    userID : number ;
+    points : number;
+    memberPurchases : any;
 
-    constructor( id:string, name:string, points:string){
-        this.memberId = id;
-        this.name = name;
+    constructor( memberID:number, userID:number, points:number, memberPurchases:any){
+        this.memberID = memberID;
+        this.userID = userID;
         this.points = points;
+        this.memberPurchases = memberPurchases
 
     }
 }

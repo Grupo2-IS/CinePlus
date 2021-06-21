@@ -1,5 +1,6 @@
 .container{
     margin-top: 20;
+    
 }
 
 .btn-add{
@@ -13,3 +14,8 @@
     table-layout: auto;
     width: 100%;
 }
+.title{
+    color: #a43b08;
+    display: flex; 
+    align-content: center;
+  }

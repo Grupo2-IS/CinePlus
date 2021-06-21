@@ -24,8 +24,8 @@ export class ShowingModelComponent implements OnInit {
   OnGet(){
     this.showingService.GetShowing().subscribe(
       (response) => {
-        this.showingList = response;
-        console.log(this.showingList);
+        this.showingList = response["$values"];
+        console.log(response);
       },
       (err) => console.log(err),
     );

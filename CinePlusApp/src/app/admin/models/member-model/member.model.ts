@@ -2,13 +2,16 @@ export class Member{
     memberID : number;
     userID : number ;
     points : number;
-    memberPurchases : any;
+    email : string;
+    user : any;     //user:
+                    //userID, nick, name, role
 
-    constructor( memberID:number, userID:number, points:number, memberPurchases:any){
+    constructor( memberID:number, userID:number, points:number,email:string , user:any){
         this.memberID = memberID;
         this.userID = userID;
         this.points = points;
-        this.memberPurchases = memberPurchases
+        this.email = email;
+        this.user = user;
 
     }
 }

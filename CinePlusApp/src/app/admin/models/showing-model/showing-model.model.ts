@@ -1,13 +1,13 @@
 export class Showing{
-    pelicula: string;
-    sala:string;
-    horaInicio :  any;
-    horaFinalizacion : any;
+    filmID: number;
+    roomID:number;
+    showingStart:  string;
+    showingEnd : any;
 
-    constructor( pelicula:string, sala: string, horaInicio:any, horaFinalizacion:any ){
-        this.pelicula = pelicula;
-        this.sala = sala;
-        this.horaInicio = horaInicio;
-        this.horaFinalizacion = horaFinalizacion;
+    constructor( filmID:number,roomID:number,showingStart:string, showingEnd:string){
+      this.filmID = filmID;
+      this.roomID = roomID;
+      this.showingEnd = showingEnd;
+      this.showingStart = showingStart;
     }
 }

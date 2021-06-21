@@ -1,0 +1,21 @@
+.container{
+    margin-top: 20;
+    
+}
+
+.btn-add{
+    font-size: large;
+    margin-bottom: 50px;
+    width: fit-content;
+
+}
+
+.table{
+    table-layout: auto;
+    width: 100%;
+}
+.title{
+    color: #a43b08;
+    display: flex; 
+    align-content: center;
+  }

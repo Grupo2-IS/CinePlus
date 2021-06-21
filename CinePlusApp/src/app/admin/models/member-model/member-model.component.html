@@ -5,23 +5,27 @@
         <i class="now-ui-icons ui-1_simple-add"></i>
         NUEVO MIEMBRO
     </button>
+    <h2 class="title"> Miembros del Club </h2>
 
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Id</th>
+                <th scope="col">ID de Miembro</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Nick</th>
+                <th scope="col"> Correo</th>
                 <th scope="col">Puntos</th>
                 <th scope="col" style="width: 30%;">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let d of memberList">
-                <th scope=" row">{{d.id }} </th>
-                <td>{{d.memberID}}</td>
-                <td> {{d.userID} }</td>
-                <td>{{d.points}}</td>
-                <td>
+                <th scope="row">{{d.memberID}} </th>
+                <td scope="row">{{d.user.name}}</td>
+                <td scope="row"> {{d.user.nick}} </td>
+                <td scope="row">{{d.email}}</td>
+                <td scope="row">{{d.points}}</td>
+                <td scope="row">
                     <button class="btn btn-warning btn-round" type="button">
                         <i class="now-ui-icons arrows-1_refresh-69"></i>
                         EDITAR

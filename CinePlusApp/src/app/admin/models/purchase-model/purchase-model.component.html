@@ -5,43 +5,16 @@
         <i class="now-ui-icons ui-1_simple-add"></i>
         HACER RESERVA
     </button>
-    <h2> Compras </h2>
+   
+    <h2 class="title"> Reservas Realizadas</h2>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">ID de Usuario</th>
                 <th scope="col">Película</th>
                 <th scope="col">Sala</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Codigo</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let p of normalPurchaseList">
-                <th scope="row">{{p.userId}} </th>
-                <td>{{p.filmID}}</td>
-                <td>{{p.roomID}}</td>
-                <td> {{p.price}}</td>
-                <td>{{p.purchaseCode}} </td>
-
-                <td>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2> Compras de Miembros</h2>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">ID de Miembro</th>
-                <th scope="col">Película</th>
-                <th scope="col">Sala</th>
+                <th scope="col">Asiento</th>
+                <th scope="col">Horario de Inicio</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Codigo</th>
                 <th scope="col">Pago con Puntos</th>
@@ -50,15 +23,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let p of memberPurchaseList">
-                <th scope="row">{{p.memberId}} </th>
-                <td>{{p.filmID}}</td>
-                <td>{{p.roomID}}</td>
-                <td> {{p.price}}</td>
-                <td>{{p.purchaseCode}} </td>
-                <td *ngIf="p.payWithPoints ; else No" > Si</td>
-                <td>{{p.usedPoints}} </td>
-                <td>
+            <tr *ngFor="let p of purchaseList">
+                <th scope="row">{{p.userID}} </th>
+                <td scope="row">{{user['name']}}</td>
+                <td scope="row">{{p.filmID}}</td>
+                <td scope="row">{{p.roomID}}</td>
+                <td scope="row">{{p.seatID}}</td>
+                <td scope="row">{{p.showingStart}}</td>
+                <td scope="row"> {{p.price}}</td>
+                <td scope="row">{{p.purchaseCode}} </td>
+                <td *ngIf="p.payWithPoints ; else No" scope="row"> Si</td>
+                <td  scope="row">{{p.usedPoints}} </td>
+                <td scope="row">
                     <button class="btn btn-danger btn-round" type="button">
                         <i class="now-ui-icons ui-1_simple-remove"></i>
                         ELIMINAR
@@ -67,6 +43,8 @@
             </tr>
         </tbody>
     </table>
+    
+
 </div>
 
  <ng-template #No> No</ng-template>

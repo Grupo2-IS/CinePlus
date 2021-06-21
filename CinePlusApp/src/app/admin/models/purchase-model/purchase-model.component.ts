@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NormalPurchase,MemberPurchase } from './purchase-model.model';
+import {Purchase,User} from './purchase-model.model';
 import {PurchaseService } from './purchase-model.service';
 import { Router,ActivatedRoute} from '@angular/router';
 
@@ -12,8 +12,8 @@ import { Router,ActivatedRoute} from '@angular/router';
 })
 export class PurchaseModelComponent implements OnInit {
 
-  normalPurchaseList : NormalPurchase[]= [];
-  memberPurchaseList : MemberPurchase[]= [];
+  purchaseList : Purchase[]= [];
+  user : User[] =[];
 
   constructor( private router:Router, private route:ActivatedRoute, private purchaseService: PurchaseService ){ }
 
@@ -25,23 +25,32 @@ export class PurchaseModelComponent implements OnInit {
     this.router.navigate(['create'], { relativeTo: this.route })}
    
     OnGet1(){
-      this.purchaseService.GetNormalPurchase().subscribe(
+      this.purchaseService.GetPurchase().subscribe(
         (response) => {
-          this.normalPurchaseList = response["$values"];
+          this.purchaseList = response["$values"];
           console.log(response);
         },
         (err) => console.log(err),
       );
-    }
 
-    OnGet2(){
-      this.purchaseService.GetMemberPurchase().subscribe(
-        (response) => {
-          this.memberPurchaseList = response["$values"];
-          console.log(response);
-        },
-        (err) => console.log(err),
-      );
+     
     }
+    
+
+    OnGet2(id:number){
+      this.purchaseService.GetUser(id).subscribe(
+        (response) =>{
+          this.user = response;
+          console.log(response);
+          console.log(this.user);
+          console.log(this.user['nick']);
+        },
+        (err)=> console.log(err),
+      );
+
+    }
+   
+
+   
 
 }

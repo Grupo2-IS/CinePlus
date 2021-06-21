@@ -28,7 +28,8 @@ export class ProjectionDetailsComponent implements OnInit {
       )
   }
 
-  onReserve() {
+  onReserve(show: Showing) {
+    this.showingService.selectedShow = show;
     this.router.navigate(['reservar'], { relativeTo: this.route });
   }
 

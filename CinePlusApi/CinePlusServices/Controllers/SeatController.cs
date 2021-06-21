@@ -12,10 +12,10 @@ namespace CinePlusServices.Controllers
     [ApiController]
     public class SeatsController : ControllerBase
     {
-        private IRepository<Seat> repository;
+        private ISeatRepository repository;
 
         // constructor injects repository registered in startup
-        public SeatsController(IRepository<Seat> repository)
+        public SeatsController(ISeatRepository repository)
         {
             this.repository = repository;
         }
@@ -30,12 +30,12 @@ namespace CinePlusServices.Controllers
         }
 
         // GET: api/seats/[id]
-        [HttpGet("{id:int}")]
+        [HttpGet("{seatID:int}/{roomID:int}")]
         [ProducesResponseType(200, Type = typeof(Seat))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetSeat(int id)
+        public async Task<IActionResult> GetSeat(int seatID, int roomID)
         {
-            Seat seat = await this.repository.RetrieveAsync(id);
+            Seat seat = await this.repository.RetrieveAsync(seatID, roomID);
 
             if (seat == null)
             {

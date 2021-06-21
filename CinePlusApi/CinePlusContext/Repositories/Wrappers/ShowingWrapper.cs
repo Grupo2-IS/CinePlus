@@ -13,9 +13,11 @@ namespace CinePlus.Context.Repositories
         public string FilmSynopsis { get; set; }
         public string FilmGenre { get; set; }
         public string FilmCountry { get; set; }
+        public double Price { get; set; }
 
         public ShowingWrapper(string filmName, string roomName, DateTime startDate, double filmLength
-                            , int roomID, int filmID, string filmSynopsis, string FilmGenre, string filmCountry)
+                            , int roomID, int filmID, string filmSynopsis, string FilmGenre, string filmCountry
+                            , double price)
         {
             this.FilmName = filmName;
             this.RoomName = roomName;
@@ -26,6 +28,7 @@ namespace CinePlus.Context.Repositories
             this.FilmSynopsis = filmSynopsis;
             this.FilmGenre = FilmGenre;
             this.FilmCountry = filmCountry;
+            this.Price = price;
         }
     }
 }

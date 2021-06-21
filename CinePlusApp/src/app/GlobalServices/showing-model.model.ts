@@ -8,9 +8,10 @@ export class Showing {
     filmSynopsis: string;
     filmGenre: string;
     filmCountry: string;
+    price: number;
 
     constructor(filmID: number, roomID: number, filmName: string, roomName: string, startDate: Date,
-        filmLength: number, filmSynopsis: string, filmGenre: string, filmCountry: string) {
+        filmLength: number, filmSynopsis: string, filmGenre: string, filmCountry: string, price: number) {
         this.filmID = filmID;
         this.roomID = roomID;
         this.filmName = filmName;
@@ -20,6 +21,7 @@ export class Showing {
         this.filmSynopsis = filmSynopsis;
         this.filmGenre = filmGenre;
         this.filmCountry = filmCountry;
+        this.price = price;
     }
 }
 

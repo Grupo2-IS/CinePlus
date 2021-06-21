@@ -8,6 +8,7 @@ export class ShowingService {
   private dataPathActive = 'https://localhost:5001/api/showings/active';
   showingList: Showing[] = [];
   showingListActive: Showing[] = [];
+  selectedShow: Showing;
   constructor(private http: HttpClient) { }
 
 

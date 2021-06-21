@@ -26,7 +26,7 @@
             <tr *ngFor="let show of showings">
                 <td>{{show.roomName}}</td>
                 <td>{{show.startDate | date : 'short'}}</td>
-                <td><button class="btn btn-warning" (click)="onReserve()">Reservar</button></td>
+                <td><button class="btn btn-warning" (click)="onReserve(show)">Reservar</button></td>
             </tr>
         </tbody>
     </table>

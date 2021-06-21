@@ -1,9 +1,6 @@
 ﻿using System;
 using CinePlus.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft;
 
 namespace CinePlus.Context
 {
@@ -61,14 +58,9 @@ namespace CinePlus.Context
                 .WithMany(f => f.Showings)
                 .HasForeignKey(sh => sh.FilmID);
 
-            builder.Entity<Showing>().HasData(
-                new { ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00) },
-                new { ShowingStart = new DateTime(2021, 05, 28, 11, 00, 00), FilmID = 2, RoomID = 2, ShowingEnd = new DateTime(2021, 05, 28, 13, 00, 00) },
-                new { ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 3, RoomID = 3, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00) },
-                new { ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00) },
-                new { ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00) }
+            this.SeedShowing(builder);
 
-                );
+
 
             // Configuring NormalPurchase Entity
             builder.Entity<Purchase>().HasKey(
@@ -170,7 +162,8 @@ namespace CinePlus.Context
                 new { UserID = 3, Nick = "penelope", Name = "Peny", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.Member },
                 new { UserID = 4, Nick = "anacleta", Name = "Ana", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User },
                 new { UserID = 5, Nick = "el ruso", Name = "Luis", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.Member },
-                new { UserID = 6, Nick = "el sueco", Name = "Jose", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User }
+                new { UserID = 6, Nick = "el sueco", Name = "Jose", PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"), Role = Role.User },
+                new { UserID = 7, Nick = "el jefe", Name = "admin", PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin"), Role = Role.Admin }
                 );
 
             //Configuring Room Entity
@@ -486,10 +479,98 @@ namespace CinePlus.Context
                 new { UserID = 2, PurchaseCode = "npc1112", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 2, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10, UsedPoints = 0 },
                 new { UserID = 3, PurchaseCode = "npc1113", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 3, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12, UsedPoints = 0 },
                 new { UserID = 4, PurchaseCode = "npc1114", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12, UsedPoints = 0 },
-                new { UserID = 5, PurchaseCode = "npc1115", ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0 },
-                new { UserID = 6, PurchaseCode = "npc1116", ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 5, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0 },
-                new { UserID = 1, PurchaseCode = "ABCDEFGA", ShowingStart = new DateTime(2021, 05, 28, 12, 00, 00), FilmID = 1, RoomID = 1, SeatID = 10, PayWithPoints = true, Price = 30, UsedPoints = 5 },
-                new { UserID = 3, PurchaseCode = "DEDFGRHA", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 3, RoomID = 3, SeatID = 15, PayWithPoints = false, Price = 10, UsedPoints = 0 }
+                new { UserID = 5, PurchaseCode = "npc1115", ShowingStart = new DateTime(2021, 07, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0 },
+                new { UserID = 6, PurchaseCode = "npc1116", ShowingStart = new DateTime(2021, 07, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 5, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0 },
+                new { UserID = 1, PurchaseCode = "ABCDEFGA", ShowingStart = new DateTime(2021, 07, 28, 12, 00, 00), FilmID = 1, RoomID = 1, SeatID = 10, PayWithPoints = true, Price = 30, UsedPoints = 5 },
+                new { UserID = 3, PurchaseCode = "DEDFGRHA", ShowingStart = new DateTime(2021, 07, 28, 10, 00, 00), FilmID = 3, RoomID = 3, SeatID = 15, PayWithPoints = false, Price = 10, UsedPoints = 0 }
+                );
+
+        }
+
+        private void SeedShowing(ModelBuilder builder)
+        {
+            builder.Entity<Showing>().HasData(
+                new
+                {
+                    ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00),
+                    FilmID = 1,
+                    RoomID = 1,
+                    ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 05, 28, 11, 00, 00),
+                    FilmID = 2,
+                    RoomID = 2,
+                    ShowingEnd = new DateTime(2021, 05, 28, 13, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00),
+                    FilmID = 3,
+                    RoomID = 3,
+                    ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00),
+                    FilmID = 4,
+                    RoomID = 1,
+                    ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 05, 29, 11, 00, 00),
+                    FilmID = 5,
+                    RoomID = 4,
+                    ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 07, 28, 10, 00, 00),
+                    FilmID = 1,
+                    RoomID = 1,
+                    ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 07, 28, 11, 00, 00),
+                    FilmID = 2,
+                    RoomID = 2,
+                    ShowingEnd = new DateTime(2021, 05, 28, 13, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 07, 28, 10, 00, 00),
+                    FilmID = 3,
+                    RoomID = 3,
+                    ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 07, 29, 10, 00, 00),
+                    FilmID = 4,
+                    RoomID = 1,
+                    ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00),
+                    Price = 20.00
+                },
+                new
+                {
+                    ShowingStart = new DateTime(2021, 07, 29, 11, 00, 00),
+                    FilmID = 5,
+                    RoomID = 4,
+                    ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00),
+                    Price = 20.00
+                }
+
                 );
 
         }

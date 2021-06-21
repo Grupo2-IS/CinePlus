@@ -7,7 +7,7 @@ using CinePlus.Services;
 
 namespace CinePlus.Controllers
 {
-    [Authorize]
+    [Authorize("Admin")]
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase

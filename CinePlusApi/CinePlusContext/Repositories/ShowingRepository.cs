@@ -12,7 +12,7 @@ namespace CinePlus.Context.Repositories
 {
     public class ShowingRepository : IShowingRepository
     {
-        private static ConcurrentDictionary<(int,int,DateTime,DateTime), Showing> showingCache;
+        private static ConcurrentDictionary<(int, int, DateTime, DateTime), Showing> showingCache;
         private CinePlusDb db;
 
         public ShowingRepository(CinePlusDb db)
@@ -20,14 +20,16 @@ namespace CinePlus.Context.Repositories
             this.db = db;
             if (showingCache == null)
             {
-                showingCache = new ConcurrentDictionary<(int,int,DateTime,DateTime), Showing>(
+                showingCache = new ConcurrentDictionary<(int, int, DateTime, DateTime), Showing>(
                     this.db.Showings
-                    .ToDictionary(d => (d.FilmID,d.RoomID,d.ShowingStart,d.ShowingEnd))
+                    .Include(sh => sh.Film)
+                    .Include(sh => sh.Room)
+                    .ToDictionary(d => (d.FilmID, d.RoomID, d.ShowingStart, d.ShowingEnd))
                 );
             }
         }
 
-        public async Task<Showing> CreateAsync(Showing showing)
+        public async Task<ShowingWrapper> CreateAsync(Showing showing)
         {
 
             EntityEntry<Showing> added = await db.Showings.AddAsync(showing);
@@ -35,7 +37,9 @@ namespace CinePlus.Context.Repositories
 
             if (affected == 1)
             {
-                return showingCache.AddOrUpdate((showing.FilmID,showing.RoomID,showing.ShowingStart,showing.ShowingEnd), showing, UpdateCache);
+                var sh = showingCache.AddOrUpdate((showing.FilmID, showing.RoomID, showing.ShowingStart, showing.ShowingEnd), showing, UpdateCache);
+                return new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
+                        sh.RoomID, sh.FilmID, sh.Film.Synopsis, sh.Film.Genre, sh.Film.Country, sh.Price);
             }
             else
             {
@@ -43,7 +47,7 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private Showing UpdateCache((int,int,DateTime,DateTime) clave, Showing showing)
+        private Showing UpdateCache((int, int, DateTime, DateTime) clave, Showing showing)
         {
             Showing old;
             if (showingCache.TryGetValue(clave, out old))
@@ -56,9 +60,18 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-        public async Task<bool?> DeleteAsync(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd)
+        public async Task<IEnumerable<ShowingWrapper>> GetActiveShowings()
         {
-            var clave=(FilmId,RoomID,ShowingStart,ShowingEnd);
+            return await Task.Run<IEnumerable<ShowingWrapper>>(
+                () => showingCache.Values.Select(
+                    sh => new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
+                        sh.RoomID, sh.FilmID, sh.Film.Synopsis, sh.Film.Genre, sh.Film.Country, sh.Price))
+                    .Where(shw => shw.StartDate >= DateTime.Now)
+            );
+        }
+        public async Task<bool?> DeleteAsync(int FilmId, int RoomID, DateTime ShowingStart, DateTime ShowingEnd)
+        {
+            var clave = (FilmId, RoomID, ShowingStart, ShowingEnd);
             Showing showing = await this.db.Showings.FindAsync(FilmId, RoomID, ShowingStart, ShowingEnd);
             this.db.Showings.Remove(showing);
             int affected = await this.db.SaveChangesAsync();
@@ -72,27 +85,31 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        public Task<IEnumerable<Showing>> RetrieveAllAsync()
+        public async Task<IEnumerable<ShowingWrapper>> RetrieveAllAsync()
         {
-            return Task.Run<IEnumerable<Showing>>(
-                () => showingCache.Values
+            return await Task.Run<IEnumerable<ShowingWrapper>>(
+                () => showingCache.Values.Select(
+                    sh => new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
+                        sh.RoomID, sh.FilmID, sh.Film.Synopsis, sh.Film.Genre, sh.Film.Country, sh.Price)
+                )
             );
         }
 
-        public Task<Showing> RetrieveAsync(int FilmId,int RoomID,DateTime ShowingStart,DateTime ShowingEnd)
+        public Task<ShowingWrapper> RetrieveAsync(int FilmId, int RoomID, DateTime ShowingStart, DateTime ShowingEnd)
         {
-            var clave=(FilmId,RoomID,ShowingStart,ShowingEnd);
+            var clave = (FilmId, RoomID, ShowingStart, ShowingEnd);
             return Task.Run(() =>
             {
-                showingCache.TryGetValue(clave, out Showing showing);
-                return showing;
+                showingCache.TryGetValue(clave, out Showing sh);
+                return new ShowingWrapper(sh.Film.Name, sh.Room.RoomName, sh.ShowingStart, sh.Film.FilmLength,
+                        sh.RoomID, sh.FilmID, sh.Film.Synopsis, sh.Film.Genre, sh.Film.Country, sh.Price);
             });
 
         }
 
-        public async Task<Showing> UpdateAsync(int FilmID,int RoomID,DateTime ShowingStart,DateTime ShowingEnd, Showing showing)
+        public async Task<Showing> UpdateAsync(int FilmID, int RoomID, DateTime ShowingStart, DateTime ShowingEnd, Showing showing)
         {
-            var clave=(FilmID, RoomID,ShowingStart,ShowingEnd);
+            var clave = (FilmID, RoomID, ShowingStart, ShowingEnd);
             this.db.Showings.Update(showing);
 
             int affected = await this.db.SaveChangesAsync();

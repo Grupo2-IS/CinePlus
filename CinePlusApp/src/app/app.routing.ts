@@ -53,9 +53,9 @@ const routes: Routes = [
         path: 'user', component: UserComponent,
         children: [
             { path: 'cartelera', component: CarteleraComponent },
-            { path: 'cartelera/detalles', component: ProjectionDetailsComponent },
-            { path: 'cartelera/detalles/reservar', component: SetPurchaseComponent },
-            { path: 'cartelera/detalles/reservar/pagar', component: UserPaymentComponent }
+            { path: 'cartelera/detalles/:id', component: ProjectionDetailsComponent },
+            { path: 'cartelera/detalles/:id/reservar', component: SetPurchaseComponent },
+            { path: 'cartelera/detalles/:id/reservar/pagar', component: UserPaymentComponent }
         ]
     },
 

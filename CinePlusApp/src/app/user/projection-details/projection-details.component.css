@@ -2,8 +2,19 @@
     margin-top: 20;
 }
 
+.container {
+    /* perspective: 1000px; */
+    /* margin: 40px 0; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
 .table{
     table-layout: auto;
     width: 100%;
+}
+.proj{
+    max-width: 60%;
 }

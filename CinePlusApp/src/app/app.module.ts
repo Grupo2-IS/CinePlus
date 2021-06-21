@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
@@ -39,11 +39,13 @@ import { SignupComponent } from './auth/signup/signup.component';
 // import { ComponentsModule } from './components/components.module';
 import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.component';
 
-import { FilmService } from './admin/models/film-model/film-model.service';
-import { MemberService} from './admin/models/member-model/member-model.service';
-import { PurchaseService} from './admin/models/purchase-model/purchase-model.service';
-import {ShowingService} from './admin/models/showing-model/showing-model.service';
-import {AuthService} from './auth/auth.service'
+import { FilmService } from './GlobalServices/film-model.service';
+import { MemberService } from './admin/models/member-model/member-model.service';
+import { PurchaseService } from './GlobalServices/purchase.service';
+import { ShowingService } from './GlobalServices/showing-model.service';
+import { AuthService } from './auth/auth.service'
+import { SeatsService } from './GlobalServices/seats.service';
+import { appInitializer } from './GlobalServices/appInitializer';
 
 @NgModule({
     declarations: [
@@ -83,7 +85,7 @@ import {AuthService} from './auth/auth.service'
         // ComponentsModule
         // ExamplesModule
     ],
-    providers: [FilmService, MemberService, PurchaseService, ShowingService, AuthService],
+    providers: [FilmService, MemberService, PurchaseService, ShowingService, AuthService, SeatsService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

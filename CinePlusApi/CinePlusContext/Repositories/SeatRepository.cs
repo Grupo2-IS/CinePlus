@@ -10,9 +10,9 @@ using System;
 
 namespace CinePlus.Context.Repositories
 {
-    public class SeatRepository : IRepository<Seat>
+    public class SeatRepository : ISeatRepository
     {
-        private static ConcurrentDictionary<int, Seat> seatCache;
+        private static ConcurrentDictionary<(int, int), Seat> seatCache;
         private CinePlusDb db;
 
         public SeatRepository(CinePlusDb db)
@@ -21,10 +21,10 @@ namespace CinePlus.Context.Repositories
 
             if (seatCache == null)
             {
-                seatCache = new ConcurrentDictionary<int, Seat>(
+                seatCache = new ConcurrentDictionary<(int, int), Seat>(
                     db.Seats
-                    .Include(f => f.Purchases)
-                    .ToDictionary(f => f.SeatID)
+                    .Include(s => s.Purchases)
+                    .ToDictionary(s => (s.SeatID, s.RoomID))
                 );
             }
         }
@@ -37,7 +37,7 @@ namespace CinePlus.Context.Repositories
 
             if (affected == 1)
             {
-                return seatCache.AddOrUpdate(seat.SeatID, seat, UpdateCache);
+                return seatCache.AddOrUpdate((seat.SeatID, seat.RoomID), seat, UpdateCache);
             }
             else
             {
@@ -45,12 +45,12 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        private Seat UpdateCache(int id, Seat seat)
+        private Seat UpdateCache((int, int) key, Seat seat)
         {
             Seat old;
-            if (seatCache.TryGetValue(id, out old))
+            if (seatCache.TryGetValue(key, out old))
             {
-                if (seatCache.TryUpdate(id, seat, old))
+                if (seatCache.TryUpdate(key, seat, old))
                 {
                     return seat;
                 }
@@ -58,14 +58,14 @@ namespace CinePlus.Context.Repositories
             return null;
         }
 
-        public async Task<bool?> DeleteAsync(int id)
+        public async Task<bool?> DeleteAsync(int SeatID, int RoomID)
         {
-            Seat seat = await this.db.Seats.FindAsync(id);
+            Seat seat = await this.db.Seats.FindAsync(SeatID, RoomID);
             this.db.Seats.Remove(seat);
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return seatCache.TryRemove(seat.SeatID, out seat);
+                return seatCache.TryRemove((seat.SeatID, seat.RoomID), out seat);
             }
             else
             {
@@ -80,24 +80,24 @@ namespace CinePlus.Context.Repositories
             );
         }
 
-        public Task<Seat> RetrieveAsync(int id)
+        public Task<Seat> RetrieveAsync(int SeatID, int RoomID)
         {
             return Task.Run(() =>
             {
-                seatCache.TryGetValue(id, out Seat seat);
+                seatCache.TryGetValue((SeatID, RoomID), out Seat seat);
                 return seat;
             });
 
         }
 
-        public async Task<Seat> UpdateAsync(int id, Seat seat)
+        public async Task<Seat> UpdateAsync(int SeatID, int RoomID, Seat seat)
         {
             this.db.Seats.Update(seat);
 
             int affected = await this.db.SaveChangesAsync();
             if (affected == 1)
             {
-                return UpdateCache(id, seat);
+                return UpdateCache((SeatID, RoomID), seat);
             }
             return null;
         }

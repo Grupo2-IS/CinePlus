@@ -17,6 +17,8 @@ namespace CinePlus.Entities
 
         [Required]
         public DateTime ShowingEnd { get; set; }
+        [Required]
+        public double Price { get; set; }
 
         public virtual Film Film { get; set; }
         public virtual Room Room { get; set; }

@@ -22,6 +22,7 @@ namespace CinePlus.Context.Repositories
             {
                 purchaseCache = new ConcurrentDictionary<(int, int, int, DateTime), Purchase>(
                     this.db.Purchases
+                    .Include(p => p.Seat)
                     .ToDictionary(d => (d.SeatID, d.FilmID, d.RoomID, d.ShowingStart))
                 );
             }
@@ -71,20 +72,36 @@ namespace CinePlus.Context.Repositories
             }
         }
 
-        public Task<IEnumerable<Purchase>> RetrieveAllAsync()
+        public async Task<IEnumerable<PurchaseWrapper>> RetrieveAllAsync()
         {
-            return Task.Run<IEnumerable<Purchase>>(
-                () => purchaseCache.Values
+            return await Task.Run<IEnumerable<PurchaseWrapper>>(
+                () => purchaseCache.Values.Select(
+                    p => new PurchaseWrapper(p.UserID, p.SeatID, p.FilmID, p.RoomID, p.ShowingStart, p.Price,
+                    p.PayWithPoints, p.UsedPoints, p.PurchaseCode, p.Seat.Row, p.Seat.Column)
+                )
             );
         }
 
-        public Task<Purchase> RetrieveAsync(int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
+        public async Task<IEnumerable<PurchaseWrapper>> RetrieveByShowingAsync(int FilmID, int RoomID, DateTime StartDate)
+        {
+            return await Task.Run<IEnumerable<PurchaseWrapper>>(
+                () => purchaseCache.Values.Select(
+                    p => new PurchaseWrapper(p.UserID, p.SeatID, p.FilmID, p.RoomID, p.ShowingStart, p.Price,
+                    p.PayWithPoints, p.UsedPoints, p.PurchaseCode, p.Seat.Row, p.Seat.Column)
+                )
+                .Where(p => p.FilmID == FilmID && p.RoomID == RoomID
+                        && p.ShowingStart == StartDate)
+            );
+        }
+
+        public Task<PurchaseWrapper> RetrieveAsync(int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
             var clave = (SeatID, FilmID, RoomID, ShowingStart);
             return Task.Run(() =>
             {
-                purchaseCache.TryGetValue(clave, out Purchase memberPurchase);
-                return memberPurchase;
+                purchaseCache.TryGetValue(clave, out Purchase p);
+                return new PurchaseWrapper(p.UserID, p.SeatID, p.FilmID, p.RoomID, p.ShowingStart, p.Price,
+                    p.PayWithPoints, p.UsedPoints, p.PurchaseCode, p.Seat.Row, p.Seat.Column);
             });
 
         }

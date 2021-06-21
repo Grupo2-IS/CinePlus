@@ -10,7 +10,6 @@ using System;
 namespace CinePlusServices.Controllers
 {
     // base address: api/memberpurchases
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PurchasesController : ControllerBase
@@ -24,22 +23,27 @@ namespace CinePlusServices.Controllers
         }
 
         // GET: api/memberpurchases
-        [AllowAnonymous]
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Purchase>))]
-        public async Task<IEnumerable<Purchase>> GetAll()
+        [ProducesResponseType(200, Type = typeof(IEnumerable<PurchaseWrapper>))]
+        public async Task<IEnumerable<PurchaseWrapper>> GetAll()
         {
             return await this.repository.RetrieveAllAsync();
         }
 
+        [HttpGet("byShowing/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<PurchaseWrapper>))]
+        public async Task<IEnumerable<PurchaseWrapper>> GetByShowing(int FilmID, int RoomID, DateTime StartDate)
+        {
+            return await this.repository.RetrieveByShowingAsync(FilmID, RoomID, StartDate);
+        }
 
         // GET: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
         [HttpGet("{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
-        [ProducesResponseType(200, Type = typeof(Purchase))]
+        [ProducesResponseType(200, Type = typeof(PurchaseWrapper))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetPurchase(int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            Purchase memberPurchase = await this.repository.RetrieveAsync(SeatID, FilmID, RoomID, ShowingStart);
+            PurchaseWrapper memberPurchase = await this.repository.RetrieveAsync(SeatID, FilmID, RoomID, ShowingStart);
 
             if (memberPurchase == null)
             {
@@ -110,7 +114,7 @@ namespace CinePlusServices.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Delete(int SeatID, int FilmID, int RoomID, DateTime ShowingStart)
         {
-            Purchase memberPurchase = await this.repository.RetrieveAsync(SeatID, FilmID, RoomID, ShowingStart);
+            PurchaseWrapper memberPurchase = await this.repository.RetrieveAsync(SeatID, FilmID, RoomID, ShowingStart);
             if (memberPurchase == null)
             {
                 return NotFound();  // 404 Resource No Found

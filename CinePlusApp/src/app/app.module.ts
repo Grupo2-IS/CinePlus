@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 //import { ComponentsModule } from './components/components.module';
 // import { ExamplesModule } from './examples/examples.module';
@@ -46,6 +46,8 @@ import { ShowingService } from './GlobalServices/showing-model.service';
 import { AuthService } from './auth/auth.service'
 import { SeatsService } from './GlobalServices/seats.service';
 import { appInitializer } from './GlobalServices/appInitializer';
+import { AuthGard } from './auth/auth-guard.service';
+import { JwtInterceptor } from './GlobalServices/jwtInterceptor';
 
 @NgModule({
     declarations: [
@@ -85,7 +87,8 @@ import { appInitializer } from './GlobalServices/appInitializer';
         // ComponentsModule
         // ExamplesModule
     ],
-    providers: [FilmService, MemberService,PurchaseService, ShowingService, AuthService, SeatsService],
+    providers: [FilmService, MemberService, PurchaseService, ShowingService, AuthService, SeatsService, AuthGard,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

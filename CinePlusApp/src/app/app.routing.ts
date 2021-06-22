@@ -26,6 +26,8 @@ import { AdminComponent } from './admin/admin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.component';
+import { AuthGard } from './auth/auth-guard.service';
+import { Role } from './auth/role';
 // import { LandingComponent } from './examples/landing/landing.component';
 // import { ProfileComponent } from './examples/profile/profile.component';
 // import { ComponentsComponent } from './components/components.component';
@@ -38,24 +40,25 @@ import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.compo
 
 const routes: Routes = [
     { path: '', redirectTo: 'index', pathMatch: 'full' },
-    { path: 'index', component: MainComponent },
+    { path: 'index', canActivate: [AuthGard], component: MainComponent },
     // { path: 'index', component: ComponentsComponent },
     // { path: 'examples/login', component: LoginComponent },
     // { path: 'examples/landing', component: LandingComponent },
-     //{ path: 'examples/profile', component: ProfileComponent },
+    //{ path: 'examples/profile', component: ProfileComponent },
     // { path: 'nucleoicons', component: NucleoiconsComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'signin', component: SigninComponent },
-    { path: 'refund', component: RemovePurchaseComponent },
+
 
     // User paths.
     {
-        path: 'user', component: UserComponent,
+        path: 'user', canActivate: [AuthGard], component: UserComponent,
         children: [
             { path: 'cartelera', component: CarteleraComponent },
             { path: 'cartelera/detalles/:id', component: ProjectionDetailsComponent },
             { path: 'cartelera/detalles/:id/reservar', component: SetPurchaseComponent },
-            { path: 'cartelera/detalles/:id/reservar/pagar', component: UserPaymentComponent }
+            { path: 'cartelera/detalles/:id/reservar/pagar', component: UserPaymentComponent },
+            { path: 'refund', component: RemovePurchaseComponent }
         ]
     },
 
@@ -65,7 +68,11 @@ const routes: Routes = [
     // },
     // Admin paths.
     {
-        path: 'admin', component: AdminComponent,
+        path: 'admin', canActivate: [AuthGard],
+        data: {
+            roles: [Role.Admin]
+        }
+        , component: AdminComponent,
         children: [
             { path: '', redirectTo: 'main', pathMatch: 'full' },
             { path: 'main', component: AdminMainComponent },

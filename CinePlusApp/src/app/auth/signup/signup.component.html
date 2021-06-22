@@ -17,6 +17,14 @@
                                 (focus)="focus=true" (blur)="focus=false" ngModel>
                         </div>
                         <div class="input-group form-group-no-border input-lg"
+                        [ngClass]="{'input-group-focus':focus===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="now-ui-icons users_circle-08"></i></span>
+                        </div>
+                        <input type="text" name="nick" class="form-control" placeholder="Nick..."
+                            (focus)="focus=true" (blur)="focus=false" ngModel>
+                    </div>
+                        <div class="input-group form-group-no-border input-lg"
                             [ngClass]="{'input-group-focus':focus1===true}">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
@@ -44,20 +52,26 @@
                                 placeholder="Repita la contraseña..." (focus)="focus=true" (blur)="focus=false" ngModel>
                         </div>
                     </div>
+                    <input type="checkbox" ng-model="member" ngModel/>
+                    <label for="member"> Registrarse en el sitio y darse de alta como Socio del Club.</label>
+
+
                     <div class="footer text-center">
                         <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Registrarse</button>
                     </div>
+
                 </form>
-                <div class="pull-left">
+                
+                <!-- <div class="pull-left">
                     <h6>
                         <a routerLink="/signin" class="link">Ya tiene cuenta?</a>
                     </h6>
-                </div>
+                </div> -->
 
             </div>
         </div>
     </div>
-    <footer class="footer">
+    <!-- <footer class="footer">
         <div class="container">
             <nav>
                 <ul>
@@ -90,5 +104,5 @@
                 <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
             </div>
         </div>
-    </footer>
+    </footer> -->
 </div>

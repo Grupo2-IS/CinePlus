@@ -76,7 +76,7 @@ namespace CinePlus.Context.Repositories
         {
             return await Task.Run<IEnumerable<PurchaseWrapper>>(
                 () => purchaseCache.Values.Select(
-                    p => new PurchaseWrapper(p.UserID, p.SeatID, p.FilmID, p.RoomID, p.ShowingStart, p.Price,
+                    p => new PurchaseWrapper(p.UserID, p.User.Name, p.SeatID, p.FilmID, p.Showing.Film.Name, p.RoomID, p.ShowingStart, p.Price,
                     p.PayWithPoints, p.UsedPoints, p.PurchaseCode, p.Seat.Row, p.Seat.Column)
                 )
             );
@@ -86,7 +86,7 @@ namespace CinePlus.Context.Repositories
         {
             return await Task.Run<IEnumerable<PurchaseWrapper>>(
                 () => purchaseCache.Values.Select(
-                    p => new PurchaseWrapper(p.UserID, p.SeatID, p.FilmID, p.RoomID, p.ShowingStart, p.Price,
+                    p => new PurchaseWrapper(p.UserID, p.User.Name, p.SeatID, p.FilmID, p.Showing.Film.Name, p.RoomID, p.ShowingStart, p.Price,
                     p.PayWithPoints, p.UsedPoints, p.PurchaseCode, p.Seat.Row, p.Seat.Column)
                 )
                 .Where(p => p.FilmID == FilmID && p.RoomID == RoomID
@@ -100,7 +100,7 @@ namespace CinePlus.Context.Repositories
             return Task.Run(() =>
             {
                 purchaseCache.TryGetValue(clave, out Purchase p);
-                return new PurchaseWrapper(p.UserID, p.SeatID, p.FilmID, p.RoomID, p.ShowingStart, p.Price,
+                return new PurchaseWrapper(p.UserID, p.User.Name, p.SeatID, p.FilmID, p.Showing.Film.Name, p.RoomID, p.ShowingStart, p.Price,
                     p.PayWithPoints, p.UsedPoints, p.PurchaseCode, p.Seat.Row, p.Seat.Column);
             });
 

@@ -9,7 +9,7 @@ using System;
 
 namespace CinePlusServices.Controllers
 {
-    // base address: api/memberpurchases
+    // base address: api/purchases
     [Route("api/[controller]")]
     [ApiController]
     public class PurchasesController : ControllerBase
@@ -22,7 +22,7 @@ namespace CinePlusServices.Controllers
             this.repository = repository;
         }
 
-        // GET: api/memberpurchases
+        // GET: api/purchases
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<PurchaseWrapper>))]
         public async Task<IEnumerable<PurchaseWrapper>> GetAll()
@@ -37,7 +37,7 @@ namespace CinePlusServices.Controllers
             return await this.repository.RetrieveByShowingAsync(FilmID, RoomID, StartDate);
         }
 
-        // GET: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
+        // GET: api/purchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
         [HttpGet("{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(200, Type = typeof(PurchaseWrapper))]
         [ProducesResponseType(404)]
@@ -55,7 +55,7 @@ namespace CinePlusServices.Controllers
             }
         }
 
-        // POST: api/memberpurchases
+        // POST: api/purchases
         // BODY: Purchase (JSON)
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Purchase))]
@@ -77,7 +77,7 @@ namespace CinePlusServices.Controllers
             return StatusCode(201);
         }
 
-        // PUT: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
+        // PUT: api/purchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
         // BODY: Purchase (JSON)
         [HttpPut("{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(204)]
@@ -107,7 +107,7 @@ namespace CinePlusServices.Controllers
             return new NoContentResult();   // 204 No Content
         }
 
-        // DELETE: api/memberpurchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
+        // DELETE: api/purchases/[UserId]/[ShowingStart]/[FilmID]/[RoomID]/[SeatID]
         [HttpDelete("{SeatID:int}/{FilmID:int}/{RoomID:int}/{ShowingStart:DateTime}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

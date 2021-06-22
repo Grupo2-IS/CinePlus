@@ -23,13 +23,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let p of purchaseList">
-                <th scope="row">{{p.userID}} </th>
-                <td scope="row">{{user['name']}}</td>
-                <td scope="row">{{p.filmID}}</td>
+            <tr *ngFor="let p of purchaseList; let i=index">
+                <td  *ngIf="j < purchaseList.length" scope="row">{{p.userName}}</td>
+                <td scope="row">{{p.filmName}}     </td>
                 <td scope="row">{{p.roomID}}</td>
                 <td scope="row">{{p.seatID}}</td>
-                <td scope="row">{{p.showingStart}}</td>
+                <td scope="row">{{p.showingStart | date: 'short'}}</td>
                 <td scope="row"> {{p.price}}</td>
                 <td scope="row">{{p.purchaseCode}} </td>
                 <td *ngIf="p.payWithPoints ; else No" scope="row"> Si</td>
@@ -48,3 +47,4 @@
 </div>
 
  <ng-template #No> No</ng-template>
+ <ng-template #Big> No es menor </ng-template>

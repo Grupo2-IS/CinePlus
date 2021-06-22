@@ -19,10 +19,10 @@
         </thead>
         <tbody>          
         <tr  *ngFor="let d of showingList"  > 
-            <th scope="row">{{d.filmID }} </th>
-            <td scope="row">{{d.roomID}}</td>
-            <td scope="row">{{d.showingStart}}</td>
-            <td scope="row">{{d.showingEnd}}</td>
+            <th scope="row">{{d.startDate  | date: 'short'}} </th>
+            <th scope = "row"> {{d.filmName}}</th>
+            <th scope="row">{{d.roomID}}</th>
+            <th scope="row">{{d.filmLength}}</th>
            
             <td>
                 <button class="btn btn-warning btn-round" type="button">

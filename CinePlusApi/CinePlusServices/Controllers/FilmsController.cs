@@ -46,6 +46,7 @@ namespace CinePlusServices.Controllers
         {
             return await this.repository.RetrieveAllAsync();
         }
+        
 
         // GET: api/films/[id]
         [HttpGet("{id:int}")]

@@ -42,7 +42,7 @@ const routes: Routes = [
     // { path: 'index', component: ComponentsComponent },
     // { path: 'examples/login', component: LoginComponent },
     // { path: 'examples/landing', component: LandingComponent },
-    // { path: 'examples/profile', component: ProfileComponent },
+     //{ path: 'examples/profile', component: ProfileComponent },
     // { path: 'nucleoicons', component: NucleoiconsComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'signin', component: SigninComponent },

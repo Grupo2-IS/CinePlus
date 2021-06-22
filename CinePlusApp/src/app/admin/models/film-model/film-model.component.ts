@@ -1,47 +1,47 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Film } from './film-model.model';
-import { FilmService } from './film-model.service';
+import { Film} from 'app/GlobalServices/film-model.model';
+import { FilmService } from 'app/GlobalServices/film-model.service';
 
-interface Idata {
-  id: string;
-  nombre: string;
-  duracion: string;
-  pais: string;
-  genero: string;
-  rating: string;
-}
-let data1: Idata,
-  data2: Idata,
-  data3: Idata;
+// interface Idata {
+//   id: string;
+//   nombre: string;
+//   duracion: string;
+//   pais: string;
+//   genero: string;
+//   rating: string;
+// }
+// let data1: Idata,
+//   data2: Idata,
+//   data3: Idata;
 
-data1 = {
-  id: '1',
-  nombre: 'The Notebook',
-  duracion: '2:04:00',
-  pais: 'Estados Unidos',
-  genero: 'Romance/Drama',
-  rating: '6',
+// data1 = {
+//   id: '1',
+//   nombre: 'The Notebook',
+//   duracion: '2:04:00',
+//   pais: 'Estados Unidos',
+//   genero: 'Romance/Drama',
+//   rating: '6',
 
-};
-data2 = {
-  id: '2',
-  nombre: 'Rain Man',
-  duracion: '2:14:00',
-  pais: 'Estados Unidos',
-  genero: 'Drama/Melodrama',
-  rating: '4',
+// };
+// data2 = {
+//   id: '2',
+//   nombre: 'Rain Man',
+//   duracion: '2:14:00',
+//   pais: 'Estados Unidos',
+//   genero: 'Drama/Melodrama',
+//   rating: '4',
 
-};
-data3 = {
-  id: '3',
-  nombre: 'Coco avant Channel',
-  duracion: '2:14:00',
-  pais: 'Francia',
-  genero: 'Drama/Bibliografico',
-  rating: '4',
+// };
+// data3 = {
+//   id: '3',
+//   nombre: 'Coco avant Channel',
+//   duracion: '2:14:00',
+//   pais: 'Francia',
+//   genero: 'Drama/Bibliografico',
+//   rating: '4',
 
-};
+// };
 
 
 @Component({
@@ -50,7 +50,7 @@ data3 = {
   styleUrls: ['./film-model.component.css']
 })
 export class FilmModelComponent implements OnInit {
-  data: Idata[] = [data1, data2, data3];
+  //data: Idata[] = [data1, data2, data3];
 
   filmsList: Film[] = []
 

@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
     const email: string = form.value.email;
     const pass: string = form.value.password;
     const pass2: string = form.value.password2;
+    const nick : string = form.value.nick;
     const msg: string = pass === pass2 ? "Your password match" : "You typed your password wrong."
     alert(name + '\n' + email + '\n' + msg);
 

@@ -9,6 +9,9 @@ export class Showing{
       this.roomID = roomID;
       this.showingEnd = showingEnd;
       this.showingStart = showingStart;
+    }
+}
+
 // export class Showing {
 //     filmID: number;
 //     roomID: number;
@@ -38,4 +41,5 @@ export class Showing{
 //         "filmLength": 134,
 //         "roomID": 2,
 //         "filmID": 2
-//     }]
+  
+    

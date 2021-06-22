@@ -140,8 +140,16 @@
                     </p>
                 </div>
             </div>
-            <button class="btn btn-primary" [disabled]="reservadas === 0" (click)="onPay()">
+            <div class="member">
+                <li>Solo socios del Club</li>
+            <button class="btn btn-primary" [disabled]="reservadas === 0">
+                PAGAR  CON PUNTOS</button>
+            </div>
+                       
+         <button class="btn btn-primary" [disabled]="reservadas === 0" (click)="onPay()">
                 PAGAR</button>
+
+                
         </div>
     </div>
 </div>

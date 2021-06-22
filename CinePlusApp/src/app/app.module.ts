@@ -85,7 +85,7 @@ import { appInitializer } from './GlobalServices/appInitializer';
         // ComponentsModule
         // ExamplesModule
     ],
-    providers: [FilmService, MemberService, PurchaseService, ShowingService, AuthService, SeatsService],
+    providers: [FilmService, MemberService,PurchaseService, ShowingService, AuthService, SeatsService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

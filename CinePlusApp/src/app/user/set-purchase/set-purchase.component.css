@@ -110,4 +110,8 @@ p.text span {
 .credits a {
   color: #fff;
 }
+.member{
+  align-items: flex-end;
+  align-content: flex-end;
+}
 

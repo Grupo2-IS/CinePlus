@@ -10,13 +10,15 @@
                     <div class="col-50">
                         <h3>DATOS</h3>
                         <label for="fname"><i class="fa fa-user"></i>NOMBRE PELÍCULA</label>
-                        <input type="text" id="fname" name="name" placeholder="John M. Doe" ngModel>
+                        <input type="text" id="fname" name="name" placeholder="John M. Doe" ngModel required>
+                        <label for="fId"> ID PELÍCULA</label>
+                        <input type="text" id="fId" name="id" placeholder="10" ngModel required>
                         <label for="country"><i class="fa fa-globe"></i>PAÍS</label>
-                        <input type="text" id="email" name="country" placeholder="USA" ngModel>
+                        <input type="text" id="email" name="country" placeholder="USA" ngModel required>
                         <label for="rating"><i class="fa fa-star"></i>RATING</label>
-                        <input type="number" max="10" min="0" id="rating" name="rating" placeholder="10" ngModel>
+                        <input type="number" max="10" min="0" id="rating" name="rating" placeholder="10" ngModel required>
                         <label for="duracion"><i class="fa fa-clock-o"></i> DURACIÓN</label>
-                        <input type="time" id="duracion" name="duracion" placeholder="2:10:00" ngModel>
+                        <input type="number" id="duracion" name="duracion" placeholder="152(en min)" ngModel required>
                         <label for="genero">GÉNERO</label>
                         <div id="genero">
                             <select [(ngModel)]="selectedGenre" name="generoSelector">
@@ -29,17 +31,17 @@
                         <div id="genero-list">
                             <span *ngFor="let a of selectedGenres" class="badge badge-primary">
                                 {{ a}} <i class="now-ui-icons ui-1_simple-remove" style="margin-left: 3px;"
-                                    (click)="removeGenero(a)"></i></span>
+                                    (click)="removeGenre(a)"></i></span>
                         </div>
                     </div>
                     <div class="col-50">
                         <h3>DETALLES</h3>
                         <label for="cname">SINOPSIS</label>
-                        <textarea [(ngModel)]="sinopsis" id="sinopsis" name="sinopsis" placeholder="Sinopsis"
-                            style="width: 100%;"></textarea>
+                        <textarea id="sinopsis" name="sinopsis" placeholder="Sinopsis"
+                            style="width: 100%;" ngModel required>  </textarea>
                     </div>
                 </div>
-                <input type="submit" value="Añadir Película" class="btn">
+                <input type="submit"  [disabled]="!f.valid" value="Añadir Película" class="btn" (click)="submit()">
             </form>
         </div>
     </div>

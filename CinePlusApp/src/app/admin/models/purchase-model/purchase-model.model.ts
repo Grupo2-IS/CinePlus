@@ -8,9 +8,11 @@ export class Purchase{
     payWithPoints : boolean;
     usedPoints : number;
     showingStart : Date;
+    seatRow : number;
+    seatColumn : number;
 
 
-    constructor(userID:number,seatID:number, filmID:number, roomID:number, price:number, purchaseCode:string, payWithPoints:boolean, usedPoints:number, showingStart:Date){
+    constructor(userID:number,seatID:number, filmID:number, roomID:number, price:number, purchaseCode:string, payWithPoints:boolean, usedPoints:number, showingStart:Date, seatRow:number, seatColumn:number){
        this.userID = userID;
        this.seatID = seatID;
        this.filmID = filmID;
@@ -20,6 +22,8 @@ export class Purchase{
        this.payWithPoints = payWithPoints;
        this.usedPoints = usedPoints;
        this.showingStart = showingStart;
+       this.seatRow = seatRow;
+       this.seatColumn = seatColumn;
 
     }
 

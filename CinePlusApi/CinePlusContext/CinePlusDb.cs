@@ -84,56 +84,6 @@ namespace CinePlus.Context
 
             this.SeedPurchases(builder);
 
-            // Configuring MemberPurchase Entity
-            #region 
-            // builder.Entity<MemberPurchase>().HasKey(
-            //     mp => new { mp.MemberId, mp.ShowingStart, mp.FilmID, mp.RoomID, mp.SeatID }
-            // );
-
-            // builder.Entity<MemberPurchase>()
-            //     .HasOne(mp => mp.Seat)
-            //     .WithMany(s => s.MemberPurchases)
-            //     .HasForeignKey(mp => new { mp.SeatID, mp.RoomID });
-
-            // builder.Entity<MemberPurchase>()
-            //     .HasOne(mp => mp.Showing)
-            //     .WithMany(sh => sh.MemberPurchases)
-            //     .HasForeignKey(mp => new { mp.ShowingStart, mp.FilmID, mp.RoomID });
-
-            // builder.Entity<MemberPurchase>()
-            //     .HasOne(mp => mp.Member)
-            //     .WithMany(m => m.MemberPurchases)
-            //     .HasForeignKey(mp => mp.MemberId);
-
-
-            // builder.Entity<MemberPurchase>().HasData(
-            //     new
-            //     {
-            //         MemberId = 1,
-            //         FilmID = 1,
-            //         RoomID = 1,
-            //         SeatID = 10,
-            //         PayWithPoints = true,
-            //         Price = 30,
-            //         PurchaseCode = "ABCDEFGA",
-            //         UsedPoints = 5,
-            //         ShowingStart = new DateTime(2021, 05, 28, 12, 00, 00)
-            //     },
-
-            //     new
-            //     {
-            //         MemberId = 3,
-            //         FilmID = 3,
-            //         RoomID = 3,
-            //         SeatID = 15,
-            //         PayWithPoints = false,
-            //         Price = 10,
-            //         PurchaseCode = "DEDFGRHA",
-            //         UsedPoints = 0,
-            //         ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00)
-            //     }
-            //     );
-            #endregion
 
             // Configuring Member Entity.
 
@@ -475,14 +425,14 @@ namespace CinePlus.Context
         private void SeedPurchases(ModelBuilder builder)
         {
             builder.Entity<Purchase>().HasData(
-                new { UserID = 1, PurchaseCode = "npc1111", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 1, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10, UsedPoints = 0 },
-                new { UserID = 2, PurchaseCode = "npc1112", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 2, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10, UsedPoints = 0 },
-                new { UserID = 3, PurchaseCode = "npc1113", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 3, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12, UsedPoints = 0 },
-                new { UserID = 4, PurchaseCode = "npc1114", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12, UsedPoints = 0 },
-                new { UserID = 5, PurchaseCode = "npc1115", ShowingStart = new DateTime(2021, 07, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0 },
-                new { UserID = 6, PurchaseCode = "npc1116", ShowingStart = new DateTime(2021, 07, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 5, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0 },
-                new { UserID = 1, PurchaseCode = "ABCDEFGA", ShowingStart = new DateTime(2021, 07, 28, 12, 00, 00), FilmID = 1, RoomID = 1, SeatID = 10, PayWithPoints = true, Price = 30, UsedPoints = 5 },
-                new { UserID = 3, PurchaseCode = "DEDFGRHA", ShowingStart = new DateTime(2021, 07, 28, 10, 00, 00), FilmID = 3, RoomID = 3, SeatID = 15, PayWithPoints = false, Price = 10, UsedPoints = 0 }
+                new { UserID = 1, PurchaseCode = "npc1111", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 1, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10, UsedPoints = 0, CardNumber = "1111222233334440" },
+                new { UserID = 2, PurchaseCode = "npc1112", ShowingStart = new DateTime(2021, 05, 28, 10, 00, 00), FilmID = 1, RoomID = 1, SeatID = 2, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00), Price = 10, UsedPoints = 0, CardNumber = "1111222233334441" },
+                new { UserID = 3, PurchaseCode = "npc1113", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 3, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12, UsedPoints = 0, CardNumber = "1111222233334442" },
+                new { UserID = 4, PurchaseCode = "npc1114", ShowingStart = new DateTime(2021, 05, 29, 10, 00, 00), FilmID = 4, RoomID = 1, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 12, 00, 00), Price = 12, UsedPoints = 0, CardNumber = "1111222233334443" },
+                new { UserID = 5, PurchaseCode = "npc1115", ShowingStart = new DateTime(2021, 07, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 4, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0, CardNumber = "1111222233334444" },
+                new { UserID = 6, PurchaseCode = "npc1116", ShowingStart = new DateTime(2021, 07, 29, 11, 00, 00), FilmID = 5, RoomID = 4, SeatID = 5, PayWithPoints = false, ShowingEnd = new DateTime(2021, 05, 29, 13, 00, 00), Price = 13, UsedPoints = 0, CardNumber = "1111222233334445" },
+                new { UserID = 1, PurchaseCode = "ABCDEFGA", ShowingStart = new DateTime(2021, 07, 28, 12, 00, 00), FilmID = 1, RoomID = 1, SeatID = 10, PayWithPoints = true, Price = 30, UsedPoints = 5, CardNumber = "0000000000000000" },
+                new { UserID = 3, PurchaseCode = "DEDFGRHA", ShowingStart = new DateTime(2021, 07, 28, 10, 00, 00), FilmID = 3, RoomID = 3, SeatID = 15, PayWithPoints = false, Price = 10, UsedPoints = 0, CardNumber = "0000000000000000" }
                 );
 
         }

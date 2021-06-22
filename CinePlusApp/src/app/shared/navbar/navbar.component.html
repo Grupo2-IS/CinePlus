@@ -33,40 +33,49 @@
     </div>
     <div class="collapse navbar-collapse" data-nav-image="assets/img/blurred-image-1.jpg" data-color="orange">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/user/cartelera">
-            <i class="now-ui-icons media-1_album"></i>
-            <p>Cartelera</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/signup">
-            <p>Registrarse</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/signin">
-            <p>Entrar</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/test">
-            <i class="now-ui-icons files_paper"></i>
-            <p>Pruebas</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/admin">
-            <i class="now-ui-icons ui-1_settings-gear-63"></i>
-            <p>Administrar</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/refund">
-            <i class="now-ui-icons business_money-coins"></i>
-            <p>Reembolzo</p>
-          </a>
-        </li>
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/signup">
+              <p>Registrarse</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/signin">
+              <p>Entrar</p>
+            </a>
+          </li>
+        </ng-template>
+
+        <ng-template [ngIf]="authService.isAuthenticated()">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/user/cartelera">
+              <i class="now-ui-icons media-1_album"></i>
+              <p>Cartelera</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/refund">
+              <i class="now-ui-icons business_money-coins"></i>
+              <p>Reembolzo</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/refund">
+              <i class="now-ui-icons users_circle-08"></i>
+              <p>Admin</p>
+            </a>
+          </li>
+
+        </ng-template>
+
+        <ng-template [ngIf]="authService.userRole() === 'admin'">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin">
+              <i class="now-ui-icons ui-1_settings-gear-63"></i>
+              <p>Administrar</p>
+            </a>
+          </li>
+        </ng-template>
 
 
       </ul>

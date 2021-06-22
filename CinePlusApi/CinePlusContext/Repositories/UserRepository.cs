@@ -23,7 +23,7 @@ namespace CinePlus.Context.Repositories
             {
                 userCache = new ConcurrentDictionary<int, User>(
                     db.Users
-                    .Include(f => f.Purchases)   //el error es aki
+                    // .Include(f => f.Purchases)   //el error es aki
                     .ToDictionary(f => f.UserID)
                 );
             }

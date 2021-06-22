@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import {AuthService} from 'app/auth/auth.service';
+import { AuthService } from 'app/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,20 +11,24 @@ export class SignupComponent implements OnInit {
   data: Date = new Date();
   focus;
   focus1;
-  constructor(private authService:AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   onSignup(form: NgForm) {
     const name: string = form.value.name;
-    const email: string = form.value.email;
+    // const email: string = form.value.email;
     const pass: string = form.value.password;
     const pass2: string = form.value.password2;
     const msg: string = pass === pass2 ? "Your password match" : "You typed your password wrong."
-    alert(name + '\n' + email + '\n' + msg);
+    // alert(name + '\n' + email + '\n' + msg);
+    if (pass !== pass2) {
+      alert("Las Contraseñas no coinciden.");
+      return;
+    }
 
-  this.authService.singUpUser(name, email, pass, pass2);
+    this.authService.singUpUser(name, pass, pass2);
   }
 
 }

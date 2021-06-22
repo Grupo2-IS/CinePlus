@@ -66,11 +66,12 @@ namespace CinePlusServices.Controllers
 
             User added = await repository.CreateAsync(user);
 
-            return CreatedAtRoute( // 201 Created
-                routeName: nameof(this.GetUser),
-                routeValues: new { id = added.UserID },
-                value: added
-            );
+            // return CreatedAtRoute( // 201 Created
+            //     routeName: nameof(this.GetUser),
+            //     routeValues: new { id = added.UserID },
+            //     value: added
+            // );
+            return StatusCode(201);
         }
 
         // PUT: api/users/[id]

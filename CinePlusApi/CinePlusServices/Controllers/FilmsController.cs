@@ -84,11 +84,12 @@ namespace CinePlusServices.Controllers
 
             Film added = await repository.CreateAsync(film);
 
-            return CreatedAtRoute( // 201 Created
-                routeName: nameof(this.GetFilm),
-                routeValues: new { id = added.FilmID },
-                value: added
-            );
+            // return CreatedAtRoute( // 201 Created
+            //     routeName: nameof(this.GetFilm),
+            //     routeValues: new { id = added.FilmID },
+            //     value: added
+            // );
+            return StatusCode(201);
         }
 
         // PUT: api/films/[id]

@@ -46,6 +46,7 @@ import { ShowingService } from './GlobalServices/showing-model.service';
 import { AuthService } from './auth/auth.service'
 import { SeatsService } from './GlobalServices/seats.service';
 import { appInitializer } from './GlobalServices/appInitializer';
+import { AuthGard } from './auth/auth-guard.service';
 
 @NgModule({
     declarations: [
@@ -85,7 +86,7 @@ import { appInitializer } from './GlobalServices/appInitializer';
         // ComponentsModule
         // ExamplesModule
     ],
-    providers: [FilmService, MemberService,PurchaseService, ShowingService, AuthService, SeatsService],
+    providers: [FilmService, MemberService, PurchaseService, ShowingService, AuthService, SeatsService, AuthGard],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -88,7 +88,9 @@ import { JwtInterceptor } from './GlobalServices/jwtInterceptor';
         // ExamplesModule
     ],
     providers: [FilmService, MemberService, PurchaseService, ShowingService, AuthService, SeatsService, AuthGard,
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+        // { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
+        // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

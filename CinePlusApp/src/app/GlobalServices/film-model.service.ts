@@ -5,7 +5,6 @@ import { Film } from './film-model.model';
 @Injectable()
 export class FilmService {
   private dataPath = 'https://localhost:5001/api/films';
-  private dataPath2 = 'https://localhost:5001/api/films';
 
   private dataPathId = 'https://localhost:5001/api/films/';
 
@@ -20,7 +19,15 @@ export class FilmService {
 
   CreateFilm(film:Film){
 
-  return this.http.post(this.dataPath2,film);
+  return this.http.post(this.dataPath,film);
+  }
+
+  DeleteFilm(id:number){
+    return this.http.delete(this.dataPathId + id);
+  }
+  UpdateFilm(id:number, film:Film){
+    return this.http.put(this.dataPathId + id ,film);
+
   }
 
 }

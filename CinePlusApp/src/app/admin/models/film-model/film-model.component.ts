@@ -1,3 +1,4 @@
+import { Output } from '@angular/core';
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Film} from 'app/GlobalServices/film-model.model';
@@ -73,6 +74,18 @@ export class FilmModelComponent implements OnInit {
       },
       (err) => console.log(err),
     );
+
+  }
+
+  OnDelete(id:number){
+    this.filmService.DeleteFilm(id).subscribe(
+      (response:Response)=>{
+        console.log(response);
+        
+      }
+    ) 
+    this.ngOnInit();
+
 
   }
 }

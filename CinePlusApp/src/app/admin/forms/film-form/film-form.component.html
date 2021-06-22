@@ -41,7 +41,8 @@
                             style="width: 100%;" ngModel required>  </textarea>
                     </div>
                 </div>
-                <input type="submit"  [disabled]="!f.valid" value="Añadir Película" class="btn" (click)="submit()">
+                <input type="submit"  [disabled]="!f.valid" value="Add or Update" class="btn" (click)="submit()">
+                <!-- {{inEditMode ? "Update": "Add"}} -->
             </form>
         </div>
     </div>

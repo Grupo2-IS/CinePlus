@@ -29,13 +29,15 @@
                 <td>{{d.genre}}</td>
                 <td>{{d.rating}}</td>
                 <td>
-                    <button class="btn btn-warning btn-round" type="button">
+                    <button class="btn btn-warning btn-round" type="button" (click)="createFilm()">
+                        <!-- <a routerLink="/admin/films/create"> {{d}} {{d.filmID}} true  -->
                         <i class="now-ui-icons arrows-1_refresh-69"></i>
                         EDITAR
+                    <!-- </a> -->
                     </button>
-                    <button class="btn btn-danger btn-round" type="button">
+                    <button class="btn btn-danger btn-round" type="button" (click)="OnDelete(d.filmID)">
                         <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
+                        ELIMINAR 
                     </button>
                 </td>
             </tr>

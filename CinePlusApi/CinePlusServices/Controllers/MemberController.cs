@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using CinePlus.Entities;
 using CinePlus.Context.Repositories;
+using CinePlus.Authorization;
 
 namespace CinePlusServices.Controllers
 {
     // base address: api/member
+    [Authorize("admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class MemberController : ControllerBase

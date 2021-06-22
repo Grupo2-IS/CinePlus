@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using CinePlus.Entities;
 using CinePlus.Context.Repositories;
+using CinePlus.Authorization;
 
 
 namespace CinePlusServices.Controllers
 {
     // base address: api/films
+    [Authorize("admin,member,user")]
     [Route("api/[controller]")]
     [ApiController]
     public class FilmsController : ControllerBase
@@ -46,7 +48,7 @@ namespace CinePlusServices.Controllers
         {
             return await this.repository.RetrieveAllAsync();
         }
-        
+
 
         // GET: api/films/[id]
         [HttpGet("{id:int}")]
@@ -69,6 +71,7 @@ namespace CinePlusServices.Controllers
         // POST: api/films
         // BODY: Film (JSON)
         [HttpPost]
+        [Authorize("admin")]
         [ProducesResponseType(201, Type = typeof(Film))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Create([FromBody] Film film)
@@ -95,6 +98,7 @@ namespace CinePlusServices.Controllers
 
         // PUT: api/films/[id]
         // BODY: Film (JSON)
+        [Authorize("admin")]
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -124,6 +128,7 @@ namespace CinePlusServices.Controllers
         }
 
         // DELETE: api/films/[id]
+        [Authorize("admin")]
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

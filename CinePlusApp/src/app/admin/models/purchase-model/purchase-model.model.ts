@@ -1,17 +1,44 @@
 export class Purchase{
-    usuario : string;
-    pelicula : string;
-    sala : string;
-    precio : string;
-    codigo : string;
+    userID : number;
+    seatID: number;
+    filmID : number;
+    roomID : number;
+    price : number;
+    purchaseCode : string;
+    payWithPoints : boolean;
+    usedPoints : number;
+    showingStart : Date;
+    seatRow : number;
+    seatColumn : number;
 
-    constructor(usuario:string, pelicula:string, sala:string, precio:string, codigo:string){
-        this.usuario = usuario;
-        this.pelicula = pelicula;
-        this.sala = sala;
-        this.precio = precio;
-        this.codigo = codigo;
+
+    constructor(userID:number,seatID:number, filmID:number, roomID:number, price:number, purchaseCode:string, payWithPoints:boolean, usedPoints:number, showingStart:Date, seatRow:number, seatColumn:number){
+       this.userID = userID;
+       this.seatID = seatID;
+       this.filmID = filmID;
+       this.roomID = roomID;
+       this.price = price;
+       this.purchaseCode = purchaseCode;
+       this.payWithPoints = payWithPoints;
+       this.usedPoints = usedPoints;
+       this.showingStart = showingStart;
+       this.seatRow = seatRow;
+       this.seatColumn = seatColumn;
+
     }
 
 }
+
+export class User{
+    userID : number;
+    name : string;
+    constructor(userID:number, name:string){
+        this.userID = userID;
+        this.name = name;
+    }
+    
+}
+
+
+
 

@@ -13,3 +13,8 @@
     table-layout: auto;
     width: 100%;
 }
+.title{
+    color: #a43b08;
+    display: flex; 
+    align-content: center;
+  }

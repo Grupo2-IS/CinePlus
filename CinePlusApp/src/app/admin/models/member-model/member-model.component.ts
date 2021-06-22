@@ -4,30 +4,30 @@ import { Member } from './member.model';
 import { MemberService } from './member-model.service';
 
 
-interface Idata {
-  id: string;
-  nombre: string;
-  puntos: string;
-}
-let data1: Idata,
-  data2: Idata,
-  data3: Idata;
+// interface Idata {
+//   id: string;
+//   nombre: string;
+//   puntos: string;
+// }
+// let data1: Idata,
+//   data2: Idata,
+//   data3: Idata;
 
-data1 = {
-  id: '1',
-  nombre: 'Mark',
-  puntos: '50'
-};
-data2 = {
-  id: '2',
-  nombre: 'Rolo',
-  puntos: '2'
-};
-data3 = {
-  id: '2',
-  nombre: 'Leo',
-  puntos: '60'
-};
+// data1 = {
+//   id: '1',
+//   nombre: 'Mark',
+//   puntos: '50'
+// };
+// data2 = {
+//   id: '2',
+//   nombre: 'Rolo',
+//   puntos: '2'
+// };
+// data3 = {
+//   id: '2',
+//   nombre: 'Leo',
+//   puntos: '60'
+// };
 
 @Component({
   selector: 'app-member-model',
@@ -37,12 +37,12 @@ data3 = {
 export class MemberModelComponent implements OnInit {
 
   memberList: Member[] = [];
-  memberTest: Idata[] = [data1, data2, data3];
+  //memberTest: Idata[] = [data1, data2, data3];
 
   constructor(private router: Router, private route: ActivatedRoute, private memberService: MemberService) { }
 
   ngOnInit() {
-    //this.OnGet();
+    this.OnGet();
   }
   createMember() {
     this.router.navigate(['create'], { relativeTo: this.route })
@@ -53,8 +53,8 @@ export class MemberModelComponent implements OnInit {
   OnGet() {
     this.memberService.GetMember().subscribe(
       (response) => {
-        this.memberList = response;
-        console.log(this.memberList);
+        this.memberList = response["$values"];
+        console.log(response);
       },
       (err) => console.log(err),
     );

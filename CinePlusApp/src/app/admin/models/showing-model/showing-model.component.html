@@ -4,9 +4,9 @@
 <div class="container">
     <button class="btn btn-primary btn-round btn-add" type="button" (click)="createShowing()">
         <i class="now-ui-icons ui-1_simple-add"></i>
-        NUEVA PROYECCION
+        NUEVA PRESENTACIÓN
     </button>
-
+    <h2 class = "title"> Proyecciones Disponibles</h2>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -17,23 +17,24 @@
                 <th scope="col" style="width: 20%;">Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let d of showingList">
-                <th scope="row">{{d.startDate | date : 'short'}}</th>
-                <td>{{d.filmName}}</td>
-                <td>{{d.roomName}}</td>
-                <td>{{d.filmLength}} min</td>
-                <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
-                    </button>
-                </td>
-            </tr>
+        <tbody>          
+        <tr  *ngFor="let d of showingList"  > 
+            <th scope="row">{{d.startDate  | date: 'short'}} </th>
+            <th scope = "row"> {{d.filmName}}</th>
+            <th scope="row">{{d.roomID}}</th>
+            <th scope="row">{{d.filmLength}}</th>
+           
+            <td>
+                <button class="btn btn-warning btn-round" type="button">
+                    <i class="now-ui-icons arrows-1_refresh-69"></i>
+                    EDITAR
+                </button>
+                <button class="btn btn-danger btn-round" type="button">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                    ELIMINAR
+                </button>
+            </td>
+        </tr>
         </tbody>
     </table>
 

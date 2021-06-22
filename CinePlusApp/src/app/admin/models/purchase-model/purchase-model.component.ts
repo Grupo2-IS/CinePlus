@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Purchase } from './purchase-model.model';
-import {PurchaseService } from './purchase-model.service';
+import {Purchase,User} from 'app/GlobalServices/purchase.model';
+import {PurchaseService } from 'app/GlobalServices/purchase.service';
 import { Router,ActivatedRoute} from '@angular/router';
+import {Film} from 'app/GlobalServices/film-model.model';
 
 
 
@@ -12,36 +13,88 @@ import { Router,ActivatedRoute} from '@angular/router';
 })
 export class PurchaseModelComponent implements OnInit {
 
-  normalPurchaseList : Purchase[]= [];
-  memberPurchaseList : Purchase[]= [];
+  purchaseList : Purchase[]= [];
+  user : User[] =[]; //poner solo User no User[]
+  films : Film[] = []
+  film: Film;
+  j:number = 0;
 
   constructor( private router:Router, private route:ActivatedRoute, private purchaseService: PurchaseService ){ }
 
   ngOnInit() {
      this.OnGet1();
-     this.OnGet2();
+     //this.GetUsers(this.purchaseList);
+     //this.OnGetUser(3);
+     //this.OnGetFilm();
+     //this.GetFilms(this.purchaseList);
   }
-  createPurchase() {
+    createPurchase() {
     this.router.navigate(['create'], { relativeTo: this.route })}
    
     OnGet1(){
-      this.purchaseService.GetNormalPurchase().subscribe(
+      this.purchaseService.GetPurchase().subscribe(
         (response) => {
-          this.normalPurchaseList = response;
-          console.log(this.normalPurchaseList);
+          this.purchaseList = response["$values"];
+          console.log(this.purchaseList);
+
         },
         (err) => console.log(err),
       );
+
+     
     }
 
-    OnGet2(){
-      this.purchaseService.GetMemberPurchase().subscribe(
-        (response) => {
-          this.memberPurchaseList = response;
-          console.log(this.memberPurchaseList);
-        },
-        (err) => console.log(err),
-      );
+    GetFilms(purchaseList : Purchase[]){
+      // purchaseList.forEach(p => {
+      //   this.OnGetFilm(p.filmID);
+      //   console.log(this.film);
+      //   this.films.push(this.film);
+
+
+        
+      // });
+        for (let index = 0; index < this.purchaseList.length; index++) {
+          this.j = purchaseList[index].filmID;
+          console.log(this.film);
+          this.films.push(this.film);
+
+          
+        }
     }
+
+    OnGetUser(id:number){
+      this.purchaseService.GetUser(id).subscribe(
+        (response) =>{
+          this.user = response;
+          console.log(response);
+          console.log(this.user);
+          console.log(this.user['nick']);
+          // this.users.push(this.user);
+        },
+        (err)=> console.log(err),
+      );
+      this.AddI();
+
+    }
+
+    AddI(){
+  
+      this.j+=1;
+      console.log(this.j);
+    }
+    OnGetFilm(id:number){
+      this.purchaseService.GetFilm(id).subscribe(
+        (response) =>{
+          this.film = response;
+          console.log(response);
+          console.log(this.film);
+        },
+        (err)=> console.log(err),
+      );
+
+    }
+   
+
+   
 
 }

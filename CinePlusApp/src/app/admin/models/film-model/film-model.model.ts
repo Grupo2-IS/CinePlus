@@ -18,7 +18,6 @@ export class Film {
     }
 }
 
-
 // Ejemplo de JSON response
 // {
 //     "filmID": 1,

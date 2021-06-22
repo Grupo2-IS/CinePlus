@@ -7,7 +7,7 @@ using CinePlus.Context.Repositories;
 
 namespace CinePlusServices.Controllers
 {
-    // base address: api/members
+    // base address: api/member
     [Route("api/[controller]")]
     [ApiController]
     public class MemberController : ControllerBase
@@ -19,7 +19,7 @@ namespace CinePlusServices.Controllers
         {
             this.repository = repository;
         }
-        // GET: api/members
+        // GET: api/member
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Member>))]
         public async Task<IEnumerable<Member>> GetAll()
@@ -27,7 +27,7 @@ namespace CinePlusServices.Controllers
             return await this.repository.RetrieveAllAsync();
         }
 
-        // GET: api/members/[id]
+        // GET: api/member/[id]
         [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(Member))]
         [ProducesResponseType(404)]
@@ -45,7 +45,7 @@ namespace CinePlusServices.Controllers
             }
         }
 
-        // POST: api/members
+        // POST: api/member
         // BODY: Member (JSON)
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Member))]
@@ -71,7 +71,7 @@ namespace CinePlusServices.Controllers
             );
         }
 
-        // PUT: api/members/[id]
+        // PUT: api/member/[id]
         // BODY: Member (JSON)
         [HttpPut("{id}")]
         [ProducesResponseType(204)]

@@ -1,5 +1,8 @@
 export class Purchase {
     userID: number;
+    userName: string;
+    filmID: number;
+    filmName : string;
     seatID: number;
     roomID: number;
     showingStart: Date;
@@ -9,9 +12,12 @@ export class Purchase {
     purchaseCode: string;
     seatRow: number;
     seatColumn: number;
-    constructor(userID: number, seatID: number, roomID: number, showingStart: Date, price: number,
+    constructor(userID: number, userName:string, filmID:number, filmName:string, seatID: number, roomID: number, showingStart: Date, price: number,
         payWithPoints: boolean, usedPoints: number, purchaseCode: string, seatRow: number, seatColumn: number) {
         this.userID = userID;
+        this.userName = userName;
+        this.filmID = filmID;
+        this.filmName = filmName;
         this.seatID = seatID;
         this.roomID = roomID;
         this.showingStart = showingStart;
@@ -23,7 +29,18 @@ export class Purchase {
         this.seatColumn = seatColumn;
     }
 }
-
+export class User{
+    userID : number;
+    name : string;
+    constructor(userID:number, name:string){
+        this.userID = userID;
+        this.name = name;
+    }
+    
+}
+export class Film{
+    
+}
 
 // {
 //     "userID": 3,

@@ -1,12 +1,17 @@
 export class Member{
-    memberId : string;
-    name : string ;
-    points : string;
+    memberID : number;
+    userID : number ;
+    points : number;
+    email : string;
+    user : any;     //user:
+                    //userID, nick, name, role
 
-    constructor( id:string, name:string, points:string){
-        this.memberId = id;
-        this.name = name;
+    constructor( memberID:number, userID:number, points:number,email:string , user:any){
+        this.memberID = memberID;
+        this.userID = userID;
         this.points = points;
+        this.email = email;
+        this.user = user;
 
     }
 }

@@ -1,22 +1,33 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
-import { Purchase } from './purchase-model.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Purchase, User } from './purchase-model.model';
+import { Input } from "@angular/core";
 
 @Injectable()
 export class PurchaseService {
-  private dataPath = 'https://localhost:5001/api/normalpurchases';
-  private dataPath1 = 'https://localhost:5001/api/memberpurchases';
+  private dataPath = 'https://localhost:5001/api/purchases' ;
+  
 
-  constructor(private http: HttpClient) { }
+  //id:string="1";
+ // @Input() id:string;
 
- GetNormalPurchase() {
+  private userPath = "https://localhost:5001/api/users/";
+
+  constructor(private http: HttpClient) { 
+    //this.id ="5";
+  }
+
+
+ GetPurchase() {
     return this.http.get<Purchase[]>(this.dataPath);
 
   }
-
-  GetMemberPurchase() {
-    return this.http.get<Purchase[]>(this.dataPath1);
+  GetUser(id:number){
+    return this.http.get<User[]>(this.userPath + id);
 
   }
+  
+
+  
 
 }

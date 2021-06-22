@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Showing } from './showing-model.model';
-import { ShowingService } from './showing-model.service';
+import { Showing } from 'app/GlobalServices/showing-model.model';
+import { ShowingService } from 'app/GlobalServices/showing-model.service';
 import { DatePipe } from '@angular/common';
 
 

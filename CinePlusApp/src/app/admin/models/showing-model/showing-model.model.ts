@@ -1,20 +1,34 @@
-export class Showing {
+export class Showing{
     filmID: number;
-    roomID: number;
-    filmName: string;
-    roomName: string;
-    startDate: Date;
-    filmLength: number;
+    roomID:number;
+    showingStart:  string;
+    showingEnd : any;
 
-    constructor(filmID: number, roomID: number, filmName: string, roomName: string, startDate: Date, filmLength: number) {
-        this.filmID = filmID;
-        this.roomID = roomID;
-        this.filmName = filmName;
-        this.roomName = roomName;
-        this.startDate = startDate;
-        this.filmLength = filmLength;
+    constructor( filmID:number,roomID:number,showingStart:string, showingEnd:string){
+      this.filmID = filmID;
+      this.roomID = roomID;
+      this.showingEnd = showingEnd;
+      this.showingStart = showingStart;
     }
 }
+
+// export class Showing {
+//     filmID: number;
+//     roomID: number;
+//     filmName: string;
+//     roomName: string;
+//     startDate: Date;
+//     filmLength: number;
+
+//     constructor(filmID: number, roomID: number, filmName: string, roomName: string, startDate: Date, filmLength: number) {
+//         this.filmID = filmID;
+//         this.roomID = roomID;
+//         this.filmName = filmName;
+//         this.roomName = roomName;
+//         this.startDate = startDate;
+//         this.filmLength = filmLength;
+//     }
+// }
 
 
 // Example response
@@ -27,4 +41,5 @@ export class Showing {
 //         "filmLength": 134,
 //         "roomID": 2,
 //         "filmID": 2
-//     },]
+  
+    

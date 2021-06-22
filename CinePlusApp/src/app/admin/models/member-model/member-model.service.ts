@@ -4,7 +4,8 @@ import { Member } from './member.model';
 
 @Injectable()
 export class MemberService {
-  private dataPath = 'https://localhost:5001/api/members';
+  private dataPath = 'https://localhost:5001/api/member';
+ 
 
   constructor(private http: HttpClient) { }
 

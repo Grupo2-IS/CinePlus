@@ -48,4 +48,7 @@ export class ShowingService {
     return this.http.post(this.dataPath,showing);
 
   }
+
+ 
+ 
 }

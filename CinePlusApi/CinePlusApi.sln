@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinePlusServices", "CinePlusServices\CinePlusServices.csproj", "{B338B5FB-2493-46A2-AFC0-64EF7E962CA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinePlusServices", "CinePlusServices\CinePlusServices.csproj", "{B338B5FB-2493-46A2-AFC0-64EF7E962CA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinePlusEntities", "CinePlusEntities\CinePlusEntities.csproj", "{0AF24043-FCE1-4465-A656-1A1557D75E58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinePlusEntities", "CinePlusEntities\CinePlusEntities.csproj", "{0AF24043-FCE1-4465-A656-1A1557D75E58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinePlusContext", "CinePlusContext\CinePlusContext.csproj", "{F031DBF6-19A1-4EE3-8E91-2D9B9A67D1D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinePlusContext", "CinePlusContext\CinePlusContext.csproj", "{F031DBF6-19A1-4EE3-8E91-2D9B9A67D1D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Tests", "Unit Tests\Unit Tests.csproj", "{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B338B5FB-2493-46A2-AFC0-64EF7E962CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +57,23 @@ Global
 		{F031DBF6-19A1-4EE3-8E91-2D9B9A67D1D6}.Release|x64.Build.0 = Release|Any CPU
 		{F031DBF6-19A1-4EE3-8E91-2D9B9A67D1D6}.Release|x86.ActiveCfg = Release|Any CPU
 		{F031DBF6-19A1-4EE3-8E91-2D9B9A67D1D6}.Release|x86.Build.0 = Release|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Debug|x86.Build.0 = Debug|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Release|x64.ActiveCfg = Release|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Release|x64.Build.0 = Release|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Release|x86.ActiveCfg = Release|Any CPU
+		{6C35F131-E1A5-4FD3-BA18-4F619E6DCDA6}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33D11FEC-1FD3-4FE4-978F-613229AE13C5}
 	EndGlobalSection
 EndGlobal

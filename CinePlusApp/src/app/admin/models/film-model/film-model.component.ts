@@ -1,3 +1,4 @@
+import { Output } from '@angular/core';
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Film} from 'app/GlobalServices/film-model.model';
@@ -53,6 +54,7 @@ export class FilmModelComponent implements OnInit {
   //data: Idata[] = [data1, data2, data3];
 
   filmsList: Film[] = []
+  country:string;
 
   constructor(private router: Router, private route: ActivatedRoute, private filmService: FilmService) { }
 
@@ -74,5 +76,39 @@ export class FilmModelComponent implements OnInit {
       (err) => console.log(err),
     );
 
+  }
+
+  OnDelete(id:number){
+    this.filmService.DeleteFilm(id).subscribe(
+      (response:Response)=>{
+        console.log(response);
+        
+      },
+      (err) => console.log(err),
+    ) 
+    // this.ngOnInit(); //con el objetivo q la pagina se renderizara pero no :(
+  }
+
+  OrderFilmsByRating(){
+    this.filmService.GetFilmsOrderByRating().subscribe(
+      (response) => {
+        this.filmsList = response["$values"];
+        console.log(response);
+      },
+      (err) => console.log(err),
+    );
+    //this.ngOnInit();
+  }
+
+  SelectFilmsByCountry(){
+    this.filmService.GetFilmsByCountry(this.country).subscribe(
+      (response) => {
+        this.filmsList = response["$values"];
+        console.log(response);
+      },
+      (err) => console.log(err),
+    );
+
+    //this.ngOnInit();
   }
 }

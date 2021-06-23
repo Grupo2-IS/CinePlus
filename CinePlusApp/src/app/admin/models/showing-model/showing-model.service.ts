@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { Showing } from './showing-model.model';
+import { ShowingS } from './showing-model.model';
 
 @Injectable()
 export class ShowingService {
@@ -10,10 +10,10 @@ export class ShowingService {
   constructor(private http: HttpClient) { }
 
   GetShowing() {
-    return this.http.get<Showing[]>(this.dataPath);
+    return this.http.get<ShowingS[]>(this.dataPath);
   }
 
   GetActiveShowing() {
-    return this.http.get<Showing[]>(this.dataPathActive);
+    return this.http.get<ShowingS[]>(this.dataPathActive);
   }
 }

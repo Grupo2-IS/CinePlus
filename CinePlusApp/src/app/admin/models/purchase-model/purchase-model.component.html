@@ -1,9 +1,9 @@
 <app-book-header></app-book-header>
 <!-- Hacer uns tabla psrs compras normales y otra para compras d socios -->
 <div class="container">
-    <button class="btn btn-primary btn-round btn-add" type="button" (click)="createPurchase()">
+    <button class="btn btn-primary btn-round btn-add" type="button" (click)="See()">
         <i class="now-ui-icons ui-1_simple-add"></i>
-        HACER RESERVA
+        VER ESTADÍSTICAS
     </button>
    
     <h2 class="title"> Reservas Realizadas</h2>
@@ -34,7 +34,7 @@
                 <td *ngIf="p.payWithPoints ; else No" scope="row"> Si</td>
                 <td  scope="row">{{p.usedPoints}} </td>
                 <td scope="row">
-                    <button class="btn btn-danger btn-round" type="button">
+                    <button class="btn btn-danger btn-round" type="button" (click)="OnDelete(p.seatID, p.filmID, p.roomID, p.showingStart)">
                         <i class="now-ui-icons ui-1_simple-remove"></i>
                         ELIMINAR
                     </button>

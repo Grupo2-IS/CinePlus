@@ -55,6 +55,16 @@ namespace CinePlusServices.Controllers
         {
             return await this.repo.GetFilmsRating();
         }
+        // [HttpGet("filmsByCountry/{country:string}")]
+        // [ProducesResponseType(200, Type = typeof(IEnumerable<Film>))]
+        // public async Task<IEnumerable<Film>> GetPeliculasPorPaises(string country)
+        // {
+        //     return await this.repo. GetFilmsCountry(country);
+        // }
+
+
+
+
 
     }
 }

@@ -11,15 +11,21 @@
                         <input type="text" id="fname" name="name" placeholder="John M. Doe" ngModel required>
                         <label for="nick"><i class="fa fa-user-circle-o"></i> Nick</label>
                         <input type="text" id="nick" name="nick" placeholder="johny"ngModel>
-                        <label for="level"> Level</label>
-                        <input type="number" id="level" name="level" placeholder="3" ngModel>
+                        <label for="points"> Points</label>
+                        <input type="number" id="points" name="points" placeholder="33" ngModel>
                         <label for="role"> Role</label>
                         <input type="text" id="role" name="role" placeholder="admin" ngModel>
                         <label for="password"><i class="fa fa-key"></i> Password</label>
                         <input type="password" id="password" name="password" placeholder="Password123!" ngModel>
+                        <label for="email"><i class="fa fa-envelope "></i> Email</label>
+                        <input type="email" id="email" name="email" placeholder="pedroperez@gmail.com" ngModel>
+                        <label for="userId"> UserID</label>
+                        <input type="number" id="userID" name="userID" placeholder="5" ngModel>
+                        <label for="memberId"> MemberID</label>
+                        <input type="number" id="memberID" name="memberID" placeholder="3" ngModel>
                     </div>
                 </div>
-                <input type="submit" value="Añadir Miembro" class="btn btn-primary">
+                <input type="submit" value="Añadir Miembro" class="btn btn-primary" (click)="submit()">
             </form>
         </div>
     </div>

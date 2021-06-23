@@ -10,7 +10,7 @@ using CinePlus.Authorization;
 namespace CinePlusServices.Controllers
 {
     // base address: api/films
-    [Authorize("admin,member,user")]
+    // [Authorize("admin,member,user")]
     [Route("api/[controller]")]
     [ApiController]
     public class FilmsController : ControllerBase
@@ -71,7 +71,7 @@ namespace CinePlusServices.Controllers
         // POST: api/films
         // BODY: Film (JSON)
         [HttpPost]
-        [Authorize("admin")]
+        // [Authorize("admin")]
         [ProducesResponseType(201, Type = typeof(Film))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Create([FromBody] Film film)
@@ -98,7 +98,7 @@ namespace CinePlusServices.Controllers
 
         // PUT: api/films/[id]
         // BODY: Film (JSON)
-        [Authorize("admin")]
+        // [Authorize("admin")]
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -128,7 +128,7 @@ namespace CinePlusServices.Controllers
         }
 
         // DELETE: api/films/[id]
-        [Authorize("admin")]
+        // [Authorize("admin")]
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

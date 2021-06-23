@@ -6,6 +6,16 @@
         <i class="now-ui-icons ui-1_simple-add"></i>
         NUEVA PELÍCULA
     </button>
+    <button class="btn btn-primary btn-round btn-add" type="button" (click)="OrderFilmsByRating()">
+        Mostrar Películas Con Mayor Rating.
+    </button>
+
+    <!-- <button class="btn btn-primary btn-round btn-add" id="country" type="button" (click)="SelectFilmsByCountry()">
+        Mostrar Películas De Nacionalidad .
+    </button>
+    <input type="text" [(ngModel)]="country"  placeholder="USA" > -->
+
+
     <h2 class="title"> Películas Disponibles </h2>
     <table class="table table-hover">
         <thead>
@@ -29,13 +39,9 @@
                 <td>{{d.genre}}</td>
                 <td>{{d.rating}}</td>
                 <td>
-                    <button class="btn btn-warning btn-round" type="button">
-                        <i class="now-ui-icons arrows-1_refresh-69"></i>
-                        EDITAR
-                    </button>
-                    <button class="btn btn-danger btn-round" type="button">
+                    <button class="btn btn-danger btn-round" type="button" (click)="OnDelete(d.filmID)">
                         <i class="now-ui-icons ui-1_simple-remove"></i>
-                        ELIMINAR
+                        ELIMINAR 
                     </button>
                 </td>
             </tr>

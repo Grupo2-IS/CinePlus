@@ -484,7 +484,7 @@ namespace CinePlus.Context
                 {
                     ShowingStart = new DateTime(2021, 07, 28, 10, 00, 00),
                     FilmID = 1,
-                    RoomID = 1,
+                    RoomID = 2,
                     ShowingEnd = new DateTime(2021, 05, 28, 12, 00, 00),
                     Price = 20.00
                 },

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Member } from './member.model';
-import { MemberService } from './member-model.service';
+import { Member } from '../../../GlobalServices/member.model';
+import { MemberService } from '../../../GlobalServices/member-model.service';
 
 
 // interface Idata {
@@ -58,5 +58,14 @@ export class MemberModelComponent implements OnInit {
       },
       (err) => console.log(err),
     );
+  }
+
+  OnDelete(id:number){
+  this.memberService.DeleteMember(id).subscribe(
+   (response) =>{
+     console.log(response);
+   },
+   (err) => console.log(err),
+ )
   }
 }

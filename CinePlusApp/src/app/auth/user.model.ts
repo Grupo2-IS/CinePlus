@@ -4,6 +4,12 @@ export class User {
     userName: string;
     role: string;
     jwtToken?: string;
+    constructor(id, firstName, userName, role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.userName = userName;
+        this.role = role;
+    }
 }
 
 

@@ -8,9 +8,9 @@ import { User } from "./user.model";
 @Injectable()
 export class AuthService {
     constructor(private http: HttpClient) { }
-    isAuthenticated: boolean = !environment.production;
-    // user: User = null;
-    user = new User(1, 'admin', 'admin', Role.Admin);
+    isAuthenticated: boolean = environment.production;
+    user: User = null;
+    // user = new User(1, 'admin', 'admin', Role.Admin);
     singUpUser(name: string, password: string, password2: string) {
         return
 

@@ -7,13 +7,13 @@ namespace CinePlus.Entities
     public class Purchase
     {
 
-        public static string PointsCard
-        {
-            get
-            {
-                return "0000000000000000";
-            }
-        }
+        // public static string PointsCard
+        // {
+        //     get
+        //     {
+        //         return "0000000000000000";
+        //     }
+        // }
 
         [Required]
         public int UserID { get; set; }

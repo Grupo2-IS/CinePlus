@@ -23,6 +23,8 @@ namespace CinePlus.Context.Repositories
                 purchaseCache = new ConcurrentDictionary<(int, int, int, DateTime), Purchase>(
                     this.db.Purchases
                     .Include(p => p.Seat)
+                    .Include(p => p.User)
+                    .Include(p => p.Showing)
                     .ToDictionary(d => (d.SeatID, d.FilmID, d.RoomID, d.ShowingStart))
                 );
             }

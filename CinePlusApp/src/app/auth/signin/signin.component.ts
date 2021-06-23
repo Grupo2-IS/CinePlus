@@ -26,8 +26,11 @@ export class SigninComponent implements OnInit {
         this.authService.user = response;
         this.authService.isAuthenticated = true;
         this.router.navigate(['/']);
+        if (response['status'] === '400') {
+          alert("Usuario o contraseña incorrecto.");
+        }
       },
-      (err) => console.log(err)
+      (err) => alert("Usuario o contraseña incorrecto.")
     )
   }
 

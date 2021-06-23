@@ -11,7 +11,7 @@
                         <!-- <input type="text" id="film" name="film" placeholder="Titanic"> -->
                         <div id="film">
                             <select [(ngModel)]="film" name="film">
-                                <option *ngFor="let a of genres" [ngValue]="a">{{a}}</option>
+                                <option *ngFor="let a of filmsList" [ngValue]="a">{{a.name}}</option>
                             </select>
                             <!-- <button class="btn btn-success" (click)="addFilm()">
                                 <i class="now-ui-icons ui-1_simple-add"></i>
@@ -25,7 +25,7 @@
                         <input type="time" id="end" name="end" placeholder="02:45 PM" ngModel>
                     </div>
                 </div>
-                <input type="submit" value="Añadir Proyección" class="btn btn-primary">
+                <input type="submit" value="Añadir Proyección" class="btn btn-primary" (click)="submit()">
             </form>
         </div>
     </div>

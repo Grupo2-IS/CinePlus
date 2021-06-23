@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Showing } from './showing-model.model';
+import{ShowingS} from 'app/admin/models/showing-model/showing-model.model';
 
 @Injectable()
 export class ShowingService {
@@ -39,5 +40,12 @@ export class ShowingService {
       (err) => console.log(err)
     );
   }
+  DeleteShowing(FilmId:number, RoomID:number, ShowingStart:Date, ShowingEnd:Date){
+    return this.http.delete(this.dataPath + "/" + FilmId + "/" + RoomID + '/' + ShowingStart + '/'+ ShowingEnd);
+  }
 
+  CreateShowing(showing:ShowingS){
+    return this.http.post(this.dataPath,showing);
+
+  }
 }

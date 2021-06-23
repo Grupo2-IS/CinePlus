@@ -6,7 +6,6 @@ import { Film } from './film-model.model';
 export class FilmService {
   private dataPath = 'https://localhost:5001/api/films';
 
-  private dataPathId = 'https://localhost:5001/api/films/';
 
   constructor(private http: HttpClient) { }
 
@@ -14,7 +13,7 @@ export class FilmService {
     return this.http.get<Film[]>(this.dataPath);
   }
   GetFilmId(id: number) {
-    return this.http.get<Film>(this.dataPathId + id);
+    return this.http.get<Film>(this.dataPath + '/' + id);
   }
 
   CreateFilm(film:Film){
@@ -23,10 +22,10 @@ export class FilmService {
   }
 
   DeleteFilm(id:number){
-    return this.http.delete(this.dataPathId + id);
+    return this.http.delete(this.dataPath + '/' + id);
   }
   UpdateFilm(id:number, film:Film){
-    return this.http.put(this.dataPathId + id ,film);
+    return this.http.put(this.dataPath +'/'+ id ,film);
 
   }
 

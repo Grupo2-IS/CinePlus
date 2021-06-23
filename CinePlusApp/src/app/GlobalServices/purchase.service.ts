@@ -6,9 +6,7 @@ import { Film} from "./film-model.model";
 @Injectable()
 export class PurchaseService {
     private dataPath = 'https://localhost:5001/api/purchases' ;
-    private userPath = "https://localhost:5001/api/users/";
     private datapathSeat = "https://localhost:5001/api/purchases/byShowing";
-    private dataPathFilm = "https://localhost:5001/api/films/";
     actualPurchases: Purchase[];
     constructor(private http: HttpClient) { }
 
@@ -20,16 +18,12 @@ export class PurchaseService {
         return this.http.get<Purchase[]>(this.dataPath);
     
       }
-      GetUser(id:number){
-        return this.http.get<User[]>(this.userPath + id);
-    
-      }
 
-      GetFilm( id:number){
-          return this.http.get<Film>(this.dataPathFilm + id);
-      }
-
+    DeletePurchase(seatId:number,filmId:number,roomId:number,showingStart: Date ){
+      return this.http.delete(this.dataPath + '/' + seatId +  '/' + filmId + '/' + roomId + '/' + showingStart);
+    }
       
+ 
       
     
 

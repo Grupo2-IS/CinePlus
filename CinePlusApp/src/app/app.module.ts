@@ -40,7 +40,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { RemovePurchaseComponent } from './remove-purchase/remove-purchase.component';
 
 import { FilmService } from './GlobalServices/film-model.service';
-import { MemberService } from './admin/models/member-model/member-model.service';
+import { MemberService } from './GlobalServices/member-model.service';
 import { PurchaseService } from './GlobalServices/purchase.service';
 import { ShowingService } from './GlobalServices/showing-model.service';
 import { AuthService } from './auth/auth.service'

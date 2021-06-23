@@ -3,15 +3,15 @@ export class Member{
     userID : number ;
     points : number;
     email : string;
-    user : any;     //user:
+    user : any    //user:
                     //userID, nick, name, role
 
-    constructor( memberID:number, userID:number, points:number,email:string , user:any){
+    constructor( memberID:number, userID:number, points:number,email:string ){
         this.memberID = memberID;
         this.userID = userID;
         this.points = points;
         this.email = email;
-        this.user = user;
+        //this.user = user;
 
     }
 }

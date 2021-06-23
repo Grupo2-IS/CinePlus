@@ -19,9 +19,9 @@ export class FilmFormComponent implements OnInit {
   selectedGenres = [];
   selectedGenre = null;
  
-  film:Film = new Film( 14," filmName", 54, "country"," this.genre", "5" ," sinopsis");
-  id:number = 2;
-  inEditMode: boolean =true;
+  film:Film ;
+  // id:number = 2;
+  // inEditMode: boolean =true;
   genre:string = "";
   filmsList: Film[]=[];
 
@@ -48,17 +48,17 @@ export class FilmFormComponent implements OnInit {
 
   onSignin(form: NgForm) {
 
-    if (this.inEditMode){
-      form.value.name = this.film.name;
-      form.value.country = this.film.country;
-      form.value.rating = this.film.rating;
-      form.value.duracion = this.film.filmLength;
-      form.value.genre = this.film.genre;
-      form.value.sinopsis = this.film.synopsis;
-      form.value.id = this.film.filmID;
-      console.log(form);
+    // if (this.inEditMode){
+    //   form.value.name = this.film.name;
+    //   form.value.country = this.film.country;
+    //   form.value.rating = this.film.rating;
+    //   form.value.duracion = this.film.filmLength;
+    //   form.value.genre = this.film.genre;
+    //   form.value.sinopsis = this.film.synopsis;
+    //   form.value.id = this.film.filmID;
+    //   console.log(form);
       
-    }
+    // }
 
     const filmName = form.value.name;
     const country = form.value.country;
@@ -72,47 +72,46 @@ export class FilmFormComponent implements OnInit {
     const sinopsis = form.value.sinopsis;
     const id = form.value.id;  //se puede calcular segun la cant d usuarios en BD
 
-    if (this.ValidId(id)){
+    // if (this.ValidId(id)){
 
-      console.log("valid");
+     // console.log("valid");
       this.film = new Film( id, filmName, duration, country, this.genre, rating, sinopsis);
       console.log(this.film);
-    }
-    else{
-      console.log("Invalid Id");
-    }
-    form.reset();
+    //}
+    // else{
+    //   console.log("Invalid Id");
+    // }
+    //form.reset();
   }
 
 
   submit(){
-    console.log("llego a submit");
-    if(!this.inEditMode){
+    // console.log("llego a submit");
+    // if(!this.inEditMode){
       
     this.filmService.CreateFilm(this.film).subscribe(
       (response:Response)=>{
         console.log(response);
-        this.filmForm.setValue({
+        // this.filmForm.setValue({
 
-        })
+        // })
       }
     )  
-     
-    }
+   // }
 
-    else{
-      this.filmService.UpdateFilm(this.id,this.film).subscribe(
-        (response:Response)=>{
-          console.log(response);
-          this.filmForm.setValue({
+    // else{
+    //   console.log("inEdit Mode")
+    //   this.filmService.UpdateFilm(this.id,this.film).subscribe(
+    //     (response:Response)=>{
+    //       console.log(response);
+    //       this.filmForm.setValue({
   
-          })
-        }
-      )  
-      
-    }
+    //       })
+    //     }
+    //   )  
+    // }
 
-    
+
   }
 
   //TODAVIA NO FUNCIONA VALIDAR ID

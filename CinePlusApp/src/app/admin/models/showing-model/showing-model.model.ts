@@ -1,34 +1,23 @@
-export class Showing{
+export class ShowingS {
     filmID: number;
     roomID:number;
-    showingStart:  string;
-    showingEnd : any;
+    showingStart:  Date;
+    showingEnd : Date;
+    price : number;
+    // film:any;
+    // room:any;
 
-    constructor( filmID:number,roomID:number,showingStart:string, showingEnd:string){
+    constructor( filmID:number,roomID:number,showingStart:Date, showingEnd:Date, price:number){
       this.filmID = filmID;
       this.roomID = roomID;
       this.showingEnd = showingEnd;
       this.showingStart = showingStart;
+      this.price=price;
+      // this.film = film;
+      // this.room = room;
     }
 }
 
-// export class Showing {
-//     filmID: number;
-//     roomID: number;
-//     filmName: string;
-//     roomName: string;
-//     startDate: Date;
-//     filmLength: number;
-
-//     constructor(filmID: number, roomID: number, filmName: string, roomName: string, startDate: Date, filmLength: number) {
-//         this.filmID = filmID;
-//         this.roomID = roomID;
-//         this.filmName = filmName;
-//         this.roomName = roomName;
-//         this.startDate = startDate;
-//         this.filmLength = filmLength;
-//     }
-// }
 
 
 // Example response
@@ -42,4 +31,3 @@ export class Showing{
 //         "roomID": 2,
 //         "filmID": 2
   
-    

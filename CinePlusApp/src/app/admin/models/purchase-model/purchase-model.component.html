@@ -34,7 +34,7 @@
                 <td *ngIf="p.payWithPoints ; else No" scope="row"> Si</td>
                 <td  scope="row">{{p.usedPoints}} </td>
                 <td scope="row">
-                    <button class="btn btn-danger btn-round" type="button">
+                    <button class="btn btn-danger btn-round" type="button" (click)="OnDelete(p.seatID, p.filmID, p.roomID, p.showingStart)">
                         <i class="now-ui-icons ui-1_simple-remove"></i>
                         ELIMINAR
                     </button>

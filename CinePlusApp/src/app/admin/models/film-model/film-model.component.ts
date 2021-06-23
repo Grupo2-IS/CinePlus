@@ -82,9 +82,10 @@ export class FilmModelComponent implements OnInit {
       (response:Response)=>{
         console.log(response);
         
-      }
+      },
+      (err) => console.log(err),
     ) 
-    this.ngOnInit();
+    // this.ngOnInit(); con el objetivo q la pagina se renderizara pero no :(
 
 
   }

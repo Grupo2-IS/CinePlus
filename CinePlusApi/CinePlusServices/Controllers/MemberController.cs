@@ -9,7 +9,7 @@ using CinePlus.Authorization;
 namespace CinePlusServices.Controllers
 {
     // base address: api/member
-    [Authorize("admin")]
+    // [Authorize("admin,user,admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class MemberController : ControllerBase

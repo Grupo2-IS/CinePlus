@@ -32,9 +32,10 @@ namespace CinePlus.Controllers
         [HttpPost("refresh-token")]
         public IActionResult RefreshToken()
         {
-            var refreshToken = Request.Cookies["refreshToken"];
+            var refreshToken = this.Request.Cookies["refreshToken"];
+
             var response = _userService.RefreshToken(refreshToken, ipAddress());
-            setTokenCookie(response.RefreshToken);
+            this.setTokenCookie(response.RefreshToken);
             return Ok(response);
         }
 
@@ -82,7 +83,7 @@ namespace CinePlus.Controllers
                 HttpOnly = true,
                 Expires = DateTime.UtcNow.AddDays(7)
             };
-            Response.Cookies.Append("refreshToken", token, cookieOptions);
+            this.Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
 
         private string ipAddress()

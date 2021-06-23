@@ -33,8 +33,7 @@ namespace CinePlus.Services
         {
             //services.AddDbContext<CinePlusDb>(options => options.UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=CinePlusDB;Integrated Security=true;"));
             services.AddDbContext<CinePlusDb>();
-            services.AddCors(options =>
-                options.AddDefaultPolicy(p => p.AllowAnyOrigin()));
+            services.AddCors();
 
             services.AddControllers().AddJsonOptions(options =>
                 {

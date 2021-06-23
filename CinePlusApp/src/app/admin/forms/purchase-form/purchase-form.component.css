@@ -68,6 +68,12 @@
   .btn:hover {
     background-color: #45a049;
   }
+
+  .title{
+    color: #45a049;
+    display: flex; 
+    align-content: center;
+  }
   
 
   

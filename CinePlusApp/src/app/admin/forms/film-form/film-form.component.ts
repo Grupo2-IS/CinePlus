@@ -64,28 +64,29 @@ export class FilmFormComponent implements OnInit {
     const country = form.value.country;
     const rating = form.value.rating;
     const duration = form.value.duracion;
-    this.genre = "";
-    this.selectedGenres.forEach(g => {
-      this.genre =  this.genre + "/" + g
+    const genre = form.value.genre;
+    // this.genre = "";
+    // this.selectedGenres.forEach(g => {
+    //   this.genre =  this.genre + "/" + g
       
-    });
+    // });
     const sinopsis = form.value.sinopsis;
     const id = form.value.id;  //se puede calcular segun la cant d usuarios en BD
 
     // if (this.ValidId(id)){
 
      // console.log("valid");
-      this.film = new Film( id, filmName, duration, country, this.genre, rating, sinopsis);
+      this.film = new Film( id, filmName, duration, country, genre, rating, sinopsis);
       console.log(this.film);
     //}
     // else{
     //   console.log("Invalid Id");
     // }
-    //form.reset();
+   
   }
 
 
-  submit(){
+  submit(form: NgForm){
     // console.log("llego a submit");
     // if(!this.inEditMode){
       
@@ -110,7 +111,7 @@ export class FilmFormComponent implements OnInit {
     //     }
     //   )  
     // }
-
+    form.reset();
 
   }
 

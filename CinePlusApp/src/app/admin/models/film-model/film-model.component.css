@@ -19,3 +19,8 @@
     display: flex; 
     align-content: center;
   }
+#country{
+    display: flex; 
+    align-content: flex-start;
+
+}

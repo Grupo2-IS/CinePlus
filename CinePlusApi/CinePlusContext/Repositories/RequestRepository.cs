@@ -87,10 +87,19 @@ namespace CinePlus.Context.Repositories
         {
             FilmRepository repofilm = new FilmRepository(this.dbContext);
             var peliculas = await repofilm.RetrieveAllAsync();
-            var query = peliculas.OrderBy(o => o.Rating);
+            var query = peliculas.OrderByDescending(o => o.Rating);
 
             return query;
         }
+
+
+        //   public async Task<IEnumerable<Film>> GetFilmsCountry(string country)
+        // {
+        //     FilmRepository repofilm = new FilmRepository(this.dbContext);
+        //     var peliculas = await repofilm.RetrieveAllAsync();
+        //     var query = peliculas.Where(p => p.Country == country);
+        //     return query;
+        // }
 
 
 

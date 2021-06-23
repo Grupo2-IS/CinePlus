@@ -5,6 +5,7 @@ import { Film } from './film-model.model';
 @Injectable()
 export class FilmService {
   private dataPath = 'https://localhost:5001/api/films';
+  private requestPath = 'https://localhost:5001/api/request/';
 
 
   constructor(private http: HttpClient) { }
@@ -29,4 +30,15 @@ export class FilmService {
 
   }
 
+
+  GetFilmsOrderByRating(){
+    return this.http.get(this.requestPath + 'filmsByRating' );
+
+  }
+
+  
+  GetFilmsByCountry( country:string){
+    return this.http.get(this.requestPath + 'filmsByCountry' + country);
+
+  }
 }

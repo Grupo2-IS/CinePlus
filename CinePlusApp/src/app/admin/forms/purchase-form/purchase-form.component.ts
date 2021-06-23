@@ -17,6 +17,7 @@ export class PurchaseFormComponent implements OnInit {
   onSignin(form: NgForm) {
     const userID = form.value.usuario;
     const seatID = form.value.asiento;
+    
   
 
   }

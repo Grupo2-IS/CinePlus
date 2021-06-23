@@ -25,7 +25,7 @@ export class PurchaseModelComponent implements OnInit {
      this.OnGet();
    
   }
-    createPurchase() {
+    See() {
     this.router.navigate(['create'], { relativeTo: this.route })}
    
     OnGet(){

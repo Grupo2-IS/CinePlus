@@ -7,6 +7,8 @@ import { Film} from "./film-model.model";
 export class PurchaseService {
     private dataPath = 'https://localhost:5001/api/purchases' ;
     private datapathSeat = "https://localhost:5001/api/purchases/byShowing";
+    private entradasPath = 'https://localhost:5001/api/request/'; 
+
     actualPurchases: Purchase[];
     constructor(private http: HttpClient) { }
 
@@ -21,6 +23,10 @@ export class PurchaseService {
 
     DeletePurchase(seatId:number,filmId:number,roomId:number,showingStart: Date ){
       return this.http.delete(this.dataPath + '/' + seatId +  '/' + filmId + '/' + roomId + '/' + showingStart);
+    }
+
+    GetEntradasPorMes(year:number,month:number){
+      return this.http.get(this.entradasPath + '/sellsByMoth'+ year + '/' + month )
     }
       
  

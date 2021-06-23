@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Purchase} from 'app/GlobalServices/purchase.model';
 import{PurchaseService } from'app/GlobalServices/purchase.service';
 
+
 @Component({
   selector: 'app-purchase-form',
   templateUrl: './purchase-form.component.html',
@@ -10,19 +11,34 @@ import{PurchaseService } from'app/GlobalServices/purchase.service';
 })
 export class PurchaseFormComponent implements OnInit {
  purchase:Purchase;
-  constructor() { }
+ month:number;
+ year:number;
+ entradas:number;
+  constructor( private purchaseService:PurchaseService) { }
 
   ngOnInit(): void {
   }
   onSignin(form: NgForm) {
-    const userID = form.value.usuario;
-    const seatID = form.value.asiento;
+     this.month = form.value.month;
+     this.year = form.value.year;
     
-  
-
   }
+
+  submit(year:number,month:number)
+  { this.entradas=10;
+    this.purchaseService.GetEntradasPorMes(year, month).subscribe(
+    (response)=>{
+      this.entradas =response["$value"];
+      console.log(response);
+    },
+    (err) => console.log(err),
+   );
+}
+
+
 
 }
 
-// constructor(userID: number, userName:string, filmID:number, filmName:string, seatID: number, roomID: number, showingStart: Date, price: number,
-//   payWithPoints: boolean, usedPoints: number, purchaseCode: string, seatRow: number, seatColumn: number) {
+
+
+

@@ -10,7 +10,7 @@ import { ShowingService } from 'app/GlobalServices/showing-model.service';
   styleUrls: ['./user-payment.component.css']
 })
 export class UserPaymentComponent implements OnInit {
-  costo: number = 34;
+  costo: number = 30;
   reservadas: number = 3;
   pelicula: string = "Batman y dora";
   constructor(private seatsService: SeatsService, private showingService: ShowingService,
